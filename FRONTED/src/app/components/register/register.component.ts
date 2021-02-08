@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
     this.userService.checkUser(user).subscribe(
       res => {
         console.log(res);
-        if (res == null) {
+        if (res != null) {
           // console.log("here!!!!!!!!!")
           // this.isExist = true;
           confirm("משתמש זה קיים כבר ")

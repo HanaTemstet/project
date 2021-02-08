@@ -10,6 +10,7 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { DonationService } from 'src/app/shared/services/donation.service';
 import { GmhService } from 'src/app/shared/services/gmh.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-add-donation',
@@ -30,8 +31,11 @@ export class AddDonationComponent implements OnInit {
   donor = false
   filteredProducts: Observable<Product[]>;
   products: Array<Product>
+  details=false
+  continue=false;
+  changeDetails=false;
   constructor(private gmhService: GmhService, private donationService: DonationService,
-    private categoriesService: CategoriesService, private productsService: ProductsService) { }
+    private categoriesService: CategoriesService,public userService:UserService, private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.gmhService.getCategoryGmach().subscribe(
@@ -267,6 +271,10 @@ export class AddDonationComponent implements OnInit {
     }
   }
   donorDetails() {
+    if(this.continue==false)
+    this.continue=true;
+    else 
+    this.continue=false;
     this.donor = !this.donor
     this.donation = !this.donation
   }

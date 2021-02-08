@@ -14,15 +14,18 @@ h1{
   direction: rtl;
    text-align: right; 
    line-height: 100%;
+   padding:  3% 0%  3% 0% ;
 }
-/* .content {
+.content {
     display: flex;
+    text-align: right;
+    align-items:flex-start;
     margin: 70px auto 32px;
     padding: 0 16px;
     max-width: 960px;
     flex-direction: column;
-    align-items: center;
-  } */
+    align-items: right;
+  }
   body{
       margin-top: 10%;
     background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;

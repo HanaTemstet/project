@@ -1,7 +1,7 @@
 <body>
-    <!-- <div class="content"> -->
+    <div class="content">
 <h1 style="font-size: 30px;" *ngIf="currentUser==undefined">רב תודות!<br>אנו שמחים שברצונך להצטרף למשפחת"CHARITY",<br> נשמח תמיד לעמוד לשרותך!</h1>
-<div style="direction: rtl;margin:0% !important; background-color: rgb(181, 210, 255); padding: 2%; width: 50%;">
+<div style="direction: rtl;margin:0% !important;text-align: right; background-color:rgb(185, 229, 247); padding: 2%; width: 50%;">
 <h1 style="font-size: 20px;">אנחנו יכולים לעזור לך לבחור איזה גמח להוסיף, לפי צרכי הציבור, האם אתה מעוניין??</h1>
 <input type="button" [routerLink]="['/needsGMHim']" value="כן תודה!" class="nav-link btn btn-success">
 </div>
@@ -10,11 +10,12 @@
 <button mat-raised-button color="a" [routerLink]="['/register']" >הרשם</button>
 <button mat-raised-button color="a" [routerLink]="['/signIn']" >הכנס</button>
 </div>
+    </div>
 
 <div *ngIf="currentUser!=undefined">
 <!-- </div> -->
 
-<app-add-gmh></app-add-gmh>
+
 
 
 
@@ -81,3 +82,4 @@
     </div> -->
 </div>
 </body>
+<app-new-gmh *ngIf="currentUser!=undefined" style="direction: rtl; text-align: right;"></app-new-gmh>

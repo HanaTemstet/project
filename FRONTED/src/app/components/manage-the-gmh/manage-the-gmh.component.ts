@@ -133,6 +133,10 @@ export class ManageTheGMHComponent implements OnInit {
       }
     )
   }
+  handleDestinationChange(a: Address) {
+    this.adress = a.formatted_address;
+    // console.log(a)
+  }
 
   // closeNew() {
   //   this.newgmh = false
@@ -259,10 +263,7 @@ export class ManageTheGMHComponent implements OnInit {
   //     });
   //   }
   // }
-  handleDestinationChange(a: Address) {
-    this.adress = a.formatted_address;
-    // console.log(a)
-  }
+
   // newcategory() {
   //   this.gmhForm.controls["newCategory"].enable();
   //   this.gmhForm.controls["category"].disable();

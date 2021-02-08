@@ -23,6 +23,7 @@ export class AppComponent {
   cookieValue;
   donationCode: number
   myDonation: donation
+
   //gmhsArr:GMH[];
 
   constructor(private gmhService:GmhService,private route:Router, private cookieService: CookieService,public dialog: MatDialog,public userService: UserService) { }
@@ -64,7 +65,7 @@ export class AppComponent {
   getGmahim(){   
     this.gmhService.getAllGmhs().subscribe(res => {
       this.gmhService.gmhsSearch = res;
-    this.route.navigate(['/gmhList'])   }, 
+    this.route.navigate(['/gmhList']);    }, 
       err => { console.log(err); }
     );
     }

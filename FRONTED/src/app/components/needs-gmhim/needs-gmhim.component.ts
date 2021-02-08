@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { GmhService } from 'src/app/shared/services/gmh.service';
+import { validSearch } from 'src/app/validators/valid';
 
 @Component({
   selector: 'app-needs-gmhim',
@@ -13,6 +14,7 @@ import { GmhService } from 'src/app/shared/services/gmh.service';
   styleUrls: ['./needs-gmhim.component.css']
 })
 export class NeedsGMHimComponent implements OnInit {
+  needsGmhimForm:FormGroup;
   needsGmhim;
   categories: CategoryGMH[]
   filteredCategories: Observable<CategoryGMH[]>
@@ -21,6 +23,7 @@ export class NeedsGMHimComponent implements OnInit {
   categoriesControl = new FormControl();
   tatcategoriesControl = new FormControl();
   adress;
+  masterCategory: CategoryGMH;
   displayedColumns = ["category", "adress"]
   constructor(private gmhService: GmhService, private categoriesService: CategoriesService) { }
 
@@ -37,10 +40,21 @@ export class NeedsGMHimComponent implements OnInit {
       }
     )
     this.getCategoryGmh()
+    this.needsGmhimForm = new FormGroup({
+      textSearch: new FormControl('',Validators.compose([Validators.pattern('[א-ת]{10}')])),
+      category: new FormControl(''),
+      tatCategory: new FormControl(''),
+      currentLocation:new FormControl(''),
+      location: new FormControl(''),
+      distance:new FormControl(''),
+    },{validators: validSearch("location")});
+    this.getCurrentLocation();
   }
+  
   getCategoryGmh() {
     this.gmhService.getCategoryGmach().subscribe(res => {
-      this.categories = res// console.log(res);
+      this.categories = res
+       console.log(res);
       this.filteredCategories = this.categoriesControl.valueChanges
         .pipe(
           startWith(''),
@@ -59,6 +73,20 @@ export class NeedsGMHimComponent implements OnInit {
   displayFn(c: CategoryGMH): string {
     return c && c.CategoryName ? c.CategoryName : '';
   }
+  // getCategoriesForGmach() {
+    
+  //   // this.needsGmhimForm.controls['tatCategory'].enable();
+  //   //  console.log(this.searchForm.controls.category.value);
+  //   this.categories.forEach(element => {
+  //     if (element.CategoryName == this.needsGmhimForm.controls.category.value)
+  //       this.masterCategory = element;
+  //   });
+  //   this.gmhService.getCategoriesForGmach(this.masterCategory).subscribe(res => {
+  //     this.tatCategories = res;
+  //     // console.log(res);
+  //     err => { console.log(err); }
+  //   });
+  // }
   getTatCategoriesForGmh(c) {
     //console.log(this.gmhForm.controls["newTatCategory"].disabled);
     this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
@@ -91,10 +119,14 @@ export class NeedsGMHimComponent implements OnInit {
 
       });
     }
+    
     else {
       alert("Geolocation is not supported by this browser.");
     }
 
+  }
+  chooseLocation(){
+    this.needsGmhimForm.controls.location.enable()
   }
   filterNeedsGmhim() {
     let fd = new FormData()

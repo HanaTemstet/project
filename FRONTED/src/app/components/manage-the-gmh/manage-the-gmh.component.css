@@ -9,7 +9,8 @@
   }
   .gmhs{
     background-color: rgb(181, 210, 255);
-    width:50%;
+    width:170%;
+    padding: 10%;
   }
   .content {
     display: flex;

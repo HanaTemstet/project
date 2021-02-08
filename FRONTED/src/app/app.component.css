@@ -43,9 +43,12 @@ header{
     border-bottom:1px solid #ccc; 
 }
 
-.home{
-  height: 45px;
-  width: 60px;
+   mat-icon{outline:none !important;}
+
+.nav-link{
+  height: 40px;
+  width:95px;
+cursor: pointer;
 }
 
 ul#nav li a:hover { background-color: #aaa; }
@@ -63,8 +66,10 @@ ul#nav li:hover ul { display:block; }
 
 } */
 .active{
+  border: none;
   border-bottom: 3px solid rgb(181, 210, 255)!important;
 
 }
+
 
 

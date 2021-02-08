@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
@@ -25,22 +26,27 @@ export class NewGmhComponent implements OnInit {
   myGmhim: GMH[];
   newgmh = false;
   currentUser: User;
-
+  currLat=0;
+  currLng=0;
+  adress;
   constructor(private gmhService: GmhService, private userService: UserService, private categoriesService: CategoriesService,private router:Router) { }
 
   ngOnInit(): void {
     this.gmhForm = new FormGroup({
       GmhName: new FormControl('',Validators.required),
+      divLocation: new FormControl(),
       category: new FormControl(),
       newCategory: new FormControl(),
       tatCategory: new FormControl({ value: '', disabled: true }),
       newTatCategory: new FormControl({ value: '', disabled: true }),
+      location:new FormControl(),
       comments: new FormControl()
     },{validators: isCategory('category','newCategory')})
     this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));    
     this.gmhService.setMyGmhim(this.myGmhim)
     this.currentUser = this.userService.CurrentUser;
-    this.getMyGmhim()
+    this.getMyGmhim();
+    this.getCurrentLocation();
   }
   choosecategory() {
     this.gmhForm.controls["newCategory"].disable();
@@ -218,5 +224,25 @@ export class NewGmhComponent implements OnInit {
       this.newgmh = true;
       this.getCategoryGmh();
   
+    }
+    getCurrentLocation() {
+      this.gmhForm.controls.location.setValue("")
+      this.gmhForm.controls.location.disable()
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.currLat = position.coords.latitude;
+          this.currLng = position.coords.longitude;
+        });
+      }
+      else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+    chooseLocation(){
+      this.gmhForm.controls.location.enable()
+    }
+    handleDestinationChange(a: Address) {
+      this.adress = a;
+      //  console.log(a)
     }
 }

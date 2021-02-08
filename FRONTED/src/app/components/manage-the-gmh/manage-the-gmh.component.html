@@ -1,9 +1,4 @@
 <a [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים אישיים</a>
-<!-- <div *ngIf="currentUser==undefined">
-    <input type="button" value="הכנס" [routerLink]="['/signIn']">
-    <input type="button" value="הרשם" [routerLink]="['/register']">
-</div> -->
-
 <div class="content" *ngIf="currentUser!=undefined">
     <button mat-raised-button color="primary" [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים
         אישיים</button>
@@ -11,7 +6,7 @@
         <h1>היי {{currentUser.Name}} , הגמחים שלך:</h1>
         <h1>מכאן תוכל\י לנהל אותם בקלות</h1>
         <div class="gmhs" *ngFor="let g of myGmhim" [routerLink]="['/one-gmh',g.GmhCode]">
-            <div>{{g.GmhName}}</div>
+            <div style="text-align: right; align-items: right; font-size: xx-large;">{{g.GmhName}}</div>
             <div style="float: left;">
                 <div class="img">
                     <button mat-raised-button color="primary" [routerLink]="['/one-gmh',g.GmhCode]">ניהול</button>
@@ -109,7 +104,7 @@
             </table> -->
 
             <div class="img">
-                <button mat-mini-fab color="primary">
+                <button (click)="newgmh=true" mat-mini-fab color="primary">
                     <!-- <mat-icon (click)="closeNew()" *ngIf="newgmh">clear</mat-icon>
                     <mat-icon (click)="new()" class="img" *ngIf="!newgmh">add_circle</mat-icon> -->
 
@@ -124,4 +119,4 @@
         </div>
      </div>
 
-    <app-add-gmh *ngIf></app-add-gmh>
+    <app-new-gmh *ngIf="newgmh==true"></app-new-gmh>

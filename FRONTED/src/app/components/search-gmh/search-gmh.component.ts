@@ -80,9 +80,7 @@ export class SearchGMHComponent implements OnInit {
       alert("Geolocation is not supported by this browser.");
     }
   }
-  chooseLocation(){
-    this.searchForm.controls.location.enable()
-  }
+ 
 
   private _filter(name: string): Product[] {
     const filterValue = name.toLowerCase();
@@ -96,7 +94,9 @@ export class SearchGMHComponent implements OnInit {
       err => { console.log(err); }
     });
   }
-
+  chooseLocation(){
+    this.searchForm.controls.location.enable()
+  }
   handleDestinationChange(a: Address) {
     this.adress = a;
     //  console.log(a)
