@@ -40,15 +40,14 @@ export class SignInComponent implements OnInit {
     this.userService.checkUser(user).subscribe(
       res => {
         this.userService.setCurrentUser(res);
-        //this.cookieService.set('userName', this.userService.CurrentUser.Name);
-        // localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+        this.cookieService.set('userName', this.userService.CurrentUser.Name);
+        localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
 
         console.log(res);
 
         // console.log( this.router.events .pipe(filter((e: any) => e instanceof RoutesRecognized), pairwise() ).subscribe((e: any) => { console.log(e[0].urlAfterRedirects); })); 
         if (res != undefined) {
           console.log(prevComponent)
-          // this.router.navigate(['/{{prevComponent}}'])
           if (prevComponent == "/addDonation")
             this.router.navigate(['/addDonation'])
           else

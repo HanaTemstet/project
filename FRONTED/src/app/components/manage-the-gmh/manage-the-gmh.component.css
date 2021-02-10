@@ -1,26 +1,28 @@
 
-   .text{
+   /* .text{
     visibility: hidden;
-  }
+
+  } */
   
   /* Show the tooltip text when you mouse over the tooltip container */
-  .img:hover .text {
+  /* .img:hover .text {
     visibility: visible;
-  }
+  } */
   .gmhs{
-    background-color: rgb(181, 210, 255);
-    width:170%;
-    padding: 10%;
+    /* background-color: rgb(181, 210, 255); */
+    width:100%;
+    /* padding: 10%; */
   }
   .content {
     display: flex;
-    margin: 82px auto;
+
+    /* margin: 82px auto; */
     padding: 0 16px;
-    max-width: 60%;
+    max-width: 100%;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
-    margin-top: 10%;
+    /* margin-top: 10%; */
+    /* margin-top: 10%; */
 
     direction:rtl; 
     text-align: right;
@@ -28,7 +30,11 @@
   }
   body{
     /* background-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 0%),url( "src/assets/bg.png") !important; background-size: 60% 55% !important; margin-top: 10%; background-repeat: no-repeat !important; */
-    background-image:url( "src/assets/bg.png") !important; background-size: 50% 45% !important; margin-top: 10%; background-repeat: no-repeat !important;
+    background-image:url( "src/assets/bg.png") !important; background-size: 50% 45% !important;background-position: 0% 50%; background-attachment: fixed; margin-top:- 10%; background-repeat: no-repeat !important;
+    }
+    .img{
+      display: inline-block;
+      padding: 2%;
     }
   
   

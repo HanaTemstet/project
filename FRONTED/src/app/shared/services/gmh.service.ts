@@ -13,6 +13,7 @@ import { Searches } from '../models/Searches.model';
 })
 export class GmhService {
   public gmhsSearch:GMH[];
+public dataSource
 private myGmhim:GMH[];
   constructor(private http:HttpClient) { }
   
@@ -71,9 +72,9 @@ private myGmhim:GMH[];
   search(gmhForSearch:FormData):Observable<GMH[]>{
   return this.http.post<GMH[]>(environment.url + 'gmh/searchGMH', gmhForSearch)
   }
-  getNeedsGmhim(): Observable<needsGmh[]> {
-    return this.http.get<needsGmh[]>(environment.url + 'gmh/getNeedsGmhim')
-  }
+  // getNeedsGmhim(): Observable<needsGmh[]> {
+  //   return this.http.get<needsGmh[]>(environment.url + 'gmh/getNeedsGmhim')
+  // }
   filterNeedsGmhim(fd: FormData): Observable<needsGmh[]> {
     return this.http.post<needsGmh[]>(environment.url + 'gmh/filterNeedsGmhim', fd)
   }

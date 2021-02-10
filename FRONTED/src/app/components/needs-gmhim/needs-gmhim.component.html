@@ -1,17 +1,20 @@
 <body>
-    <form  class="form" [formGroup]="needsGmhimForm" (submit)="filterNeedsGmhim()">
+    <form  class="form content" [formGroup]="needsGmhimForm" (submit)="filterNeedsGmhim()">
 
     <div class="form-group">
-        <label>ספר לנו היכן תרצה לפתוח גמ"ח:</label>
-        <p ><input type="radio" name="r" (click)="getCurrentLocation()">
+        <h2 >ספר לנו היכן תרצה לפתוח גמ"ח:</h2>
+        <p ><input type="radio" value="1" name="r" checked (click)="getCurrentLocation()">
             <mat-icon>room</mat-icon>מיקום נוכחי
         </p>
-        <input type="radio" name="r" (click)="chooseLocation()"> <input ngx-google-places-autocomplete #placesRef="ngx-places"
+        <input type="radio" value="2" name="r" (click)="chooseLocation()"> <input ngx-google-places-autocomplete #placesRef="ngx-places"
           (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏" formControlName="location">
+    <!-- <div *ngIf="needsGmhim.errors?.validSearch!=null" style="text-align: right;">
+            {{needsGmhim.errors?.validSearch}}
+        </div> -->
     </div>
     
-        <div class="formGroup">
-    <label> בחר קטגוריה מועדפת:</label>
+        <div class="form-group">
+    <h2> בחר קטגוריה מועדפת:</h2>
     <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
         [matAutocomplete]="auto" [value]="displayFn" class="form-control">
     <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
@@ -21,7 +24,7 @@
         </mat-option>
     </mat-autocomplete>
 </div>
-<div class="formGroup">
+<div class="form-group">
         <label> תת קטגוריה:</label>
         <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
             [value]="displayFn" [formControl]="tatcategoriesControl" class="form-control">
@@ -31,6 +34,7 @@
             </mat-option>
         </mat-autocomplete>
 </div>
+<input type="submit" value="סנן" class="btn btn-primary form-group">
         <!-- <label> כתובת:</label>
         <mat-radio-group aria-label="Select an option">
             <mat-radio-button value="1" (click)="getCurrentLocation()">מיקום נוכחי

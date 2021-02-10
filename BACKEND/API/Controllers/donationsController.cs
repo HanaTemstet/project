@@ -68,7 +68,7 @@ namespace API.Controllers
         public IHttpActionResult filterDonations()
         {
             var httpRequest = HttpContext.Current.Request;
-            return Ok(BL.donationsBL.filterDonations(
+            return Ok(BL.donationsBL.FilterDonations(
                 Convert.ToInt32(httpRequest["category"]),
                 Convert.ToInt32(httpRequest["tatcategory"]),
                 Convert.ToString(httpRequest["adress"])));
@@ -96,7 +96,7 @@ namespace API.Controllers
                 postedFile.SaveAs(filePath);
                 d.Picture = postedFile.FileName;
             }
-            return Ok(BL.donationsBL.saveChanges(d));
+            return Ok(BL.donationsBL.SaveChanges(d));
         }
 
     }

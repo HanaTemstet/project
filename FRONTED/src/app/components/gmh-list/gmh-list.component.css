@@ -2,8 +2,30 @@
   .editObject {
     display: list-item;
     list-style-type: disc;
-    width: 133px;
     list-style-position: inside;
     color: #e34062!important;
-    font-size: 12px;
+    font-size: 100%;
+}
+
+ 
+table {
+  direction: rtl;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th{
+  text-align: right !important;
+  direction: rtl!important;
+  right:0%!important;
+  color: black;
+  font-size: 170%;
+  font: bold!important;
+}
+td{
+  font-size: 120%;
+}
+a{
+  margin-left: 0%;
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Charity_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Charity_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CategoryGMH">
           <Key>
             <PropertyRef Name="CategoryCode" />
@@ -22,6 +22,14 @@
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="text" Type="nvarchar" MaxLength="50" />
           <Property Name="fingerPrint" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DonationOffers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserCode" Type="int" Nullable="false" />
+          <Property Name="DonationCode" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Donations">
           <Key>
@@ -162,6 +170,30 @@
             </Principal>
             <Dependent Role="Complaint">
               <PropertyRef Name="gmhCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DonationO__Donat__634EBE90">
+          <End Role="Donations" Type="Self.Donations" Multiplicity="1" />
+          <End Role="DonationOffers" Type="Self.DonationOffers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donations">
+              <PropertyRef Name="donationCode" />
+            </Principal>
+            <Dependent Role="DonationOffers">
+              <PropertyRef Name="DonationCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DonationO__UserC__625A9A57">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="DonationOffers" Type="Self.DonationOffers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="DonationOffers">
+              <PropertyRef Name="UserCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -348,6 +380,7 @@
         <EntityContainer Name="Charity_DBModelStoreContainer">
           <EntitySet Name="CategoryGMH" EntityType="Self.CategoryGMH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Complaint" EntityType="Self.Complaint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DonationOffers" EntityType="Self.DonationOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Donations" EntityType="Self.Donations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GMH" EntityType="Self.GMH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
@@ -366,6 +399,14 @@
           <AssociationSet Name="FK__Complaint__gmhCo__3D2915A8" Association="Self.FK__Complaint__gmhCo__3D2915A8">
             <End Role="GMH" EntitySet="GMH" />
             <End Role="Complaint" EntitySet="Complaint" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DonationO__Donat__634EBE90" Association="Self.FK__DonationO__Donat__634EBE90">
+            <End Role="Donations" EntitySet="Donations" />
+            <End Role="DonationOffers" EntitySet="DonationOffers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DonationO__UserC__625A9A57" Association="Self.FK__DonationO__UserC__625A9A57">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="DonationOffers" EntitySet="DonationOffers" />
           </AssociationSet>
           <AssociationSet Name="FK__Donations__Categ__05D8E0BE" Association="Self.FK__Donations__Categ__05D8E0BE">
             <End Role="CategoryGMH" EntitySet="CategoryGMH" />
@@ -428,8 +469,7 @@
             <End Role="Searches" EntitySet="Searches" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Charity_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -476,6 +516,7 @@
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CategoryGMH" Relationship="Self.FK__Donations__Categ__05D8E0BE" FromRole="Donations" ToRole="CategoryGMH" />
           <NavigationProperty Name="CategoryGMH1" Relationship="Self.FK__Donations__Maste__06CD04F7" FromRole="Donations" ToRole="CategoryGMH" />
+          <NavigationProperty Name="DonationOffers" Relationship="Charity_DBModel.FK__DonationO__Donat__634EBE90" FromRole="Donations" ToRole="DonationOffers" />
         </EntityType>
         <EntityType Name="GMH">
           <Key>
@@ -602,6 +643,7 @@
           <NavigationProperty Name="GMH" Relationship="Self.FK__GMH__UserCode__2B0A656D" FromRole="USERS" ToRole="GMH" />
           <NavigationProperty Name="LENDINGS" Relationship="Self.FK__LENDINGS__UserCo__4F47C5E3" FromRole="USERS" ToRole="LENDINGS" />
           <NavigationProperty Name="RequestForLoan" Relationship="Self.FK__RequestFo__UserC__2BFE89A6" FromRole="USERS" ToRole="RequestForLoan" />
+          <NavigationProperty Name="DonationOffers" Relationship="Charity_DBModel.FK__DonationO__UserC__625A9A57" FromRole="USERS" ToRole="DonationOffers" />
         </EntityType>
         <Association Name="FK__CategoryG__Maste__47DBAE45">
           <End Role="CategoryGMH" Type="Self.CategoryGMH" Multiplicity="0..1" />
@@ -889,7 +931,50 @@
             <End Role="USERS" EntitySet="USERS" />
             <End Role="RequestForLoan" EntitySet="RequestForLoan" />
           </AssociationSet>
+          <EntitySet Name="DonationOffers" EntityType="Charity_DBModel.DonationOffers" />
+          <AssociationSet Name="FK__DonationO__Donat__634EBE90" Association="Charity_DBModel.FK__DonationO__Donat__634EBE90">
+            <End Role="Donations" EntitySet="Donations" />
+            <End Role="DonationOffers" EntitySet="DonationOffers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DonationO__UserC__625A9A57" Association="Charity_DBModel.FK__DonationO__UserC__625A9A57">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="DonationOffers" EntitySet="DonationOffers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DonationOffers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserCode" Type="Int32" Nullable="false" />
+          <Property Name="DonationCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Donations" Relationship="Charity_DBModel.FK__DonationO__Donat__634EBE90" FromRole="DonationOffers" ToRole="Donations" />
+          <NavigationProperty Name="USERS" Relationship="Charity_DBModel.FK__DonationO__UserC__625A9A57" FromRole="DonationOffers" ToRole="USERS" />
+        </EntityType>
+        <Association Name="FK__DonationO__Donat__634EBE90">
+          <End Type="Charity_DBModel.Donations" Role="Donations" Multiplicity="1" />
+          <End Type="Charity_DBModel.DonationOffers" Role="DonationOffers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donations">
+              <PropertyRef Name="donationCode" />
+            </Principal>
+            <Dependent Role="DonationOffers">
+              <PropertyRef Name="DonationCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DonationO__UserC__625A9A57">
+          <End Type="Charity_DBModel.USERS" Role="USERS" Multiplicity="1" />
+          <End Type="Charity_DBModel.DonationOffers" Role="DonationOffers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="DonationOffers">
+              <PropertyRef Name="UserCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1042,6 +1127,15 @@
                 <ScalarProperty Name="E_mail" ColumnName="E-mail" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Permission" ColumnName="Permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonationOffers">
+            <EntityTypeMapping TypeName="Charity_DBModel.DonationOffers">
+              <MappingFragment StoreEntitySet="DonationOffers">
+                <ScalarProperty Name="DonationCode" ColumnName="DonationCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

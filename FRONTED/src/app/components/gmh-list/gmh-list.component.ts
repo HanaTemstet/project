@@ -37,7 +37,7 @@ displayedColumns: string[] = ['position', 'name','a'];
       complainText: new FormControl(''),
     });
     console.log(this.gmhService.gmhsSearch)
-    this.dataSource  = new MatTableDataSource<GMH>(this.gmhService.gmhsSearch);
+    this.gmhService.dataSource  = new MatTableDataSource<GMH>(this.gmhService.gmhsSearch);
     console.log(this.dataSource)
   }
 

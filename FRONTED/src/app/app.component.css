@@ -40,18 +40,25 @@ header{
     padding: 5px 10px;
     color: #000;
     text-decoration:none;
-    border-bottom:1px solid #ccc; 
+    border-bottom:1px solid rgb(181, 210, 255); 
 }
 
    mat-icon{outline:none !important;}
 
 .nav-link{
   height: 40px;
-  width:95px;
+  width:110px;
 cursor: pointer;
+font-size: 120%;
+text-align: center;
+}
+.home{
+  text-align: center;
+  font-size: 250%;
+  border-bottom:1px solid rgb(181, 210, 255)!important; 
 }
 
-ul#nav li a:hover { background-color: #aaa; }
+ul#nav li a:hover { font: bold!important; }
 ul#nav li ul li { float:none; }
 ul#nav li ul { position:absolute; display:none; }
 ul#nav li:hover ul { display:block; }
@@ -65,9 +72,14 @@ ul#nav li:hover ul { display:block; }
   border-bottom: 5px solid blue !important;
 
 } */
+.enterExitName{
+  font: outline;
+  font-size: large;
+}
 .active{
+  font: bold!important;
   border: none;
-  border-bottom: 3px solid rgb(181, 210, 255)!important;
+  border-bottom: 4px solid rgb(181, 210, 255)!important;
 
 }
 

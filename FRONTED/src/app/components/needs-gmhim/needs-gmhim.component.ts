@@ -28,17 +28,18 @@ export class NeedsGMHimComponent implements OnInit {
   constructor(private gmhService: GmhService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.gmhService.getNeedsGmhim().subscribe(
-      res => {
-        this.needsGmhim = res;
-        this.needsGmhim.forEach(ng => {
-          this.categoriesService.getCategoryName(ng.category).subscribe(
-            res => ng.categoryName = res
-          )
-        });
+    this.filterNeedsGmhim();
+    // this.gmhService.filterNeedsGmhim().subscribe(
+    //   res => {
+    //     this.needsGmhim = res;
+    //     this.needsGmhim.forEach(ng => {
+    //       this.categoriesService.getCategoryName(ng.category).subscribe(
+    //         res => ng.categoryName = res
+    //       )
+    //     });
      //   console.log(this.needsGmhim);
-      }
-    )
+    //   }
+    // )
     this.getCategoryGmh()
     this.needsGmhimForm = new FormGroup({
       textSearch: new FormControl('',Validators.compose([Validators.pattern('[א-ת]{10}')])),
@@ -110,6 +111,8 @@ export class NeedsGMHimComponent implements OnInit {
     this.adress = a.formatted_address;
   }
   getCurrentLocation() {
+    this.needsGmhimForm.controls.location.setValue("")
+    this.needsGmhimForm.controls.location.disable()
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         console.log(position.coords.latitude,position.coords.longitude);
@@ -119,12 +122,17 @@ export class NeedsGMHimComponent implements OnInit {
 
       });
     }
+
+
+    
     
     else {
       alert("Geolocation is not supported by this browser.");
     }
 
   }
+
+
   chooseLocation(){
     this.needsGmhimForm.controls.location.enable()
   }

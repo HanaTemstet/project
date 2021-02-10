@@ -10,6 +10,11 @@
  width: 50%; 
  color: crimson;
 }
+.signInRegister{
+  margin:3%!important;
+  width: 30%;
+font-size: x-large;
+}
 h1{
   direction: rtl;
    text-align: right; 

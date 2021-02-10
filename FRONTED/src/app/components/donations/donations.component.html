@@ -1,4 +1,4 @@
-<div class="content">
+<body><div class="content">
     <form (submit)="filterDonations()">
         <label> קטגוריה:</label>
         <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
@@ -47,7 +47,9 @@
                 <tr>
                     <td>{{d.donationName}} </td>
                     <td>{{d.Description}} </td>
-                    <td><img *ngIf="d.Picture!=null" [src]="url + d.Picture" class="rounded mb-3" width="180" mat-card-image></td>
+                    <td>
+                        <!-- <img *ngIf="d.Picture!=null" [src]="url + d.Picture" class="rounded mb-3" width="180" mat-card-image> -->
+                    </td>
 
                     <td>{{d.donorName}} </td>
                     <td>{{d.Adress}} </td>
@@ -58,3 +60,4 @@
         </table>
     </div>
 </div>
+</body>

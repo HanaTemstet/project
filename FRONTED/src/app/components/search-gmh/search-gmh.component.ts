@@ -13,6 +13,7 @@ import { map, startWith } from 'rxjs/operators';
 import getBrowserFingerprint from 'get-browser-fingerprint';
 import { Searches } from 'src/app/shared/models/Searches.model';
 import { validSearch } from 'src/app/validators/valid';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-search-gmh',
   templateUrl: './search-gmh.component.html',
@@ -40,7 +41,7 @@ export class SearchGMHComponent implements OnInit {
   constructor(private userService: UserService, private productsService: ProductsService, private router: Router, private gmhService: GmhService,private route: ActivatedRoute,) { }
   ngOnInit(): void {
     this.searchForm = new FormGroup({
-      textSearch: new FormControl('',Validators.compose([Validators.pattern('[א-ת]{10}')])),
+      textSearch: new FormControl('',Validators.compose([Validators.pattern('[א-ת&&" "&&Product]*')])),
       category: new FormControl(''),
       tatCategory: new FormControl(''),
       currentLocation:new FormControl(''),
@@ -48,6 +49,7 @@ export class SearchGMHComponent implements OnInit {
       distance:new FormControl(''),
     },{validators: validSearch("location")});
     this.getCategoryGmh();
+    
     this.productsService.getProducts().subscribe(
       res => {
         this.products = res,
@@ -58,6 +60,7 @@ export class SearchGMHComponent implements OnInit {
     );
     this.getCurrentLocation();
   }
+
   filter() {
     this.filteredProducts = this.searchForm.controls.textSearch.valueChanges
       .pipe(
@@ -190,7 +193,7 @@ export class SearchGMHComponent implements OnInit {
      this.gmhService.search(this.formData)
     .subscribe(res => {
       this.gmhService.gmhsSearch = res;
-      
+  this.gmhService.dataSource= new MatTableDataSource<GMH>(this.gmhService.gmhsSearch);
       console.log(res)
       console.log(this.gmhService.gmhsSearch)
       if(this.gmhService.gmhsSearch.length==0)

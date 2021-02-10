@@ -41,7 +41,6 @@ export class ManageTheGMHComponent implements OnInit {
     //   res => this.categories = res,
     //   err => console.log(err)
     //);
-    this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));
   //  console.log(this.myGmhim);
     
     this.gmhService.setMyGmhim(this.myGmhim)
@@ -69,6 +68,8 @@ export class ManageTheGMHComponent implements OnInit {
     });
     this.currentUser = this.userService.CurrentUser;
     this.getMyGmhim()
+    this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));
+
     //console.log(this.myGmhim)
   }
   // private _filter(name: string): CategoryGMH[] {

@@ -49,15 +49,17 @@
         <!-- <p><input type="radio" name="r" #r1  [checked]="true" (click)="getCurrentLocation()">מיקום נוכחי </p>
         <input type="radio" name="r" #r2 (click)=" this.searchForm.controls.location.enable()" > <input ngx-google-places-autocomplete #placesRef="ngx-places"
             (onAddressChange)="handleDestinationChange($event)" formControlName="location" placeholder="בחר מיקום‏"  > -->
-            <p ><input type="radio" name="r" (click)="getCurrentLocation()">
+            <p ><input type="radio" name="r" checked (click)="getCurrentLocation()">
                 <mat-icon>room</mat-icon>מיקום נוכחי
             </p>
             <input type="radio" name="r" (click)="chooseLocation()"> <input ngx-google-places-autocomplete #placesRef="ngx-places"
               (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏" formControlName="location">
-        </div>
         <div *ngIf="searchForm.errors?.validSearch!=null" style="text-align: right;">
-            {{searchForm.errors?.validSearch}}
+                {{searchForm.errors?.validSearch}}
+            </div>
         </div>
+
+
 
         <div class="form-group">
         <label>מרחק נסיעה</label>

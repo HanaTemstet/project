@@ -1,4 +1,5 @@
-<div class="content">
+
+<body><div class="content">
     <form [formGroup]="donationForm">
 
 
@@ -12,8 +13,12 @@
             <a (click)="changeDetails=true">שינוי פרטים</a>
             <app-edit-owner-details *ngIf="changeDetails"></app-edit-owner-details>
         </div>
-
-        <div style="border-radius: 5px;" *ngIf="!continue&&(details||userService.CurrentUser==undefined)">פרטי המוסר
+        <div *ngIf="userService.CurrentUser==undefined">
+            <label>במידה והינך רשום במערכת,<br> לחץ על "הכנס ופרטיך התעדכנו אוטומטית</label>
+            <!-- <button [routerLink]="['/register']" routerLinkActive="active">הרשם</button> -->
+            <button class="btn btn-success" [routerLink]="['/signIn']" routerLinkActive="active">הכנס</button>
+        </div>
+        <div style="border-radius: 5px;padding:5%;  box-shadow: 0 0 10px 1px rgb(185, 229, 247);" *ngIf="!continue&&(details||userService.CurrentUser==undefined)">פרטי המוסר
 
 
             <div class="form-group">
@@ -37,13 +42,9 @@
                 <input class="txt" type="text" class="form-control" formControlName="phone">
                 <div class="error" *ngIf="donationForm.controls['phone'].errors!=null">מספר לא תקין</div>
             </div>
-            <div>
-                <label>במידה והינך רשום במערכת לחץ על "הכנס ופרטיך התעדכנו אוטומטית</label>
-                <!-- <button [routerLink]="['/register']" routerLinkActive="active">הרשם</button> -->
-                <button [routerLink]="['/signIn']" routerLinkActive="active">הכנס</button>
-            </div>
+            
 
-            <button (click)="donorDetails()">
+            <button class="btn btn-success"(click)="donorDetails()">
                 <mat-icon>arrow_back_ios</mat-icon>המשך
             </button>
 
@@ -51,14 +52,14 @@
         </div>
         <div *ngIf="userService.CurrentUser!=undefined">
             <label>הנך רשום במערכת האם תרצה שפרטיך התעדכנו בתרומה אוטומטית?</label>
-            <button (click)="details=true">לא אני רוצה להקיש בעצמי</button>
-            <button (click)="continue=true">כן תודה!</button>
+            <button class="btn btn-success" (click)="details=true">לא אני רוצה להקיש בעצמי</button>
+            <button class="btn btn-success" (click)="continue=true">כן תודה!</button>
         </div>
 
 
 
 
-        <div style="border-radius: 5px; font-size: medium;" *ngIf="continue">
+        <div style="border-radius: 5px; font-size: medium; border-radius: 5px;padding:5%;  box-shadow: 0 0 10px 1px rgb(185, 229, 247);" *ngIf="continue">
             <h2>פרטי התרומה</h2>
             <div class="form-group">
                 <mat-radio-group aria-label="Select an option">
@@ -124,7 +125,7 @@
                 <input class="txt" type="text" class="form-control" formControlName="comments">
                 <div class="error" *ngIf="donationForm.controls['comments'].errors!=null">*</div>
             </div>
-            <button (click)="donorDetails()">
+            <button class="btn btn-success" (click)="donorDetails()">
                 <mat-icon>arrow_forward_ios</mat-icon>חזרה
             </button>
             <button class="btn btn-success" (click)="setCategory()" [disabled]="!donationForm.valid"
@@ -136,3 +137,5 @@
 
     </form>
 </div>
+
+</body>

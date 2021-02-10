@@ -65,7 +65,8 @@ export class AppComponent {
   getGmahim(){   
     this.gmhService.getAllGmhs().subscribe(res => {
       this.gmhService.gmhsSearch = res;
-    this.route.navigate(['/gmhList']);    }, 
+    // this.route.navigate(['/gmhList']);   
+   }, 
       err => { console.log(err); }
     );
     }

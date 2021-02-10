@@ -17,13 +17,20 @@
     text-align: left;
     padding:17px;
   } */
+  .a{background-color:  rgb(215,12,46);}
+  button{background-color:  rgb(215,12,46) }
   th{
     background-color: #dddddd;
   }
  tr:nth-child(even) {
     background-color: #dddddd;
     width: 70%;
-  } /* 
+  } 
+  .btn-success{
+    background-color:rgb(215,12,46)!important ;
+    border-color:rgb(215,12,46)!important;
+  }
+  /* 
 
  
 
@@ -36,15 +43,9 @@
   
  
 
- 
-table {
-  direction: rtl;
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+
 .mat-a{
-  background-color: rgb(198, 230, 231);
+  background-color:rgb(215,12,46);
 } 
 .content {
     display: flex;

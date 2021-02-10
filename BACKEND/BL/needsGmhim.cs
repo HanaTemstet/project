@@ -9,13 +9,13 @@ namespace BL
 {
    public class needsGmhim
     {
-        public static List<NeedsGmhim> GetNeedsGmhim()
-        {
-            using(DAL.Charity_DBEntities db=new DAL.Charity_DBEntities())
-            {
-                return BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.ToList());
-            }
-        }
+        //public static List<NeedsGmhim> GetNeedsGmhim()
+        //{
+        //    using(DAL.Charity_DBEntities db=new DAL.Charity_DBEntities())
+        //    {
+        //        return BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.ToList());
+        //    }
+        //}
         public static List<NeedsGmhim> filterNeedsGmhim(int c,int tc,string adress)
         {
             List<DTO.NeedsGmhim> needsGmhims = new List<DTO.NeedsGmhim>();
@@ -64,6 +64,16 @@ namespace BL
                 }
                 return needsGmhims.Distinct().ToList();
             }
+        }
+
+        public static void add(NeedsGmhim ng)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            { 
+                db.NeedsGmhim.Add(BL.Converters.GMHConverter.convertToDal(ng));
+                db.SaveChanges();
+            }
+
         }
     }
 }

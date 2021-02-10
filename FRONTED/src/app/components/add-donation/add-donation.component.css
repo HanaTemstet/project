@@ -5,9 +5,16 @@
     max-width: 960px;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
-    margin-top: 10%;
+    margin-top: 7%;
     direction:rtl; 
     text-align: right;
     margin-left: 50%;
+  }
+  .btn{
+    padding: 3%;
+    margin: 3%;
+    align-items: center;
+  }
+  body{font-size: medium;
+    background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;
   }

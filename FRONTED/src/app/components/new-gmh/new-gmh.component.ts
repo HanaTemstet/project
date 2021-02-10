@@ -47,6 +47,7 @@ export class NewGmhComponent implements OnInit {
     this.currentUser = this.userService.CurrentUser;
     this.getMyGmhim();
     this.getCurrentLocation();
+    this.getCategoryGmh();
   }
   choosecategory() {
     this.gmhForm.controls["newCategory"].disable();
@@ -61,7 +62,7 @@ export class NewGmhComponent implements OnInit {
   
         this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
           this.tatCategories = res;
-          //console.log(res),
+          console.log(res),
   
             this.filteredTatCategories = this.gmhForm.controls.tatCategory.valueChanges
               .pipe(
@@ -215,6 +216,7 @@ export class NewGmhComponent implements OnInit {
       this.gmhService.getCategoryGmach().subscribe(
         res => {
           this.categories = res; this.filter()
+  console.log(res);
   
         },
         err => console.log(err)

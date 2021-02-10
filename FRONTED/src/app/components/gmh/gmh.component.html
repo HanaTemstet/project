@@ -1,20 +1,80 @@
 
-<form [formGroup]="gmhForm" >
-    <h4>: שם</h4>
-<p>{{gmh.GmhName}}</p>
-<h4>: כתובת</h4>
-<p>{{gmh.Adress}}</p>
-<h4>: אימייל</h4>
-<p>{{gmh.e_mail}}</p>
-<h4>: טלפון</h4>
-<p>{{gmh.Phone}}</p>
-<br>
-<br>
+<body>
+    <div style="padding:6px; position: fixed;width: 100%; margin-top: -3%; text-align: right; right: 0; direction: rtl; background-color: white;">
+        <div style="display: inline-block; padding-left: 3%;">
+                <h2>שם:&ensp;</h2>
+                <h2>{{gmh.GmhName}}</h2>
+            </div>
+            <div style="display: inline-block;padding-left: 3%;">
+            <h2>כתובת:&ensp;</h2>
+                <h2>{{gmh.Adress}}</h2>
+            </div>    
+            <div style="display: inline-block;padding-left: 3%;">
+            <h2>אימייל:&ensp;</h2>
+                <h2>{{gmh.e_mail}}</h2>
+            </div>  
+            <div style="display: inline-block;padding-left: 3%;">
+            <h2>טלפון:&ensp;</h2>
+                <h2>{{gmh.Phone}}</h2>
+            </div>   
+               
+        </div>
 
-<table class="table table-hover">
+<div  style="margin-left: 15%; width:80%" >
+    <table class="table-primary"  style=" table-layout: fixed; direction: rtl; align-items: center; color: black;" mat-table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th class="th" mat-header-cell *matHeaderCellDef> שם מוצר </th>
+        <td class="td" mat-cell  *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="picture">
+        <th class="th" mat-header-cell *matHeaderCellDef> תמונה </th>
+        <td class="td"  mat-cell *matCellDef="let element">  <img class="rounded mb-3"
+            width="100" height="100" mat-card-image src={{element.Images}} /> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date" >
+        <th class="th" mat-header-cell *matHeaderCellDef> תאריכים </th>
+        <td  class="td w-25" width="80" mat-cell *matCellDef="let element" > 
+            <mat-form-field style="width: 0%; align-items: right;" >
+            <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" style="visibility: hidden;">
+                <!---->
+                <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"  ></mat-datepicker-toggle>
+            <mat-date-range-picker (opened)="myP(element)" #picker [dateClass]="dateClass.bind(element,this)"></mat-date-range-picker>
+        </mat-form-field> </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="amount">
+        <th class="th" mat-header-cell *matHeaderCellDef> כמות </th>
+        <td class="td"  mat-cell *matCellDef="let element"> {{element.Amount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="describe">
+        <th class="th" mat-header-cell *matHeaderCellDef> תיאור חופשי </th>
+        <td class="td"  mat-cell *matCellDef="let element"> {{element.FreeDescription}} </td>
+      </ng-container>
+
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+<!-- <table class="table table-hover">
+
     <tr>
     <th>שם מוצר</th>
     <th>תמונה</th>
+    <th>תאריכים</th>
     <th>כמות</th>
     <th>תיאור חופשי</th>
 </tr>
@@ -27,7 +87,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker">
-                <!---->
+
                 <input matStartDate placeholder="Start date">
                 <input matEndDate placeholder="End date">
             </mat-date-range-input>
@@ -40,8 +100,10 @@
        <td>{{p.Status}}</td>   
    </tr>
 </tbody>
-</table>
-<table class="table table-hover">
+</table> -->
+
+
+<!-- <table class="table table-hover">
     <tr>
     <th>רייטינג </th>
     <th>טקסט</th>
@@ -79,7 +141,8 @@
        <td>{{o.Comment}}</td> 
        <td></td>    
    </tr>
-</table>
+</table> -->
 
 
-</form>
+
+</body>

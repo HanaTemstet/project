@@ -39,8 +39,8 @@ export function CheckPassword(pass1: string, pass2: string): ValidatorFn {
 
     export function validSearch(p: string): ValidatorFn {
         return (form: FormGroup): { [Key: string]: any } | null => {  
-            console.log(form.controls[p].value)  
-            if (form.controls[p].disabled && form.controls[p].value==null) 
+            // console.log(form.controls[p].enabled && form.controls[p].value=="")
+            if (form.controls[p].enabled && form.controls[p].value=="") 
             return {searchError: 'לא נבחר מיקום  '};
             return null;
         }

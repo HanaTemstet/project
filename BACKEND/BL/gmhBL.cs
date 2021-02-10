@@ -308,9 +308,17 @@ namespace BL
                         }
 
                     }
-                if (a == null)
+                if (a.Count == 0)
                 {
-                    //add to gmh we nedd this search.....
+                    NeedsGmhim ng = new NeedsGmhim();
+                    if (CurrentLocation1 != 0)
+                        ng.Adress = CurrentLocation1 + " " + CurrentLocation2;
+                   else ng.Adress = location;
+                    if (tatCategory != 0)
+                        ng.category = tatCategory;
+                    else
+                        ng.category = category;
+                    needsGmhim.add(ng);
                 }
                 List<GMH> gmhs = new List<GMH>();
                 bool add = true;

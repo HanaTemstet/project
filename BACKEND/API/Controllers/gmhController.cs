@@ -83,12 +83,12 @@ namespace API.Controllers
         {
             return Ok(BL.gmhBL.getAllGmhs());
         }
-        [Route("getNeedsGmhim")]
-        public IHttpActionResult getNeedsGmhim()
-        {
-            return Ok(BL.needsGmhim.GetNeedsGmhim());
-        }
-        [Route("filterNeedsGmhim")]
+        //[Route("getNeedsGmhim")]
+        //public IHttpActionResult getNeedsGmhim()
+        //{
+        //    return Ok(BL.needsGmhim.GetNeedsGmhim());
+        //}
+        //[Route("filterNeedsGmhim")]
         public IHttpActionResult filterNeedsGmhim()
         {
             var httpRequest = HttpContext.Current.Request;

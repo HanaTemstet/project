@@ -160,6 +160,8 @@ export class AddDonationComponent implements OnInit {
         }
       }
     )
+    this.formData = new FormData()
+
   }
   handleFileInput(etf) {
     this.formData.append('Image', etf[0]);
@@ -235,6 +237,7 @@ export class AddDonationComponent implements OnInit {
         }
       )
     }
+
   }
   setTatCategory(d, master) {
     if (this.donationForm.controls["newTatCategory"].value != "")//תת קטגוריה חדשה

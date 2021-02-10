@@ -1,12 +1,13 @@
 body{
     margin-top: 10%;
-  background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;
+  background-image: url( "src/assets/bg.png") !important; background-size: 55% 50% !important;margin-top: 10%; background-repeat: no-repeat !important;
   direction:rtl; 
   text-align: right;
   align-items: right;
   }
   .form-group {
     display: inline-block;
-margin-right: 40px;
+margin-right:-40%;
+right: 0!important;
   }
  

@@ -12,14 +12,18 @@ import { map, startWith } from 'rxjs/operators';
 import { Lending } from 'src/app/shared/models/Lending.model';
 import { DatePipe } from '@angular/common';
 import { Route } from '@angular/compiler/src/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 'use strict';
 export var currentProduct: productToGmh
+
 @Component({
   selector: 'app-one-gmh',
   templateUrl: './one-gmh.component.html',
   styleUrls: ['./one-gmh.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class OneGmhComponent implements OnInit {
   @ViewChild(MatDatepicker) datepicker: MatDatepicker<Date>;
   myGmh: GMH;
@@ -39,6 +43,11 @@ export class OneGmhComponent implements OnInit {
   formData: FormData = new FormData();
   startDate; endDate;
   max;
+  dataSource;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  displayedColumns: string[] = ['name','picture','date','amount','describe','buttons']
   constructor(private route: ActivatedRoute,
     private gmhService: GmhService, private productsServices: ProductsService,private router:Router, private datepipe: DatePipe) {
     ;
@@ -101,6 +110,8 @@ export class OneGmhComponent implements OnInit {
             }
           )
         })
+  this.dataSource  = new MatTableDataSource<productToGmh>(res);
+      
       },
     );
   }
@@ -138,6 +149,7 @@ export class OneGmhComponent implements OnInit {
   }
   showdetails(p) {
     // console.log(p);
+
     this.show = true;
     currentProduct = p;
     this.editPForm.controls.Name.setValue(p.Name);

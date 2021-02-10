@@ -4,7 +4,7 @@
 </div>
 
 <div class="mat-elevation-z8">
-  <table class="table-primary table-striped"  style="direction: rtl;" mat-table [dataSource]="dataSource">
+  <table class="table-primary table-striped"  style="direction: rtl; text-align: right;  color: black;" mat-table [dataSource]="gmhService.dataSource">
 
     <!-- Position Column -->
     <ng-container matColumnDef="position">
@@ -19,8 +19,8 @@
     </ng-container>
 
     <ng-container matColumnDef="a">
-      <th mat-header-cell *matHeaderCellDef> כתובת </th>
-      <td mat-cell *matCellDef="let element">     <a (click)="openDialog($event)" class="pointer editObject alertInappropriateDeal" id="alertInappropriateDeal2310309"  
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element">     <a (click)="openDialog($event)" class="pointer editObject alertInappropriateDeal"   
         title="לחצו כאן כדי לדווח על מודעה שאינה הולמת את רוח האתר">דווחו על מודעה לא הולמת</a>
       </td>
     </ng-container>

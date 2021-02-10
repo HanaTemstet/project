@@ -35,6 +35,9 @@
         <AssociationConnector Association="Charity_DBModel.FK__PRODUCTto__Produ__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__RequestFo__Produ__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="Charity_DBModel.FK__RequestFo__UserC__2BFE89A6" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Charity_DBModel.DonationOffers" Width="1.5" PointX="8.25" PointY="12.625" />
+        <AssociationConnector Association="Charity_DBModel.FK__DonationO__Donat__634EBE90" />
+        <AssociationConnector Association="Charity_DBModel.FK__DonationO__UserC__625A9A57" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,15 +1,17 @@
 <body>
     <div class="content">
+        
 <h1 style="font-size: 30px;" *ngIf="currentUser==undefined">רב תודות!<br>אנו שמחים שברצונך להצטרף למשפחת"CHARITY",<br> נשמח תמיד לעמוד לשרותך!</h1>
-<div style="direction: rtl;margin:0% !important;text-align: right; background-color:rgb(185, 229, 247); padding: 2%; width: 50%;">
+<div *ngIf="currentUser==undefined">
+    <h1>בשביל להוסיף גמ"ח עליך להרשם או להיכנס במידה והינך רשום כבר במערכת.</h1>
+    <button class="signInRegister" mat-raised-button color="a" [routerLink]="['/register']" >הרשם</button>
+    <button class="signInRegister" mat-raised-button color="a" [routerLink]="['/signIn']" >הכנס</button>
+    </div>
+<div style="direction: rtl;margin:2% !important;text-align: right; background-color:rgb(185, 229, 247); padding: 2%; width: 65%; box-shadow: 0 0 5px 1px rgba(0, 140, 186, 0.5);">
 <h1 style="font-size: 20px;">אנחנו יכולים לעזור לך לבחור איזה גמח להוסיף, לפי צרכי הציבור, האם אתה מעוניין??</h1>
 <input type="button" [routerLink]="['/needsGMHim']" value="כן תודה!" class="nav-link btn btn-success">
 </div>
-<div *ngIf="currentUser==undefined">
-<h1>בשביל להוסיף גמ"ח עליך להרשם או להיכנס במידה והינך רשום כבר במערכת.</h1>
-<button mat-raised-button color="a" [routerLink]="['/register']" >הרשם</button>
-<button mat-raised-button color="a" [routerLink]="['/signIn']" >הכנס</button>
-</div>
+
     </div>
 
 <div *ngIf="currentUser!=undefined">
@@ -81,5 +83,5 @@
     </form> 
     </div> -->
 </div>
-</body>
 <app-new-gmh *ngIf="currentUser!=undefined" style="direction: rtl; text-align: right;"></app-new-gmh>
+</body>
