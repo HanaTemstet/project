@@ -15,10 +15,10 @@ namespace DAL
     public partial class OPINIONS
     {
         public int OpinionCode { get; set; }
-        public int gmhCode { get; set; }
+        public int LandingCode { get; set; }
         public Nullable<int> Rating { get; set; }
         public string Comment { get; set; }
     
-        public virtual GMH GMH { get; set; }
+        public virtual LENDINGS LENDINGS { get; set; }
     }
 }

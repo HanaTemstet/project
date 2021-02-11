@@ -45,7 +45,7 @@ namespace BL
                 List<OPINION> p = new List<OPINION>();
                 foreach (var op in db.OPINIONS)
                 {
-                    if (op.gmhCode == gmh.GmhCode)
+                    if (op.LandingCode == gmh.GmhCode)
                         p.Add(BL.Converters.OpinionConverter.convertToDTO(op));
                 }
                 return p.ToArray();

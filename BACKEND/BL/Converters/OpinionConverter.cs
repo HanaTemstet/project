@@ -13,7 +13,7 @@ namespace BL.Converters
             return new DTO.OPINION
             {
              Comment=o.Comment,
-            gmhCode=o.gmhCode,
+            gmhCode=o.LandingCode,
              OpinionCode=o.OpinionCode,
              Rating=o.Rating
             };
@@ -23,7 +23,7 @@ namespace BL.Converters
             return new DAL.OPINIONS
             {
                 Comment = o.Comment,
-                gmhCode = o.gmhCode,
+                LandingCode = o.gmhCode,
                 OpinionCode = o.OpinionCode,
                 Rating = o.Rating
             };
@@ -41,7 +41,7 @@ namespace BL.Converters
             return new DTO.OPINION
             {
                 Comment = o.Comment,
-                gmhCode = o.gmhCode,
+                gmhCode = o.LandingCode,
                 OpinionCode = o.OpinionCode,
                 Rating = o.Rating
             };
@@ -51,7 +51,7 @@ namespace BL.Converters
             return new DAL.OPINIONS
             {
                 Comment = o.Comment,
-                gmhCode = o.gmhCode,
+                LandingCode = o.gmhCode,
                 OpinionCode = o.OpinionCode,
                 Rating = o.Rating
             };
@@ -69,7 +69,7 @@ namespace BL.Converters
             return new DTO.OPINION
             {
                 Comment = o.Comment,
-                gmhCode = o.gmhCode,
+                gmhCode = o.LandingCode,
                 OpinionCode = o.OpinionCode,
                 Rating = o.Rating
             };
@@ -79,7 +79,7 @@ namespace BL.Converters
             return new DAL.OPINIONS
             {
                 Comment = o.Comment,
-                gmhCode = o.gmhCode,
+                LandingCode = o.gmhCode,
                 OpinionCode = o.OpinionCode,
                 Rating = o.Rating
             };

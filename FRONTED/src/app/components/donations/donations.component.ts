@@ -93,6 +93,8 @@ export class DonationsComponent implements OnInit {
    if (this.tatcategoriesControl.value == null) fd.append('tatcategory', '0')
    else fd.append('tatcategory', this.tatcategoriesControl.value.CategoryCode)
     fd.append('adress', this.adress)
+    console.log(this.adress);
+    
     this.donationService.filterDonations(fd).subscribe(
       res =>{ this.donations = res;
       console.log(res);

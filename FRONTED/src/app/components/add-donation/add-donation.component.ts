@@ -31,11 +31,11 @@ export class AddDonationComponent implements OnInit {
   donor = false
   filteredProducts: Observable<Product[]>;
   products: Array<Product>
-  details=false
-  continue=false;
-  changeDetails=false;
+  details = false
+  continue = false;
+  changeDetails = false;
   constructor(private gmhService: GmhService, private donationService: DonationService,
-    private categoriesService: CategoriesService,public userService:UserService, private productsService: ProductsService) { }
+    private categoriesService: CategoriesService, public userService: UserService, private productsService: ProductsService) { }
 
   ngOnInit(): void {
     this.gmhService.getCategoryGmach().subscribe(
@@ -52,10 +52,10 @@ export class AddDonationComponent implements OnInit {
       tatCategories: new FormControl({ value: '', disabled: true }),
       newTatCategory: new FormControl({ value: '', disabled: true }),
       comments: new FormControl(''),
-      donorName: new FormControl('', Validators.required),
+      donorName: new FormControl('',),
       donorEmail: new FormControl('', Validators.email),
-      adress: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.pattern('[0-9]{9,10}'))
+      adress: new FormControl('',),
+      phone: new FormControl('',)
     })
 
   }
@@ -63,9 +63,9 @@ export class AddDonationComponent implements OnInit {
     this.productsService.getProductsAccordingToGmhCategory(c.option.value).subscribe(
       res => {
         this.products = res,
-       //   console.log(res);
+          //   console.log(res);
 
-        this.filter1();
+          this.filter1();
       },
       err => console.log(err),
     );
@@ -77,7 +77,7 @@ export class AddDonationComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.ProductName),
         map(name => name ? this._filter1(name) : this.products.slice())
       );
-      
+
   }
   filter() {
     this.filteredCategories = this.donationForm.controls.Categories.valueChanges
@@ -127,27 +127,36 @@ export class AddDonationComponent implements OnInit {
     this.donationForm.controls.tatCategories.enable()
     this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
       this.tatCategories = res;
-    //  console.log(res),
+      //  console.log(res),
 
-        this.filteredTatCategories = this.donationForm.controls.tatCategories.valueChanges
-          .pipe(
-            startWith(''),
-            map(value => typeof value === 'string' ? value : value.CategoryName),
-            map(name => name ? this._filter(name) : this.tatCategories.slice())
-          );
+      this.filteredTatCategories = this.donationForm.controls.tatCategories.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value : value.CategoryName),
+          map(name => name ? this._filter(name) : this.tatCategories.slice())
+        );
       err => { console.log(err); }
     });
   }
   addDonation(d) {
     //let d=new donation()
-    d.Adress = this.adress;
+    if (!this.changeDetails) {
+      d.Adress = this.userService.CurrentUser.Adress;
+      d.Phone = this.userService.CurrentUser.Phone;
+      d.donorEmail = this.userService.CurrentUser.E_mail;
+      d.donorName = this.userService.CurrentUser.Name;
+    }
+    else {
+      d.Adress = this.adress;
+      d.Phone = this.donationForm.controls.phone.value;
+      d.donorEmail = this.donationForm.controls.donorEmail.value;
+      d.donorName = this.donationForm.controls.donorName.value;
+
+    }
     // d.category = this.donationForm.controls.Categories.value.CategoryCode;
     d.Description = this.donationForm.controls.comments.value;
     //d.Category=this.donationForm.controls.tatCategories.value.CategoryCode;
-    d.Phone = this.donationForm.controls.phone.value;
     d.donationName = this.donationForm.controls.donationName.value;
-    d.donorName = this.donationForm.controls.donorName.value;
-    d.donorEmail = this.donationForm.controls.donorEmail.value;
     console.log(d);
     this.formData.append('donation', JSON.stringify(d))
     this.donationService.addDonation(this.formData).subscribe(
@@ -274,10 +283,10 @@ export class AddDonationComponent implements OnInit {
     }
   }
   donorDetails() {
-    if(this.continue==false)
-    this.continue=true;
-    else 
-    this.continue=false;
+    if (this.continue == false)
+      this.continue = true;
+    else
+      this.continue = false;
     this.donor = !this.donor
     this.donation = !this.donation
   }

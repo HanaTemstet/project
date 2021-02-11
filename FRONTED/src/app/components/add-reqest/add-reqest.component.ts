@@ -10,7 +10,6 @@ import { GMH } from 'src/app/shared/models/Gmh.model';
 import { RequestForLoan } from 'src/app/shared/models/RequestForLoan.model';
 import { ReqestService } from 'src/app/shared/services/reqest.service';
 
-
 @Component({
   selector: 'app-add-reqest',
   templateUrl: './add-reqest.component.html',
@@ -32,7 +31,7 @@ export class AddReqestComponent implements OnInit {
       comments: new FormControl('', Validators.required),
       textSearch: new FormControl(''),
   });
-
+if(this.myGmh)
     this.productsService.getProductsAccordingToGmhCategory(this.myGmh).subscribe(
       res => {
         this.products = res,
@@ -40,7 +39,7 @@ export class AddReqestComponent implements OnInit {
           this.filter()     },
       err => console.log(err),
     );}
-
+   
   filter() {
     this.filteredProducts = this.addReqestForm.controls.textSearch.valueChanges
       .pipe(
@@ -85,3 +84,4 @@ export class AddReqestComponent implements OnInit {
     
 
 }
+

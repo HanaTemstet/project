@@ -65,9 +65,12 @@ export class RegisterComponent implements OnInit {
           this.userService.addUser(user).subscribe(
             res => {
               console.log(res);
-              // this.cookieService.set('userName', this.userService.CurrentUser.Name);
-              // localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
-              confirm("משתש נוסף בהצלחה")              
+              this.userService.setCurrentUser(user);
+               this.cookieService.set('userName', this.userService.CurrentUser.Name);
+               localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+               localStorage.setItem('gmhin', JSON.stringify({}));
+
+              confirm("משתמש נוסף בהצלחה")              
               this.router.navigate(['/manageTheGMH'])
             },
             err => {

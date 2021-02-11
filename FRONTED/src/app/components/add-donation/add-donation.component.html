@@ -52,7 +52,7 @@
         </div>
         <div *ngIf="userService.CurrentUser!=undefined">
             <label>הנך רשום במערכת האם תרצה שפרטיך התעדכנו בתרומה אוטומטית?</label>
-            <button class="btn btn-success" (click)="details=true">לא אני רוצה להקיש בעצמי</button>
+            <button class="btn btn-success" (click)="details=true" (click)="donorDetails()">לא אני רוצה להקיש בעצמי</button>
             <button class="btn btn-success" (click)="continue=true">כן תודה!</button>
         </div>
 

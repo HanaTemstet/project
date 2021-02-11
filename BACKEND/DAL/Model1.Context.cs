@@ -13,7 +13,7 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Charity_DBEntities: DbContext
+    public partial class Charity_DBEntities : DbContext
     {
         public Charity_DBEntities()
             : base("name=Charity_DBEntities")
@@ -26,7 +26,7 @@ namespace DAL
         }
     
         public virtual DbSet<CategoryGMH> CategoryGMH { get; set; }
-        public virtual DbSet<Complaint> Complaint { get; set; }
+        public virtual DbSet<DonationOffers> DonationOffers { get; set; }
         public virtual DbSet<Donations> Donations { get; set; }
         public virtual DbSet<GMH> GMH { get; set; }
         public virtual DbSet<Images> Images { get; set; }
@@ -38,6 +38,5 @@ namespace DAL
         public virtual DbSet<RequestForLoan> RequestForLoan { get; set; }
         public virtual DbSet<Searches> Searches { get; set; }
         public virtual DbSet<USERS> USERS { get; set; }
-        public virtual DbSet<DonationOffers> DonationOffers { get; set; }
     }
 }

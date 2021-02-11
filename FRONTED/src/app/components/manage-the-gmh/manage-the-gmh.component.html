@@ -1,83 +1,87 @@
 <!-- <a [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים אישיים</a> -->
+
 <body>
-<div style="left: 0; margin-top: 3%; position: fixed;">
-    <div style="padding: 0.7%;"><button mat-raised-button class="btb btn-success" [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים
-    אישיים</button></div>
-  <div style="padding: 0.7%;">  <button (click)="newgmh=true" mat-raised-button style=" width: 100%;" class="btb btn-success" [routerLink]="['/add-gmh']" routerLinkActive="active">
-       הוספת גמ"ח</button></div>
-      <div style="padding: 0.7%;">  <button mat-raised-button class="btb btn-success" [routerLink]="['/add-reqest']" routerLinkActive="active">הוסף בקשה לתרומה
+    <div style="left: 0; margin-top: 3%; position: fixed;">
+        <div style="padding: 0.7%;"><button mat-raised-button class="btb btn-success"
+                [routerLink]="['/editOwnerDetails']" routerLinkActive="active">עריכת פרטים
+                אישיים</button></div>
+        <div style="padding: 0.7%;"> <button (click)="newgmh=true" mat-raised-button style=" width: 100%;"
+                class="btb btn-success" [routerLink]="['/add-gmh']" routerLinkActive="active">
+                הוספת גמ"ח</button></div>
+        <div style="padding: 0.7%;"> <button mat-raised-button class="btb btn-success" [routerLink]="['/add-reqest']"
+                routerLinkActive="active" >הוסף בקשה לתרומה
             </button></div>
-        </div>
-<div class="content" *ngIf="currentUser!=undefined">
+    </div>
+    <!-- {{userService.CurrentUser}} -->
+    <div class="content" *ngIf="userService.CurrentUser!=undefined">
+        <div class="content">
+            <h1 style="margin-top: 8%;">היי {{userService.CurrentUser.Name}} , הגמחים שלך:</h1>
+            <h1>מכאן תוכל\י לנהל אותם בקלות </h1>
+            <div style="border-bottom: 1px solid black!important; " class="gmhs nav nav-link" *ngFor="let g of myGmhim">
+                <div class="img"> <a class="gmhs nav nav-link"
+                        style="text-align: right; align-items: right; font-size: xx-large;"
+                        [routerLink]="['/one-gmh',g.GmhCode]" routerLinkActive="active">{{g.GmhName}}</a></div>
+                <div style="float: left; width: 100%;">
+                    <div class="img">
+                        <button mat-raised-button class="btn btn-success"
+                            [routerLink]="['/one-gmh',g.GmhCode]">ניהול</button>
+                    </div>
+                    <div class="img">
+                        <button title="מחק גמח" mat-raised-button class="btn btn-success">
+                            <mat-icon (click)="delete(g)">delete</mat-icon>
+                        </button>
+                        <!-- <span class="text">מחק גמח </span> -->
+                    </div>
+                    <div class="img">
+                        <button mat-raised-button title="ערוך פרטי גמח" class="btn btn-success">
+                            <mat-icon (click)="edit(g)">create</mat-icon>
+                        </button>
+                        <!-- <span class="text">ערוך פרטי גמח</span> -->
+                    </div>
+                </div>
 
-    
-    <div  class="content">
-        <h1>היי {{currentUser.Name}} , הגמחים שלך:</h1>
-        <h1>מכאן תוכל\י לנהל אותם בקלות</h1>
-        <div style="border-bottom: 1px solid black!important; " class="gmhs nav nav-link" *ngFor="let g of myGmhim" >
-           <div class="img"> <a class="gmhs nav nav-link" style="text-align: right; align-items: right; font-size: xx-large;" [routerLink]="['/one-gmh',g.GmhCode]" routerLinkActive="active">{{g.GmhName}}</a></div>
-            <div style="float: left; width: 100%;">
-                <div class="img">
-                    <button mat-raised-button class="btn btn-success" [routerLink]="['/one-gmh',g.GmhCode]">ניהול</button>
-                </div>
-                <div class="img">
-                    <button title="מחק גמח" mat-raised-button class="btn btn-success">
-                        <mat-icon (click)="delete(g)">delete</mat-icon>
-                    </button>
-                    <!-- <span class="text">מחק גמח </span> -->
-                </div>
-                <div class="img">
-                    <button mat-raised-button title="ערוך פרטי גמח" class="btn btn-success">
-                        <mat-icon (click)="edit(g)">create</mat-icon>
-                    </button>
-                    <!-- <span class="text">ערוך פרטי גמח</span> -->
-                </div>
+                <tr *ngIf="open && g==currentgmh">פרטי הגמח:<mat-icon (click)="close()">clear</mat-icon>
+                    <div style="width: 250%;">
+                        <form [formGroup]="editGmhForm">
+                            <div class="form-group">
+                                שם הגמח:
+                                <input class="txt" type="text" class="form-control" formControlName="GmhhName">
+                                <div class="error" *ngIf="editGmhForm.controls['GmhhName'].errors!=null">* </div>
+                            </div>
+                            <div class="form-group">
+                                <label> טלפון :</label>
+                                <input class="txt" type="text" class="form-control" formControlName="Phone">
+                                <div class="error" *ngIf="editGmhForm.controls['Phone'].errors!=null">מספר לא תקין
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label> מייל :</label>
+                                <input class="txt" type="text" class="form-control" formControlName="E_mail">
+                                <div class="error" *ngIf="editGmhForm.controls['E_mail'].errors!=null">מספר לא תקין
+                                </div>
+                            </div>
+                            <p>כתובת:
+                                <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
+                                    (onAddressChange)="handleDestinationChange($event)" class="form-control">‏
+                            </p> -->
+                            <p>שם:<input type="text" formControlName="Phone"> <input type="text"></p>להחליף לשם אחד?
+                            <p>הערות:<input type="text" formControlName="Comments" class="form-control"></p>
+                            <p><button mat-raised-button color="primary" class="btn btn-primary"
+                                    [disabled]="!editGmhForm.valid" (click)="saveChange()">
+                                    שמור שינויים</button>
+                            </p>
+                        </form>
+                    </div>
+                </tr>
+
+
             </div>
-            
-            <tr *ngIf="open && g==currentgmh">פרטי הגמח:<mat-icon (click)="close()">clear</mat-icon>
-                <div style="width: 250%;">
-                    <form [formGroup]="editGmhForm">
-                        <div class="form-group">
-                            שם הגמח:
-                            <input class="txt" type="text" class="form-control" formControlName="GmhhName">
-                            <div class="error" *ngIf="editGmhForm.controls['GmhhName'].errors!=null">* </div>
-                        </div>
-                        <div class="form-group">
-                            <label> טלפון :</label>
-                            <input class="txt" type="text" class="form-control" formControlName="Phone">
-                            <div class="error" *ngIf="editGmhForm.controls['Phone'].errors!=null">מספר לא תקין
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label> מייל :</label>
-                            <input class="txt" type="text" class="form-control" formControlName="E_mail">
-                            <div class="error" *ngIf="editGmhForm.controls['E_mail'].errors!=null">מספר לא תקין
-                            </div>
-                        </div>
-                        <p>כתובת:
-                            <input ngx-google-places-autocomplete #placesRef="ngx-places"
-                                formControlName="Adress" (onAddressChange)="handleDestinationChange($event)"
-                                class="form-control">‏
-                        </p> -->
-    <p>שם:<input type="text" formControlName="Phone"> <input type="text"
-                           ></p>להחליף לשם אחד?
-     <p>הערות:<input type="text" formControlName="Comments" class="form-control"></p>
-                        <p><button mat-raised-button color="primary" class="btn btn-primary"
-                                [disabled]="!editGmhForm.valid" (click)="saveChange()">
-                                שמור שינויים</button>
-                        </p>
-                    </form>
-                </div>
-            </tr>
+            <div>
 
 
-        </div>
-        <div>
-
-
-            <!-- <div class="img"> -->
+                <!-- <div class="img"> -->
                 <!-- <button (click)="newgmh=true" mat-mini-fab color="primary"> -->
-                    <!-- <mat-icon (click)="closeNew()" *ngIf="newgmh">clear</mat-icon>
+                <!-- <mat-icon (click)="closeNew()" *ngIf="newgmh">clear</mat-icon>
                     <mat-icon (click)="new()" class="img" *ngIf="!newgmh">add_circle</mat-icon> -->
 
                 <!-- </button> -->
@@ -85,16 +89,16 @@
                 <!-- <span class="text" *ngIf="newgmh">סגור </span> -->
                 <!-- <input type="button" value="סוכן חכם" title="הסוכן החכם יכול לתתת לך רעיונות לגמחים נצרכים על פי אזור מסוים"
                 [routerLink]="['/needsGMHim']" routerLinkActive="active"> -->
-            <!-- </div> -->
-            <!-- <button [routerLink]="['/add-gmh']">add gmh</button> -->
-          
+                <!-- </div> -->
+                <!-- <button [routerLink]="['/add-gmh']">add gmh</button> -->
+
+            </div>
         </div>
-     </div>
 
-    
-    <app-new-gmh *ngIf="newgmh==true"></app-new-gmh>
 
-            <!-- <table class="table table-hover">
+        <app-new-gmh *ngIf="newgmh==true"></app-new-gmh>
+
+        <!-- <table class="table table-hover">
                 <tbody *ngFor="let g of myGmhim">
                     <tr>
                         <th>שם גמח</th>
@@ -113,8 +117,8 @@
                         <td>{{g.Phone}}</td>
                         <td>{{g.e_mail}}</td> -->
 
-            <!-- <td class="img"><img src="assets\a.png" (click)="delete(g)"> -->
-            <!-- <td>{{g.comments}}</td>
+        <!-- <td class="img"><img src="assets\a.png" (click)="delete(g)"> -->
+        <!-- <td>{{g.comments}}</td>
                         <td class="img">
                             <button mat-mini-fab color="primary">
                                 <mat-icon (click)="delete(g)">delete</mat-icon>
@@ -133,6 +137,3 @@
 
                 </tbody>
             </table> -->
-
-
-    

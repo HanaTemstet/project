@@ -17,10 +17,10 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USERS()
         {
+            this.DonationOffers = new HashSet<DonationOffers>();
             this.GMH = new HashSet<GMH>();
             this.LENDINGS = new HashSet<LENDINGS>();
             this.RequestForLoan = new HashSet<RequestForLoan>();
-            this.DonationOffers = new HashSet<DonationOffers>();
         }
     
         public int UserCode { get; set; }
@@ -33,12 +33,12 @@ namespace DAL
         public string Permission { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DonationOffers> DonationOffers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GMH> GMH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LENDINGS> LENDINGS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequestForLoan> RequestForLoan { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DonationOffers> DonationOffers { get; set; }
     }
 }

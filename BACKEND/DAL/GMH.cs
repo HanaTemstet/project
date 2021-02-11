@@ -17,8 +17,6 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GMH()
         {
-            this.Complaint = new HashSet<Complaint>();
-            this.OPINIONS = new HashSet<OPINIONS>();
             this.PRODUCTtoGMH = new HashSet<PRODUCTtoGMH>();
         }
     
@@ -32,11 +30,7 @@ namespace DAL
         public string comments { get; set; }
     
         public virtual CategoryGMH CategoryGMH { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Complaint> Complaint { get; set; }
         public virtual USERS USERS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OPINIONS> OPINIONS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTtoGMH> PRODUCTtoGMH { get; set; }
     }

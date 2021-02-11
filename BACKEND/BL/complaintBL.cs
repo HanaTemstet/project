@@ -14,7 +14,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                db.Complaint.Add(Converters.ComplaintConverter.convertToDAL(complaint));
+              //  db.Complaint.Add(Converters.ComplaintConverter.convertToDAL(complaint));
                 try
                 {
                     db.SaveChanges();

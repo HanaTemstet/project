@@ -26,7 +26,7 @@ namespace BL
              
 
                     needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY==tc).ToList()));
-                    if (adress != "" && adress != "undefind")
+                    if (adress != "" && adress != "undefined")
                     {
                         foreach (NeedsGmhim ng in needsGmhims)
                         {
@@ -40,7 +40,7 @@ namespace BL
                 else if (c != 0)
                 {
                     needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY == c).ToList()));
-                    if (adress != "" && adress != "undefind")
+                    if (adress != "" && adress != "undefined")
                     {
                         foreach (NeedsGmhim ng in needsGmhims.ToList())
                         {
@@ -52,7 +52,7 @@ namespace BL
                     }
 
                 }
-               else
+                else if(adress != "" && adress != "undefined")
                 {
                     foreach (DAL.NeedsGmhim ng in db.NeedsGmhim)
                     {
