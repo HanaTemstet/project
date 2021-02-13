@@ -10,10 +10,10 @@ namespace BL
 {
     public class donationsBL
     {
-        private static Donations donations;
+        //private static Donations donations;
         public static int AddDonations(Donations d)
         {
-            donations = d;
+            //donations = d;
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 // if (d.MasterCategory == 0) d.MasterCategory = null;
@@ -23,7 +23,7 @@ namespace BL
                 {
                     db.SaveChanges();
                     int code = db.Donations.ToArray().Last().donationCode;
-                    donations.donationCode = code;
+                    d.donationCode = code;
                     BL.EmailService.SendMail("תרומתך התקבלה", code + "מספר התרומה", d.donorEmail);
                     CoordinationDonation(d);
                     return code;
@@ -49,24 +49,28 @@ namespace BL
         public static void CoordinationDonation(Donations d)
         {
 
+
+
             List<DAL.GMH> gMHs = new List<DAL.GMH>();
             List<DAL.RequestForLoan> requests = new List<DAL.RequestForLoan>();
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
+                BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d, db.GMH.FirstOrDefault(g => g.GmhCode == 6002));
+
                 requests = db.RequestForLoan.Where(r => r.ProductCode == d.ProductCode).ToList();
-                if (db.Donations.Contains(BL.Converters.DonationConverter.convertToDAL(d)))
-                {
+                //if (db.Donations.Contains(BL.Converters.DonationConverter.convertToDAL(d)))
+                //{
                     requests.ForEach(r =>
                     {
                         if (db.DonationOffers.FirstOrDefault(dd => dd.DonationCode != d.donationCode || dd.UserCode != r.UserCode) != null)
                             requests.Remove(r);
                     });
-                }
+          //      }
                 gMHs = db.GMH.Where(g => g.CategoryCode == d.Category).ToList();
 
                 if (requests.Count() == 1)//אם יש רק אחד באותה קטגוריה
                 {
-                    BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d.donationCode, db.GMH.FirstOrDefault(g => g.CategoryCode == d.Category).e_mail);
+                    BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d, db.GMH.FirstOrDefault(g => g.CategoryCode == d.Category));
                 }
                 else if (requests.Count() > 1)//אם יש יותר בודקים מרחק 
                 {
@@ -85,7 +89,7 @@ namespace BL
                     if (gMHs.Count() == 0) { }//מה לעשות אם אין אף אחד בקרבה
                     else if (gMHs.Count() == 1)//אם יש אחד בקרבה גדולה
                     {
-                        BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d.donationCode, gMHs[0].e_mail);
+                        BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d, gMHs[0]);
                     }
                     else if (gMHs.Count() > 1)
                     {
@@ -104,7 +108,7 @@ namespace BL
 
         }
 
-        public static void d(bool b, int userCode, int donationCode)
+        public static void donationAnswer(bool b, int userCode, int donationCode)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
@@ -130,6 +134,7 @@ namespace BL
                         System.Diagnostics.Debug.WriteLine("no");
 
                     }
+                    CoordinationDonation(BL.Converters.DonationConverter.convertToDTO(db.Donations.FirstOrDefault(d=>d.donationCode==donationCode)));
 
 
                 }

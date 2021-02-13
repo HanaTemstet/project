@@ -21,6 +21,7 @@
     <li class="nav-item" >
         <mat-icon class="nav-link home" [ngStyle]="{'border':'none'}" [routerLink]="['/home']" routerLinkActive="active">home</mat-icon>
       <!-- <img class="nav-link home" src="assets\home.png" [routerLink]="['/home']" routerLinkActive="active"> -->
+
     </li>
     <li class="nav-item">
       <a class="nav-link" [routerLink]="['/add-gmh']" routerLinkActive="active" > הוספת גמ"ח </a>     
@@ -32,7 +33,7 @@
   </li>
 
     <li class="nav-item" (click)="getGmahim()">
-      <a class="nav-link" [routerLink]="['/gmhList']" routerLinkActive="active"> גמחי"ם </a>
+      <a class="nav-link" routerLinkActive="active"> גמחי"ם </a>
     </li>
     
     <li class="nav-item">
@@ -59,9 +60,4 @@
 
 
 <router-outlet></router-outlet>
-<div style="bottom: 0;">
-  <footer class="navbar navbar-default navbar-fixed-bottom">
-    <p>Author: Hege Refsnes<br>
-    <a href="mailto:hege@example.com">hege@example.com</a></p>
-  </footer>
-</div>
+

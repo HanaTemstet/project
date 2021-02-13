@@ -75,19 +75,25 @@ html, body { height: 100%;
   /* bottom: 0; */
 }
 footer {
-  margin-top:5%;
-  position: relative;
-  left: 0;
-  bottom: 0;
+  /* margin-top:5%; */
+  display: block!important;
+  /* left: 0; */
+  /* position: sticky; */
   width: 100%;
   color: white;
   text-align: center;
-  padding: 3px;
+  /* padding: 3px; */
   background-color:rgb(155, 14, 14);
   color: rgb(68, 46, 46);
-}
+/* position: block; */
+  /* position:fixed; */
+  bottom:0px;
+  }
+
 body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  font-weight: bold;
+
   /* background-image: "assets\images.png"; */
   /* background-image: url('assets/images.png');  */
   /* opacity: 0.97; */

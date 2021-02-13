@@ -57,12 +57,12 @@ namespace API.Controllers
         {
 
             var httpRequest = HttpContext.Current.Request;
-            System.Diagnostics.Debug.WriteLine(httpRequest["text"]);
+            System.Diagnostics.Debug.WriteLine(Convert.ToString(httpRequest["text"]));
             System.Diagnostics.Debug.WriteLine(Convert.ToInt32(httpRequest["category"]));
             System.Diagnostics.Debug.WriteLine(Convert.ToInt32(httpRequest["tatCategory"]));
             System.Diagnostics.Debug.WriteLine(Convert.ToDouble(httpRequest["CurrentLocation1"]));
             System.Diagnostics.Debug.WriteLine(Convert.ToDouble(httpRequest["CurrentLocation2"]));
-            System.Diagnostics.Debug.WriteLine(httpRequest["location"]);
+            System.Diagnostics.Debug.WriteLine(Convert.ToString(httpRequest["location"]));
             System.Diagnostics.Debug.WriteLine(Convert.ToInt32(httpRequest["distance"]));
 
 

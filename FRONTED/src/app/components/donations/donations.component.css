@@ -1,4 +1,30 @@
 body{
+  font-weight: bold;
+
     margin-top: 10%;
-  background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;
+  background-image: url( "src/assets/bg.png") !important; background-size: 35% 30% !important;margin-top: 10%; background-repeat: no-repeat !important;
   }
+  .donations{
+    display: inline-block;
+     width: 30%;
+     /* height: 170px; */
+     /* border: 2px solid ; */
+     /* border-color:  rgb(245, 230, 230); */
+       box-shadow: 0 0 0px 2px rgb(185, 229, 247);
+        margin-bottom: 2%;margin:10px; padding:10px!important;
+         background-color:  #dfd7d7;
+  }
+  .donations:hover{
+    box-shadow: 0 0 15px 2px gray;
+    background-color: 
+    rgb(185, 229, 247)!important;
+  }
+
+  form{margin-right: -20%;}
+ p{margin-top: -5%;}
+ .redB{
+   background-color: rgb(215,12,46);
+   border-color:  rgb(215,12,46);
+   /* display: inline-block; */
+   float: left;
+ }

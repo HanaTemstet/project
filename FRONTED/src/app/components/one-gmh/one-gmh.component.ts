@@ -47,7 +47,7 @@ export class OneGmhComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['name','picture','date','amount','describe','buttons']
+  displayedColumns: string[] = ['name','date','buttons','amount','describe','picture']
   constructor(private route: ActivatedRoute,
     private gmhService: GmhService, private productsServices: ProductsService,private router:Router, private datepipe: DatePipe) {
     ;

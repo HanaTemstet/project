@@ -22,12 +22,14 @@ element.style {
   .th{
     text-align: right !important;
     direction: rtl!important;
-    color: black!important;
+    /* color: black!important; */
     font-size: 120% !important;
     font: bold!important;
     width: 180;
     height: 70;
     padding: 3%!important;
+    background-color:black !important;
+    color:white!important;
 
   }
 
@@ -39,13 +41,18 @@ element.style {
     font-size: 100%;
     width: 180;
 
-    padding: 3%!important;
+    /* padding: 3%!important; */
 
   }
-  tr:nth-child(even) {
-    background-color: #dddddd;
+  .table-primary{
+    box-shadow: 0 0 0px 5px black!important;
+    border: none!important;
   }
-  .table-primary{background-color:rgb(185, 229, 247) ;}
+  tr:nth-child(even) {
+    background-color: #f8f6f6 !important;
+
+  }
+  .table-primary{background-color:rgbrgb(185, 229, 247); ;}
 .txt{  
     direction: rtl;
     margin-top: -80px;
@@ -61,12 +68,12 @@ element.style {
 
 .content {
     display: flex;
-    margin: 82px auto;
-    padding: 0 16px;
+    /* margin: 82px auto; */
+    /* padding: 0 16px; */
     max-width: 960px;
     flex-direction: column;
     align-items: right;
-    margin-top: 5%;
+    margin-top: 10%;
     direction:rtl; 
     text-align: right;
   }
@@ -76,7 +83,7 @@ element.style {
       margin-right: 5%;
   }
   body{
-    margin-top: 10%;
+    margin-top: 9%;
   }
 /* body{    display: flex;
   flex-direction: column;

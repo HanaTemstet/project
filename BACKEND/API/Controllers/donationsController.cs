@@ -64,6 +64,11 @@ namespace API.Controllers
         {
             return Ok(BL.donationsBL.RemoveDonation(d));
         }
+        [Route("donationAnswer")]
+        public void donationAnswer(bool b, int userCode, int donationCode)
+        {
+            BL.donationsBL.donationAnswer(b,userCode,donationCode);
+        }
         [Route("filterDonations")]
         public IHttpActionResult filterDonations()
         {

@@ -155,9 +155,13 @@ export class SearchGMHComponent implements OnInit {
     // this.openGmhDetails = null
 
     this.formData = new FormData();
+    // console.log(this.searchForm.controls.textSearch.value);
+    
     if (this.searchForm.controls.textSearch.value != null)
-      this.formData.append('text', this.searchForm.controls.textSearch.value.Productname)
+      this.formData.append('text', this.searchForm.controls.textSearch.value)
     else this.formData.append('text', "")
+    // console.log(this.formData.get('text'));
+
     if (this.searchForm.controls.category.value != ""&&this.searchForm.controls.category.value != "-כל הקטגוריות-")
       this.formData.append('category', this.masterCategory.CategoryCode)
     else this.formData.append('category', 0)

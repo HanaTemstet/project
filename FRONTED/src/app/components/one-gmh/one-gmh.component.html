@@ -14,7 +14,7 @@
 
 
 
-        <div style=" width:130%">
+        <div style=" width:110%">
             <table class="table-primary"
                 style=" table-layout: fixed; direction: rtl; align-items: center; color: black;" mat-table
                 [dataSource]="dataSource">
@@ -26,11 +26,7 @@
                 </ng-container>
 
                 <!-- Name Column -->
-                <ng-container matColumnDef="picture">
-                    <th class="th" mat-header-cell *matHeaderCellDef> תמונה </th>
-                    <td class="td" mat-cell *matCellDef="let element"> <img class="rounded mb-3" width="100"
-                            height="100" mat-card-image src={{element.Images}} /> </td>
-                </ng-container>
+                
 
                 <ng-container matColumnDef="date">
                     <th class="th" mat-header-cell *matHeaderCellDef> תאריכים </th>
@@ -53,17 +49,7 @@
                     </td>
                 </ng-container>
 
-
-                <ng-container matColumnDef="amount">
-                    <th class="th" mat-header-cell *matHeaderCellDef> כמות </th>
-                    <td class="td" mat-cell *matCellDef="let element"> <input type="number" value="{{element.Amount}}"
-                            min="0" #num (change)="changeAmount(element,num.value)"> </td>
-                </ng-container>
-
-                <ng-container matColumnDef="describe">
-                    <th class="th" mat-header-cell *matHeaderCellDef> תיאור חופשי </th>
-                    <td class="td" mat-cell *matCellDef="let element"> {{element.FreeDescription}} </td>
-                </ng-container>
+                
 
 
                 <ng-container matColumnDef="buttons">
@@ -81,7 +67,8 @@
                         <button mat-mini-fab color="redB">
                             <mat-icon (click)="deleteProduct(element)">delete</mat-icon>
                         </button>
-                        <tr *ngIf="show && element==CurrentProduct">
+                      
+                        <!-- <tr *ngIf="show&&element==CurrentProduct">
                             <div>
                                 <form [formGroup]="editPForm">
                                     <button mat-mini-fab color="redB">
@@ -94,12 +81,13 @@
                                         <mat-option *ngFor="let p of filteredPs | async" [value]="p">
                                             {{p.Productname}}
                                         </mat-option>
+                                   
                                     </mat-autocomplete>
                                     <div class="error" *ngIf="newPForm.controls['Name'].errors!=null">*</div>
                                     <p>תמונה</p>
                                     <p> <input type="file" (change)="handleFileInput($event.target.files)" multiple
                                             accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
-                                        <!----> <img *ngFor="let url of CurrentProduct.Images" [src]="url"
+                                         <img *ngFor="let url of CurrentProduct.Images" [src]="url"
                                             class="rounded mb-3" width="180" mat-card-image>
                                         <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180"
                                             mat-card-image>
@@ -119,10 +107,28 @@
                                             (click)="setP()">שמור שינויים</button></p>
                                 </form>
                             </div>
-                        </tr>
-
+                        </tr> -->
 
                     </td>
+                </ng-container>
+                <ng-container  matColumnDef="amount">
+                    <th class="th"  width="5%" mat-header-cell *matHeaderCellDef> כמות </th>
+                    <td class="td" width="5%"  mat-cell *matCellDef="let element">
+                <!-- <md-input-container> <input mdInput type="number" id="myNumber" /> </md-input-container>‏ -->
+
+                         <input style="width: 85%;" type="number" value="{{element.Amount}}"
+                            min="0" #num (change)="changeAmount(element,num.value)">
+                         </td>
+                </ng-container>
+
+                <ng-container matColumnDef="describe">
+                    <th class="th" mat-header-cell *matHeaderCellDef> תיאור חופשי </th>
+                    <td class="td"  style="text-align: center;" mat-cell *matCellDef="let element"> {{element.FreeDescription}} </td>
+                </ng-container>
+                <ng-container matColumnDef="picture">
+                    <th class="th" mat-header-cell *matHeaderCellDef> תמונה </th>
+                    <td class="td" mat-cell *matCellDef="let element"> <img class="rounded mb-3" width="100"
+                            height="100" mat-card-image src={{element.Images}} /> </td>
                 </ng-container>
 
                 <tr mat-header-row style="direction: rtl;font-size: xx-large;" *matHeaderRowDef="displayedColumns"></tr>
@@ -130,7 +136,50 @@
             </table>
 
             <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+            <tr *ngIf="show">
+                <div>
+                    <form [formGroup]="editPForm">
+                        <button mat-mini-fab color="redB">
+                            <mat-icon (click)="close()">clear</mat-icon>
+                        </button>
+                        <input type="text" placeholder="בחר " aria-label="Number" matInput
+                            formControlName="Name" [matAutocomplete]="auto" [value]="displayFn"
+                            class="form-control">
+                        <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <!-- <mat-option *ngFor="let p of filteredPs | async" [value]="p">
+                                {{p.Productname}}
+                            </mat-option> -->
+                            <mat-option >
+                                {{CurrentProduct.Name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="error" *ngIf="newPForm.controls['Name'].errors!=null">*</div>
+                        <p>תמונה</p>
+                        <p> <input type="file" (change)="handleFileInput($event.target.files)" multiple
+                                accept="image/png, image/jpeg, image/jpg, application/msword, application/vnd.ms-excel, application/pdf " />
+                            <!----> <img *ngFor="let url of CurrentProduct.Images" [src]="url"
+                                class="rounded mb-3" width="180" mat-card-image>
+                            <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180"
+                                mat-card-image>
+                        </p>
+                        <mat-checkbox class="txt" type="checkbox" formControlName="IsDisposable"
+                            [checked]="CurrentProduct.FreeDescription">
+                            האם חד פעמי?</mat-checkbox>
+                        <div class="error" *ngIf="editPForm.controls['IsDisposable'].errors!=null"> שדה נדרש
+                        </div>
+                        <p>הערות<input type="text" value="{{CurrentProduct.FreeDescription}}"
+                                formControlName="FreeDescription" class="form-control"></p>
+                        <p>פקדון<input type="number" value="{{CurrentProduct.SecurityDepositAmount}}"
+                                formControlName="SecurityDepositAmount" class="form-control"></p>
+                        <p>מצב<input type="text" value="{{CurrentProduct.Status}}" formControlName="Status"
+                                class="form-control"></p>
+                        <p> <button mat-raised-button color="redB" class="btn btn-primary"
+                                (click)="setP()">שמור שינויים</button></p>
+                    </form>
+                </div>
+            </tr>
         </div>
+        
 
 
 
@@ -260,4 +309,9 @@
         </form>
 
     </div>
+    
+  <footer>
+    <p>Author: Hege Refsnes<br>
+    <a href="mailto:hege@example.com">hege@example.com</a></p>
+  </footer>
 </body>

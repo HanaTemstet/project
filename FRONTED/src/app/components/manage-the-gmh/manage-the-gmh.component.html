@@ -35,7 +35,7 @@
             </div>
             
             <tr *ngIf="open && g==currentgmh">פרטי הגמח:<mat-icon (click)="close()">clear</mat-icon>
-                <div style="width: 250%;">
+                <div >
                     <form [formGroup]="editGmhForm">
                         <div class="form-group">
                             שם הגמח:
@@ -58,7 +58,7 @@
                             <input ngx-google-places-autocomplete #placesRef="ngx-places"
                                 formControlName="Adress" (onAddressChange)="handleDestinationChange($event)"
                                 class="form-control">‏
-                        </p> -->
+                        </p> 
     <p>שם:<input type="text" formControlName="Phone"> <input type="text"
                            ></p>להחליף לשם אחד?
      <p>הערות:<input type="text" formControlName="Comments" class="form-control"></p>
@@ -72,7 +72,7 @@
 
 
         </div>
-        <div>
+
 
 
             <!-- <div class="img"> -->
@@ -87,12 +87,19 @@
                 [routerLink]="['/needsGMHim']" routerLinkActive="active"> -->
             <!-- </div> -->
             <!-- <button [routerLink]="['/add-gmh']">add gmh</button> -->
-          
-        </div>
+       
      </div>
+    </div>
+     <footer>
+        <p>Author: Hege Refsnes<br>
+        <a href="mailto:hege@example.com">hege@example.com</a></p>
+      </footer>
+</body>
+      
 
     
-    <app-new-gmh *ngIf="newgmh==true"></app-new-gmh>
+    <!-- <app-new-gmh *ngIf="newgmh==true"></app-new-gmh> -->
+
 
             <!-- <table class="table table-hover">
                 <tbody *ngFor="let g of myGmhim">

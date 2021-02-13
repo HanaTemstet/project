@@ -38,7 +38,7 @@ namespace BL
             smtpClient.Send(msg);
 
         }
-        public static void offerDonationMail(string subject, int donationCode, string to)
+        public static void offerDonationMail(string subject, DTO.Donations donation, DAL.GMH gmh)
         {
             string email = "charity.gmh@gmail.com";
             string password = "charity2020";
@@ -51,7 +51,7 @@ namespace BL
             var smtpClient = new SmtpClient("smtp.gmail.com", 587);
 
             msg.From = new MailAddress(email);
-            msg.To.Add(new MailAddress(to));
+            msg.To.Add(new MailAddress(gmh.e_mail));
             msg.Subject = subject;
             msg.Body =
                 string.Format(
@@ -98,7 +98,7 @@ namespace BL
                
                                    < div style = 'display: inline-block;' >
                 
-                                     < form action = 'https://localhost:44314/API/Doctor/ConfirmDoctor/{0}/true' method = 'post' >
+                                     < form action = 'https://localhost:44360/API/donation/donationAnswer/true/{5}/{6}' method = 'post' >
                    
                                            < button type = 'submit'
                            style = 'display: inline-block;
@@ -122,7 +122,7 @@ namespace BL
                           </ button >
                         </ form >
                     </ div >
-                     < form action = 'https://localhost:44314/API/Doctor/ConfirmDoctor/{0}/false' method = 'post' >
+                     < form action = 'https://localhost:44360/API/donation/donationAnswer/false/{5}/{6}' method = 'post' >
    
                            < button type = 'submit'
                            style = 'display: inline-block;
@@ -148,11 +148,14 @@ namespace BL
                  </ div >
                    </ div >
                 "
-                , 1,
-                      "5",
-                      "6",
-                      0,
-                      "7"
+                , donation.Adress,
+                      donation.Description,
+                      donation.donorEmail,
+                      donation.donorName,
+                      donation.Category,
+                      gmh.UserCode,
+                      donation.donationCode
+                      
                        ); 
             msg.IsBodyHtml = true;
             smtpClient.EnableSsl = true;

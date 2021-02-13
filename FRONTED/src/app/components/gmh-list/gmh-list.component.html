@@ -4,7 +4,7 @@
 </div>
 
 <div class="mat-elevation-z8">
-  <table class="table-primary table-striped"  style="direction: rtl; text-align: right;  color: black;" mat-table [dataSource]="gmhService.dataSource">
+  <table class="table-primary table-striped"  style="width:90%; direction: rtl; text-align: right;  color: black;" mat-table [dataSource]="gmhService.dataSource">
 
     <!-- Position Column -->
     <ng-container matColumnDef="position">
@@ -17,7 +17,10 @@
       <th mat-header-cell *matHeaderCellDef> כתובת </th>
       <td  mat-cell *matCellDef="let element"> {{element.Adress}} </td>
     </ng-container>
-
+    <ng-container matColumnDef="comment">
+      <th mat-header-cell *matHeaderCellDef> הערה </th>
+      <td  mat-cell *matCellDef="let element"> {{element.comments}} </td>
+    </ng-container>
     <ng-container matColumnDef="a">
       <th mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell *matCellDef="let element">     <a (click)="openDialog($event)" class="pointer editObject alertInappropriateDeal"   
@@ -29,6 +32,11 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  
+  <footer>
+    <p>Author: Hege Refsnes<br>
+    <a href="mailto:hege@example.com">hege@example.com</a></p>
+  </footer>
 </div>
 
 

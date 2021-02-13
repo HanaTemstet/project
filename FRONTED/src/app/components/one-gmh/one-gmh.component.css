@@ -1,17 +1,23 @@
 .content {
     display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
+    padding: 5px!important;
+    /* padding: 0 16px; */
     max-width: 960px;
     flex-direction: column;
     align-items: center;
+    right: 0px!important;
   }
   th{
    direction: rtl!important;font-size: large!important;
-   text-align: right!important;
+   text-align: center!important;
    color: black!important;
+   background-color: rgb(215,12,46) ;
+   border: none;
   }
-
+  td{
+    /* border: white 1px solid; */
+    text-align: center;
+  }
   .special-date {
     background-color: rgb(130, 146, 238) !important ;
     color: brown;
@@ -41,3 +47,15 @@
     background-color:rgb(215,12,46) ;
   }
   body{margin-top: 8%;}
+  .previous:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .previous:hover span {
+    padding-right: 25px;
+  }

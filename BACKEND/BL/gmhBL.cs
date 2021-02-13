@@ -314,10 +314,17 @@ namespace BL
                     if (CurrentLocation1 != 0)
                         ng.Adress = CurrentLocation1 + " " + CurrentLocation2;
                    else ng.Adress = location;
-                    if (tatCategory != 0)
-                        ng.category = tatCategory;
+                    if (text != "")
+                        ng.category =
+                            db.Products.FirstOrDefault
+                            (p => p.Productname .Equals( text)).CategoryCode;
                     else
-                        ng.category = category;
+                    {
+                        if (tatCategory != 0)
+                            ng.category = tatCategory;
+                        else
+                            ng.category = category;
+                    }
                     needsGmhim.add(ng);
                 }
                 List<GMH> gmhs = new List<GMH>();

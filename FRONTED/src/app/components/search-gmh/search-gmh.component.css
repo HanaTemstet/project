@@ -23,7 +23,7 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #f8f6f6;
 }
 .txt{  
     margin-top: -80px;
@@ -46,7 +46,7 @@ margin-right: 40px;
       
   }
   .content{
-  background-color:rgb(181, 210, 255);
+  background-color:rgb(185, 229, 247);;
   /* margin-top: -0px; */
 }
 .decorate{

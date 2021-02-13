@@ -35,7 +35,7 @@ newOpinion:Opinion;
   opinions:Opinion[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['name','picture','date','amount','describe'];
+  displayedColumns: string[] = ['name','date','amount','describe','picture'];
     constructor(private userService: UserService,private gmhService:GmhService,private opinionService:OpinionService,private GmhService:GmhService,private productsService:ProductsService,private route:ActivatedRoute) { }
   
     ngOnInit(): void { 

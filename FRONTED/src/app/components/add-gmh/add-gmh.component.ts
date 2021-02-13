@@ -13,8 +13,8 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 export class AddGMHComponent implements OnInit {
   registerForm: FormGroup;
   adrres: string;
-  currentUser:User;
-  constructor(private userService: UserService) { }
+  // currentUser:User;
+  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
     // if(confirm("?אנחנו יכולים לעזור לך לבחור איזה גמח להוסיף, לפי צרכי הציבור, האם אתה מעוניין"))
@@ -30,7 +30,7 @@ export class AddGMHComponent implements OnInit {
       permission: new FormControl('', Validators.required),
       accept: new FormControl('', Validators.requiredTrue),
     }, { validators: CheckPassword('password', 'confirm') });
-    this.currentUser = this.userService.CurrentUser;
+    // this.currentUser = this.userService.CurrentUser;
   }
   addUser() {
     let user = new User();

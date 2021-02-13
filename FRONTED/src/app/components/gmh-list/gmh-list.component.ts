@@ -27,7 +27,7 @@ d=false;
 dataSource; 
 
 @ViewChild(MatPaginator) paginator: MatPaginator;
-displayedColumns: string[] = ['position', 'name','a'];
+displayedColumns: string[] = ['position', 'name','comment','a'];
   constructor(public gmhService: GmhService,private router:Router,public dialog: MatDialog,public route:ActivatedRoute) { }
 
   ngOnInit(): void { 

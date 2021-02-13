@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { CategoryGMH } from 'src/app/shared/models/CategoryGMH.model';
 import { donation } from 'src/app/shared/models/Donations.model';
 import { DonationService } from 'src/app/shared/services/donation.service';
 import { GmhService } from 'src/app/shared/services/gmh.service';
+import { validSearch } from 'src/app/validators/valid';
 
 @Component({
   selector: 'app-donations',
@@ -22,10 +23,21 @@ export class DonationsComponent implements OnInit {
   filteredTatCategories: Observable<CategoryGMH[]>
   categoriesControl = new FormControl();
   tatcategoriesControl = new FormControl();
-
+  details:boolean=false
+  donationDetail:donation
+  donationForm:FormGroup
   constructor(private donationService: DonationService, private gmhService: GmhService) { }
   donations: donation[]
+
   ngOnInit(): void {
+    this.donationForm = new FormGroup({
+      // textSearch: new FormControl('',Validators.compose([Validators.pattern('[א-ת&&" "&&Product]*')])),
+      // category: new FormControl(''),
+      // tatCategory: new FormControl(''),
+      // currentLocation:new FormControl(''),
+      location: new FormControl(''),
+      // distance:new FormControl(''),
+    },{validators: validSearch("location")});
     this.donationService.getDonations().subscribe(
       res => {
         this.donations = res
@@ -39,11 +51,19 @@ export class DonationsComponent implements OnInit {
     console.log(value)
     this.adress = a.formatted_address;
   }
+  detail(d:donation)
+  {
+    this.details=true;
+    this.donationDetail=d;
+  }
   getCurrentLocation() {
-    
+    this.donationForm.controls.location.setValue("")
+    this.donationForm.controls.location.disable()
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.adress = (position.coords.latitude + " " + position.coords.longitude).toString();
+        console.log(this.adress);
+        
       });
     }
     else {

@@ -25,7 +25,7 @@ export class NewGmhComponent implements OnInit {
   filteredCategories: Observable<CategoryGMH[]>;
   myGmhim: GMH[];
   newgmh = false;
-  currentUser: User;
+  // currentUser: User;
   currLat=0;
   currLng=0;
   adress;
@@ -44,7 +44,7 @@ export class NewGmhComponent implements OnInit {
     },{validators: isCategory('category','newCategory')})
     this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));    
     this.gmhService.setMyGmhim(this.myGmhim)
-    this.currentUser = this.userService.CurrentUser;
+    // this.currentUser = this.userService.CurrentUser;
     this.getMyGmhim();
     this.getCurrentLocation();
     this.getCategoryGmh();
@@ -141,24 +141,9 @@ export class NewGmhComponent implements OnInit {
           }
         )
       }
-      if (this.gmhForm.controls["newTatCategory"].value != null)//תת קטגוריה חדשה
-      {
-        console.log(this.gmhForm.controls["newTatCategory"].value);
-  
-        let c = new CategoryGMH();
-        c.CategoryName = this.gmhForm.controls["newTatCategory"].value;
-        c.MasterCategoryCode = master;
-        this.categoriesService.addCategory(c).subscribe(
-          res => {
-            console.log(res);
-            g.CategoryCode = res;
-            console.log(g);
-  
-          }
-        )
-        this.addGmh(g);
-      }
-      else if (this.gmhForm.controls["tatCategory"].value != null) {//נבחרה תת קטגוריה
+      if (this.gmhForm.controls["tatCategory"].value != null) {//נבחרה תת קטגוריה
+        console.log(this.gmhForm.controls["tatCategory"].value);
+        
         this.tatCategories.forEach(element => {
           if (element.CategoryName === this.gmhForm.controls.tatCategory.value.CategoryName) {
             g.CategoryCode = element.CategoryCode;
@@ -167,13 +152,32 @@ export class NewGmhComponent implements OnInit {
         })
         this.addGmh(g);
       }
+     else if (this.gmhForm.controls["newTatCategory"].value != null)//תת קטגוריה חדשה
+      {
+        // console.log(this.gmhForm.controls["newTatCategory"].value);
+  
+        let c = new CategoryGMH();
+        c.CategoryName = this.gmhForm.controls["newTatCategory"].value;
+        c.MasterCategoryCode = master;
+        this.categoriesService.addCategory(c).subscribe(
+          res => {
+            // console.log(res);
+            g.CategoryCode = res;
+            // console.log(g);
+  
+          }
+        )
+        this.addGmh(g);
+      }
+     
     }
     addGmh(g) {
+      // console.log(this.userService.CurrentUser)
       g.GmhName = this.gmhForm.controls.GmhName.value;
-      g.Adress = this.currentUser.Adress;
-      g.Phone = this.currentUser.Phone;
-      g.e_mail = this.currentUser.E_mail;
-      g.UserCode = this.currentUser.UserCode;
+      g.Adress = this.userService.CurrentUser.Adress;
+      g.Phone = this.userService.CurrentUser.Phone;
+      g.e_mail = this.userService.CurrentUser.E_mail;
+      g.UserCode = this.userService.CurrentUser.UserCode;
       g.comments = this.gmhForm.controls.comments.value;
       console.log(g);
       this.gmhService.add(g).subscribe(
@@ -185,6 +189,7 @@ export class NewGmhComponent implements OnInit {
             this.getCategoryGmh();
             this.gmhForm.reset()
             alert('נוסף בהצלחה')
+            this.router.navigate(['/manageTheGMH'])
           }
           else {
             alert('error, try again')

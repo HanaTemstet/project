@@ -32,6 +32,25 @@ h1{
     align-items: right;
   }
   body{
-      margin-top: 10%;
+      /* margin-top: -20%; */
     background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;
     }
+    .divMove {
+   direction: rtl;
+   margin:2% !important;
+   text-align: right;
+    background-color:rgb(144, 185, 250);
+     padding: 2%; width: 65%;
+      box-shadow: 0 0 10px 1px rgba(0, 140, 186, 0.5);
+
+        position: relative;
+        animation: mymove 3s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes mymove {
+        from {left: 40px;}
+        to {left: 200px; background-color: rgb(185, 229, 247);}
+      }
+
+      

@@ -55,29 +55,48 @@ export class RegisterComponent implements OnInit {
       res => {
         console.log(res);
         if (res != null) {
+          // this.userService.setCurrentUser(res);
+          //     this.cookieService.set('userName', this.userService.CurrentUser.Name);
+          //     localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+          //     console.log(this.userService.CurrentUser)
           // console.log("here!!!!!!!!!")
           // this.isExist = true;
           confirm("משתמש זה קיים כבר ")
-          this.router.navigate(['/signIn'])
+        this.userService.setCurrentUser(res);
+        this.cookieService.set('userName', this.userService.CurrentUser.Name);
+        localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+        this.router.navigate(['/manageTheGMH'])
 
         }
         else {
           this.userService.addUser(user).subscribe(
             res => {
               console.log(res);
+              // this.userService.setCurrentUser(res);
               // this.cookieService.set('userName', this.userService.CurrentUser.Name);
               // localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
-              confirm("משתש נוסף בהצלחה")              
-              this.router.navigate(['/manageTheGMH'])
+              // console.log(this.userService.CurrentUser)
+              confirm("משתש נוסף בהצלחה") 
+              this.userService.checkUser(user).subscribe(
+                res => {
+                  this.userService.setCurrentUser(res);
+                  this.cookieService.set('userName', this.userService.CurrentUser.Name);
+                  localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
+                  this.router.navigate(['/manageTheGMH'])
+                },err => {
+                  confirm("המערכת נתקלה בבעיה בהוספת המשתמש נסה שוב")              
+                  console.log(err); }
+              )
+            
+                            
+              // this.router.navigate(['/manageTheGMH'])
             },
             err => {
               confirm("המערכת נתקלה בבעיה בהוספת המשתמש נסה שוב")              
               console.log(err); }
           )
         }
-        // this.cookieService.set('userName', this.userService.CurrentUser.Name);
-        // localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
-        this.router.navigate(['/manageTheGMH'])
+
       },
       err => { console.log(err); }
     )
