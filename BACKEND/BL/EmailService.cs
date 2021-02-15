@@ -54,99 +54,84 @@ namespace BL
             msg.To.Add(new MailAddress(gmh.e_mail));
             msg.Subject = subject;
             msg.Body =
-                string.Format(
-                                @"
-                    <div dir=' ltr'>
-                    <h1>Hello!</h1>
-                    <h3>{{subject}}</h3>
-                    <div style='
-                      position: relative;
-                      padding: 0.75rem 1.25rem;
-                      margin-bottom: 1rem;
-                      border: 1px solid transparent;
-                      border-radius: 0.25rem;
-                      color: #0c5460;
-                      width: 50%;
-                      background-color: #d1ecf1;
-                      border-color: #bee5eb;'>
 
-                    < label > Id: { 0}</ label >
-   
-                       < br />
-   
-                       < label > First Name: { 1}</ label >
-      
-                          < br />
-      
-                          < label > Last Name: { 2}</ label >
-         
-                             < br />
-         
-                             < label > Phone Number: { 3}</ label >
-            
-                                < br />
-            
-                                < label > Address: { 4}</ label >
-               
-                                   < br />
-               
-                                   < br />
-               
-                                   </ div >
-               
-                                   < div >
-               
-                                   < div style = 'display: inline-block;' >
-                
-                                     < form action = 'https://localhost:44360/API/donation/donationAnswer/true/{5}/{6}' method = 'post' >
-                   
-                                           < button type = 'submit'
-                           style = 'display: inline-block;
-                           font - weight: 400;
-            text - align: center;
-            vertical - align: middle;
-            -webkit - user - select: none;
-            -moz - user - select: none;
-            -ms - user - select: none;
-            user - select: none;
-        border: 1px solid transparent;
-        padding: 0.375rem 0.75rem;
-            font - size: 1rem;
-            line - height: 1.5;
-            border - radius: 0.25rem;
-        transition: color 0.15s ease-in-out, background - color 0.15s ease-in-out, border - color 0.15s ease-in-out, box - shadow 0.15s ease-in-out;
-        color: #fff;
-                           background - color: #28a745;
-                           border - color: #28a745;'>
+            string.Format(
+               @"
+<div dir=' ltr'>
+                    <h1>Hello!</h1>
+                    <h3>There is a doctor who need your confirm:</h3>
+                    <div style='
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    color: #0c5460;
+    width: 50%;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;'
+>
+<label> Id: {0}</label>
+                    <br />
+                    <label> First Name: {1}</ label>
+                    <br />
+                    <label> Last Name: {2}</label>
+                    <br />
+                    <label> Phone Number: {3}</label>
+                    <br />
+                    <label> Address: {4}</label>
+                    <br />
+                    <br />
+</div>
+<div>
+<div style='display: inline-block;'>
+ <form action= 'https://localhost:44360/API/donation/donationAnswer/true/{5}/{6}' method ='post' >
+                        <button type='submit'
+                           style='display: inline-block;
+                           font-weight: 400;
+                           text-align: center;
+                           vertical-align: middle;
+                           -webkit-user-select: none;
+                           -moz-user-select: none;
+                           -ms-user-select: none;
+                           user-select: none;
+                           border: 1px solid transparent;
+                           padding: 0.375rem 0.75rem;
+                           font-size: 1rem;
+                           line-height: 1.5;
+                           border-radius: 0.25rem;
+                           transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                           color: #fff;
+                           background-color: #28a745;
+                           border-color: #28a745;'>
                         Confirm
-                          </ button >
-                        </ form >
-                    </ div >
-                     < form action = 'https://localhost:44360/API/donation/donationAnswer/false/{5}/{6}' method = 'post' >
-   
-                           < button type = 'submit'
-                           style = 'display: inline-block;
-                           font - weight: 400;
-            text - align: center;
-            vertical - align: middle;
-            -webkit - user - select: none;
-            -moz - user - select: none;
-            -ms - user - select: none;
-            user - select: none;
-        border: 1px solid transparent;
-        padding: 0.375rem 0.75rem;
-            font - size: 1rem;
-            line - height: 1.5;
-            border - radius: 0.25rem;
-        transition: color 0.15s ease-in-out, background - color 0.15s ease-in-out, border - color 0.15s ease-in-out, box - shadow 0.15s ease-in-out;
-        color: #fff;
-                           background - color: #dc3545;
-                           border - color: #dc3545;'>
+                          </button>
+                        </form>
+</div>
+                     <form action= 'https://localhost:44360/API/donation/donationAnswer/false/{5}/{6}' method ='post'>
+                        <button type='submit'
+                           style='display: inline-block;
+                           font-weight: 400;
+                           text-align: center;
+                           vertical-align: middle;
+                           -webkit-user-select: none;
+                           -moz-user-select: none;
+                           -ms-user-select: none;
+                           user-select: none;
+                           border: 1px solid transparent;
+                           padding: 0.375rem 0.75rem;
+                           font-size: 1rem;
+                           line-height: 1.5;
+                           border-radius: 0.25rem;
+                           transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                           color: #fff;
+                           background-color: #dc3545;
+                           border-color: #dc3545;'>
                         UnConfirm
-                    </ button >
-                 </ form >
-                 </ div >
-                   </ div >
+                    </button>
+                 </form>
+                 </div>
+</div>
                 "
                 , donation.Adress,
                       donation.Description,
@@ -156,7 +141,8 @@ namespace BL
                       gmh.UserCode,
                       donation.donationCode
                       
-                       ); 
+                       );
+
             msg.IsBodyHtml = true;
             smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;

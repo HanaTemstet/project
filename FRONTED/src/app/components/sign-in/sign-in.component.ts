@@ -20,6 +20,7 @@ export class SignInComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private cookieService: CookieService) { }
   signInForm: FormGroup;
   show: boolean = false;
+  a=true
   ngOnInit(): void {
     this.signInForm = new FormGroup({
       e_mail: new FormControl('', Validators.required),

@@ -10,7 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserService } from './shared/services/user.service';
 import { HomeComponent } from './components/home/home.component';
 import { SearchGMHComponent } from './components/search-gmh/search-gmh.component';
-
+import { DialogModule } from 'primeng/dialog';
 import { DonationsComponent } from './components/donations/donations.component';
 import { AddGMHComponent } from './components/add-gmh/add-gmh.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -71,6 +71,7 @@ import { NewGmhComponent } from './components/new-gmh/new-gmh.component';
     OfferDonationComponent,
     SuitableReqestComponent,
     NewGmhComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -92,7 +93,8 @@ import { NewGmhComponent } from './components/new-gmh/new-gmh.component';
     MatRadioModule,
     MatCheckboxModule,
     MatTableModule,
-    TextFieldModule
+    TextFieldModule,
+    DialogModule
   ],
   providers: [UserService, DatePipe],
   bootstrap: [AppComponent]

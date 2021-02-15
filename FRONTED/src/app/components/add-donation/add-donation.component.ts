@@ -52,9 +52,9 @@ export class AddDonationComponent implements OnInit {
       tatCategories: new FormControl({ value: '', disabled: true }),
       newTatCategory: new FormControl({ value: '', disabled: true }),
       comments: new FormControl(''),
-      donorName: new FormControl('', Validators.required),
-      donorEmail: new FormControl('', Validators.email),
-      adress: new FormControl('', Validators.required),
+      donorName: new FormControl('',),
+      donorEmail: new FormControl(''),
+      adress: new FormControl(''),
       phone: new FormControl('', Validators.pattern('[0-9]{9,10}'))
     })
 
@@ -140,14 +140,29 @@ export class AddDonationComponent implements OnInit {
   }
   addDonation(d) {
     //let d=new donation()
-    d.Adress = this.adress;
+    if (!this.changeDetails) {
+      d.Adress = this.userService.CurrentUser.Adress;
+      d.Phone = this.userService.CurrentUser.Phone;
+      d.donorEmail = this.userService.CurrentUser.E_mail;
+      d.donorName = this.userService.CurrentUser.Name;
+    }
+    else {
+      d.Adress = this.adress;
+      d.Phone = this.donationForm.controls.phone.value;
+      d.donorEmail = this.donationForm.controls.donorEmail.value;
+      d.donorName = this.donationForm.controls.donorName.value;
+
+    }
+    // d.Adress = this.adress;
     // d.category = this.donationForm.controls.Categories.value.CategoryCode;
     d.Description = this.donationForm.controls.comments.value;
     //d.Category=this.donationForm.controls.tatCategories.value.CategoryCode;
     d.Phone = this.donationForm.controls.phone.value;
-    d.donationName = this.donationForm.controls.donationName.value;
-    d.donorName = this.donationForm.controls.donorName.value;
-    d.donorEmail = this.donationForm.controls.donorEmail.value;
+    d.donationName = this.donationForm.controls.donationName.value.Productname;
+    console.log(this.donationForm.controls.donationName.value);
+
+    // d.donorName = this.donationForm.controls.donorName.value;
+    // d.donorEmail = this.donationForm.controls.donorEmail.value;
     console.log(d);
     this.formData.append('donation', JSON.stringify(d))
     this.donationService.addDonation(this.formData).subscribe(
