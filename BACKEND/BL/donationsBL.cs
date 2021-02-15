@@ -163,8 +163,10 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                if (d != null)
-                    db.Donations.Remove(BL.Converters.DonationConverter.convertToDAL(d));
+                if (d != null) {
+                    db.DonationOffers.RemoveRange(db.DonationOffers.Where(d1 => d.donationCode == d1.DonationCode).ToList());
+                    db.Donations.Remove(db.Donations.FirstOrDefault(d1=>d.donationCode==d1.donationCode));
+                }
                 try
                 {
                     db.SaveChanges();

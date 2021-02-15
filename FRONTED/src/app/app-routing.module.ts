@@ -36,6 +36,7 @@ const routes: Routes = [
   {path:'one-gmh/:id',component:OneGmhComponent},
   {path:'gmhList',component:GmhListComponent},
   { path: 'addReqest/:id', component: AddReqestComponent },
+  // { path: 'addReqest', component: AddReqestComponent },
   { path: 'myDonation', component: myDonationComponent },
   { path: 'offer-donation', component: OfferDonationComponent },
   { path: 'myDonation/:id', component: myDonationComponent },

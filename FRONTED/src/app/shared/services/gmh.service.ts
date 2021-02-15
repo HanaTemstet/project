@@ -12,6 +12,7 @@ import { Searches } from '../models/Searches.model';
   providedIn: 'root'
 })
 export class GmhService {
+ public display:boolean
   public gmhsSearch:GMH[];
 public dataSource
 private myGmhim:GMH[];

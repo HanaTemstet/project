@@ -35,18 +35,20 @@ export class SearchGMHComponent implements OnInit {
   adress;
   distance=20;
   hideTatCategory=true;
+  TravetTime:number
   //openGmhDetails;
   IncreaseTheSearchArea;
   uniqueChars: GMH[] = [];
-  constructor(private userService: UserService, private productsService: ProductsService, private router: Router, private gmhService: GmhService,private route: ActivatedRoute,) { }
+  constructor(private userService: UserService, private productsService: ProductsService, private router: Router, public gmhService: GmhService,private route: ActivatedRoute,) { }
   ngOnInit(): void {
+    // this.gmhService.display=true
     this.searchForm = new FormGroup({
       textSearch: new FormControl('',Validators.compose([Validators.pattern('[א-ת&&" "&&Product]*')])),
       category: new FormControl(''),
       tatCategory: new FormControl(''),
       currentLocation:new FormControl(''),
       location: new FormControl(''),
-      distance:new FormControl(''),
+      distance:new FormControl('20'),
     },{validators: validSearch("location")});
     this.getCategoryGmh();
     
@@ -185,8 +187,8 @@ export class SearchGMHComponent implements OnInit {
      this.formData.append('CurrentLocation2', 0)
    }
 
-    //console.log(this.searchForm.controls.distance.value)
-    if(this.searchForm.controls.distance.value!="")
+   console.log(this.searchForm.controls.distance.value)
+    if(this.searchForm.controls.distance.value!=""||this.searchForm.controls.distance.value!=0)
     this.distance=this.searchForm.controls.distance.value;
     this.formData.append('distance', this.distance);
     console.log(this.distance)
@@ -234,7 +236,7 @@ export class SearchGMHComponent implements OnInit {
       err => { console.log(err); }
     });
    // this.saveSearch();
- 
+ this.gmhService.display=true
    // this.gmhsArr.emit(this.gmhs)
 }
  

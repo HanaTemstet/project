@@ -43,9 +43,9 @@ displayedColumns: string[] = ['position', 'name','comment','a'];
 
 
 
-r(GmhCode:number){
-  this.router.navigate(['gmh',GmhCode])
-}
+// r(GmhCode:number){
+//   this.router.navigate(['gmh',GmhCode])
+// }
 openDialog(event){
   this.d=true;
 event.stopPropagation();

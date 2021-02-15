@@ -18,13 +18,13 @@
     <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
         [matAutocomplete]="auto" [value]="displayFn" class="form-control">
     <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
-        (optionSelected)="getTatCategoriesForGmh($event)">
+>
         <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
             {{c.CategoryName}}
         </mat-option>
     </mat-autocomplete>
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
         <label> תת קטגוריה:</label>
         <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
             [value]="displayFn" [formControl]="tatcategoriesControl" class="form-control">
@@ -33,8 +33,9 @@
                 {{tc.CategoryName}}
             </mat-option>
         </mat-autocomplete>
-</div>
-<input type="submit" value="סנן" class="btn btn-primary form-group">
+</div> -->
+<input type="submit" value="סנן" class="btn btn-success form-group">
+
         <!-- <label> כתובת:</label>
         <mat-radio-group aria-label="Select an option">
             <mat-radio-button value="1" (click)="getCurrentLocation()">מיקום נוכחי
@@ -67,10 +68,19 @@
         </select>
     </div> -->
 
-   
 
+      
+      <div class="list-group">
+          <h1>:הנה הגמ"חים שחסרים באזור שביקשת</h1>
+        <div style="margin: 1%;width: 150%;" class="list-group-item list-group-item-action flex-column align-items-start active" *ngFor="let c of masterCategoryNG" (click)="getTatForNG(c.CategoryCode)">
+        <div class="d-flex w-100 justify-content-between">{{c.CategoryName}}</div>
+        <div class="d-flex w-100 justify-content-between" *ngFor="let tc of tatCategoryNG">{{tc.CategoryName}}</div>
+        
+        </div>
+        </div>
 </form>
-    <table mat-table class="table table-hover" [dataSource]="needsGmhim">
+
+    <!-- <table mat-table class="table table-hover" [dataSource]="needsGmhim">
         <ng-container matColumnDef="category">
             <th mat-header-cell *matHeaderCellDef> קטגוריה </th>
             <td mat-cell *matCellDef="let ng"> {{ng.categoryName}} </td>
@@ -81,7 +91,10 @@
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </table> -->
+
+
+
        <!-- <table class="table table-hover">
             <thead>
                 <tr>

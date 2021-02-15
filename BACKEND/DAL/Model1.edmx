@@ -27,7 +27,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserCode" Type="int" Nullable="false" />
           <Property Name="DonationCode" Type="int" Nullable="false" />
         </EntityType>
@@ -173,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DonationO__Donat__634EBE90">
+        <Association Name="FK__DonationO__Donat__76619304">
           <End Role="Donations" Type="Self.Donations" Multiplicity="1" />
           <End Role="DonationOffers" Type="Self.DonationOffers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -185,7 +185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DonationO__UserC__625A9A57">
+        <Association Name="FK__DonationO__UserC__756D6ECB">
           <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
           <End Role="DonationOffers" Type="Self.DonationOffers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -400,11 +400,11 @@
             <End Role="GMH" EntitySet="GMH" />
             <End Role="Complaint" EntitySet="Complaint" />
           </AssociationSet>
-          <AssociationSet Name="FK__DonationO__Donat__634EBE90" Association="Self.FK__DonationO__Donat__634EBE90">
+          <AssociationSet Name="FK__DonationO__Donat__76619304" Association="Self.FK__DonationO__Donat__76619304">
             <End Role="Donations" EntitySet="Donations" />
             <End Role="DonationOffers" EntitySet="DonationOffers" />
           </AssociationSet>
-          <AssociationSet Name="FK__DonationO__UserC__625A9A57" Association="Self.FK__DonationO__UserC__625A9A57">
+          <AssociationSet Name="FK__DonationO__UserC__756D6ECB" Association="Self.FK__DonationO__UserC__756D6ECB">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="DonationOffers" EntitySet="DonationOffers" />
           </AssociationSet>

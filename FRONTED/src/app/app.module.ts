@@ -28,7 +28,9 @@ import { MatNativeDateModule, } from '@angular/material/core';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
 
 
-
+import { Ng5SliderModule } from 'ng5-slider';
+import {MatSliderModule} from '@angular/material/slider';
+import {MenuItem} from 'primeng/api';  
 import { DatePipe } from '@angular/common';
 import { EditOwnerDetailsComponent } from './components/edit-owner-details/edit-owner-details.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -41,6 +43,8 @@ import {MatTableModule} from '@angular/material/table';
 import { AppComponent, dialog } from './app.component';
 import { myDonationComponent } from './components/my-donation/my-donation.component';
 import { AddReqestComponent } from './components/add-reqest/add-reqest.component';
+
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 
 import { SuitableReqestComponent } from './components/suitable-reqest/suitable-reqest.component';
 import { OfferDonationComponent } from './components/offer-donation/offer-donation.component';
@@ -94,7 +98,11 @@ import { NewGmhComponent } from './components/new-gmh/new-gmh.component';
     MatCheckboxModule,
     MatTableModule,
     TextFieldModule,
-    DialogModule
+    DialogModule,
+    AccordionModule,
+    Ng5SliderModule,
+    MatSliderModule,
+  
   ],
   providers: [UserService, DatePipe],
   bootstrap: [AppComponent]

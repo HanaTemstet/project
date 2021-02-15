@@ -85,7 +85,7 @@ namespace BL
 </div>
 <div>
 <div style='display: inline-block;'>
- <form action= 'https://localhost:44360/API/donation/donationAnswer/true/{5}/{6}' method ='post' >
+ <form action= 'https://localhost:44360/api/donation/donationAnswer/true/{5}/{6}' method ='post' >
                         <button type='submit'
                            style='display: inline-block;
                            font-weight: 400;
@@ -108,7 +108,7 @@ namespace BL
                           </button>
                         </form>
 </div>
-                     <form action= 'https://localhost:44360/API/donation/donationAnswer/false/{5}/{6}' method ='post'>
+                     <form action= 'https://localhost:44360/api/donation/donationAnswer/false/{5}/{6}' method ='post'>
                         <button type='submit'
                            style='display: inline-block;
                            font-weight: 400;

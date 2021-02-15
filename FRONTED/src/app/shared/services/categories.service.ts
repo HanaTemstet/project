@@ -8,6 +8,7 @@ import { CategoryGMH } from '../models/CategoryGMH.model';
   providedIn: 'root'
 })
 export class CategoriesService {
+
   
   constructor(private http:HttpClient) { }
   addCategory(c: CategoryGMH):Observable<number> {
@@ -20,4 +21,5 @@ export class CategoriesService {
       return this.http.post<string>(environment.url+'categories/getCategoryName',category);
 
     } 
+
 }

@@ -5,6 +5,7 @@ import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { donation } from 'src/app/shared/models/Donations.model';
 import { GMH } from 'src/app/shared/models/Gmh.model';
 import { Opinion } from 'src/app/shared/models/Opinion.model';
 import { productToGmh } from 'src/app/shared/models/productToGMH.model';
@@ -33,12 +34,16 @@ opinion=false;
 newOpinion:Opinion;
   productsToGmh:productToGmh[];
   opinions:Opinion[];
+details:boolean=false
+productDetail:productToGmh
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = ['name','date','amount','describe','picture'];
     constructor(private userService: UserService,private gmhService:GmhService,private opinionService:OpinionService,private GmhService:GmhService,private productsService:ProductsService,private route:ActivatedRoute) { }
   
     ngOnInit(): void { 
+
       this.gmhForm = new FormGroup({
         comment: new FormControl(''),
       });
@@ -89,18 +94,30 @@ newOpinion:Opinion;
     rangeFilter(d:Date):boolean{
       return false;
     }
+    detail(d:productToGmh)
+    {
+      this.details=true;
+      this.productDetail=d;
+ 
+    }
+    ClosePopUp(){
+      this.details=false;
+      this.productDetail=null
+      console.log(this.details+"fdsdfghjhgfdsasdfghjhgfcdxszsdfg");
+      
+    }
 
-    changeStarColor(id:string) {
+    // changeStarColor(id:string) {
      
-        if( document.getElementById(id).style.color == "red"){
-        document.getElementById(id).style.color = "gray"; 
-        this.rating--;
-      }
-       else{
-        document.getElementById(id).style.color = "red";
-        this.rating++;
-      }
-      }  
+    //     if( document.getElementById(id).style.color == "red"){
+    //     document.getElementById(id).style.color = "gray"; 
+    //     this.rating--;
+    //   }
+    //    else{
+    //     document.getElementById(id).style.color = "red";
+    //     this.rating++;
+    //   }
+    //   }  
 
     addOpinion()
     {

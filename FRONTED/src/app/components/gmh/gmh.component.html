@@ -1,35 +1,128 @@
-<div style="padding:6px; position: fixed;width: 100%; margin-top: -3%; text-align: right; right: 0; direction: rtl; background-color: white;">
-  <div style="display: inline-block; padding-left: 3%;">
-          <h2>שם:&ensp;</h2>
-          <h2>{{gmh.GmhName}}</h2>
-      </div>
-      <div style="display: inline-block;padding-left: 3%;">
-      <h2>כתובת:&ensp;</h2>
-          <h2>{{gmh.Adress}}</h2>
-      </div>    
-      <div style="display: inline-block;padding-left: 3%;">
-      <h2>אימייל:&ensp;</h2>
-          <h2>{{gmh.e_mail}}</h2>
-      </div>  
-      <div style="display: inline-block;padding-left: 3%;">
-      <h2>טלפון:&ensp;</h2>
-          <h2>{{gmh.Phone}}</h2>
-      </div>   
-         
-  </div>
 <body>
+  <div class="content">
+    <div class="gmh">
+      <label>שם גמח</label>
+      <h4>{{gmh.GmhName}}</h4>
+      <label>כתובת</label>
+      <h4>{{gmh.Adress}}</h4>
+      <label>אימייל</label>
+      <h4>{{gmh.e_mail}}</h4>
+      <label>טלפון</label>
+      <h4>{{gmh.Phone}}</h4>
+    </div>
+    <div>
+      <div class="donations" (click)="detail(p)" *ngFor="let p of productsToGmh">
+<!-- <button class="btn btn-primary redB" (click)="detail(d)">פרטים נוספים</button> -->
+          <tr style="background: none;">
+              <td>
+                <img class="rounded mb-3"
+                width="100" height="100" mat-card-image src={{p.Images}} />
+              </td>
+              <p>{{p.Name}} </p>            
+          </tr>
+
+          <p-dialog styleClass="class" [responsive]="false" [modal]="true"
+          [style]="{width: '630px'}" header="פרטי מוצר:" [responsive] ="false"
+          [maximizable]="false" [baseZIndex]="10350" [(visible)]="details==true&&p==productDetail">
+          <!-- <p-header class="col-md-2" style="font-size:20px;color: #34495e">פרטי מוצר:</p-header> -->
+          <button mat-mini-fab color="redB">
+            <mat-icon (click)="ClosePopUp()">clear</mat-icon>
+        </button>
+              <p>{{p.Amount}} </p>
+              <mat-form-field style="width: 0%; align-items: right;" >
+                <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" style="visibility: hidden;">
+               
+                    <input matStartDate placeholder="Start date">
+                    <input matEndDate placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"  ></mat-datepicker-toggle>
+                <mat-date-range-picker (opened)="myP(p)" #picker [dateClass]="dateClass.bind(p,this)"></mat-date-range-picker>
+            </mat-form-field>
+              <p>{{p.FreeDescription}} </p>
+
+          </p-dialog>
+   
 
 
-<div  style="margin-left: 15%; width:80%; padding-top:8%;" >
+        
+      </div>
+
+
+  </div>
+</div>
+
+‏
+
+<footer>
+<p>Author: Hege Refsnes<br>
+<a href="mailto:hege@example.com">hege@example.com</a></p>
+</footer>
+</body>
+
+
+
+
+
+
+
+
+<!-- <body>
+
+
+    <div class="products content" *ngFor="let d of productsToGmh" (click)="detail(d)">
+      <tr style="background: none;">
+        <td>
+          <img class="rounded mb-3"
+          width="100" height="100" mat-card-image src={{d.Images}} />
+        </td>
+        <p>{{d.Name}} </p>
+        
+    </tr>
+    <tr style="font-weight: normal;background: none;" *ngIf="details==true&&d==productDetail">
+        <p>פרטי מוצר:</p>
+        <p>          
+            <mat-form-field style="width: 0%; align-items: right;" >
+          <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" style="visibility: hidden;">
+         
+              <input matStartDate placeholder="Start date">
+              <input matEndDate placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"  ></mat-datepicker-toggle>
+          <mat-date-range-picker (opened)="myP(d)" #picker [dateClass]="dateClass.bind(d,this)"></mat-date-range-picker>
+      </mat-form-field> </p>
+        <p>{{d.Amount}} </p>
+        <p>{{d.FreeDescription}} </p>
+    </tr>
+    </div>
+
+    
+    <footer>
+      <p>Author: Hege Refsnes<br>
+      <a href="mailto:hege@example.com">hege@example.com</a></p>
+    </footer> 
+  </body> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div  style="margin-left: 15%; width:80%; padding-top:8%;" >
     <table class="table-primary"  style=" table-layout: fixed; direction: rtl; align-items: center; color: black;" mat-table [dataSource]="dataSource">
-  
-      <!-- Position Column -->
+
       <ng-container matColumnDef="name">
         <th class="th" mat-header-cell *matHeaderCellDef> שם מוצר </th>
         <td class="td" mat-cell  *matCellDef="let element"> {{element.Name}} </td>
       </ng-container>
   
-      <!-- Name Column -->
      
 
       <ng-container matColumnDef="date" >
@@ -37,7 +130,7 @@
         <td  class="td w-25" width="80" mat-cell *matCellDef="let element" > 
             <mat-form-field style="width: 0%; align-items: right;" >
             <mat-date-range-input [rangePicker]="picker" [dateFilter]="rangeFilter" style="visibility: hidden;">
-                <!---->
+
                 <input matStartDate placeholder="Start date">
                 <input matEndDate placeholder="End date">
             </mat-date-range-input>
@@ -68,7 +161,7 @@
     </table>
   
     <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
-  </div>
+  </div> -->
 
 
 <!-- <table class="table table-hover">
@@ -146,9 +239,26 @@
 </table> -->
 
 
-<footer>
-  <p>Author: Hege Refsnes<br>
-  <a href="mailto:hege@example.com">hege@example.com</a></p>
-</footer>
 
-</body>
+
+
+<!-- <div style="padding:6px; position: fixed;width: 100%; margin-top: -1%; text-align: right; right: 0; direction: rtl; background-color: white;">
+  <div style="display: inline-block; padding-left: 3%;">
+          <h2>שם:&ensp;</h2>
+          <h2>{{gmh.GmhName}}</h2>
+      </div>
+      <div style="display: inline-block;padding-left: 3%;">
+      <h2>כתובת:&ensp;</h2>
+          <h2>{{gmh.Adress}}</h2>
+      </div>    
+      <div style="display: inline-block;padding-left: 3%;">
+      <h2>אימייל:&ensp;</h2>
+          <h2>{{gmh.e_mail}}</h2>
+      </div>  
+      <div style="display: inline-block;padding-left: 3%;">
+      <h2>טלפון:&ensp;</h2>
+          <h2>{{gmh.Phone}}</h2>
+      </div>   
+         
+  </div> -->
+ 

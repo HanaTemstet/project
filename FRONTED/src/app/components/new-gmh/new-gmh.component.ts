@@ -111,68 +111,75 @@ export class NewGmhComponent implements OnInit {
       const filterValue = name.toLowerCase();
       return this.categories.filter(c => c.CategoryName.toLowerCase().indexOf(filterValue) === 0);
     }
-    setCategoty() {
-      let g = new GMH();
-      let master;
-      console.log(
-       this.gmhForm.controls["category"].value);
-      if (this.gmhForm.controls["category"].value != null)//נבחרה קגורית אב
-      {
-        this.categories.forEach(element => {
-          console.log(element.CategoryName, this.gmhForm.controls.category.value.CategoryName);
+    // setCategoty() {
+    //   let g = new GMH();
+    //   let master;
+    //   console.log(
+    //    this.gmhForm.controls["category"].value);
+    //   if (this.gmhForm.controls["category"].value != null)//נבחרה קגורית אב
+    //   {
+    //     this.categories.forEach(element => {
+    //       console.log(element.CategoryName, this.gmhForm.controls.category.value.CategoryName);
   
-          if (element.CategoryName == this.gmhForm.controls.category.value.CategoryName) {
-            g.CategoryCode = element.CategoryCode;
-            master = element.CategoryCode
-          }
-        })
+    //       if (element.CategoryName == this.gmhForm.controls.category.value.CategoryName) {
+    //         g.CategoryCode = element.CategoryCode;
+    //         master = element.CategoryCode
+    //       }
+    //     })
   
-      }
-      else if (this.gmhForm.controls["newCategory"].value != null) {//קטגורית אב חדשה
-        console.log(this.gmhForm.controls["newCategory"].value);
+    //   }
+    //   else if (this.gmhForm.controls["newCategory"].value != null) {//קטגורית אב חדשה
+    //     console.log(this.gmhForm.controls["newCategory"].value);
   
-        let c = new CategoryGMH();
-        c.CategoryName = this.gmhForm.controls["newCategory"].value;
-        this.categoriesService.addCategory(c).subscribe(
-          res => {
-            console.log(res);
-            g.CategoryCode = res;
-            master = res;
-          }
-        )
-      }
-      if (this.gmhForm.controls["tatCategory"].value != null) {//נבחרה תת קטגוריה
-        console.log(this.gmhForm.controls["tatCategory"].value);
+    //     let c = new CategoryGMH();
+    //     c.CategoryName = this.gmhForm.controls["newCategory"].value;
+    //     this.categoriesService.addCategory(c).subscribe(
+    //       res => {
+    //         console.log(res);
+    //         g.CategoryCode = res;
+    //         master = res;
+    //       }
+    //     )
+    //   }
+    //   if (this.gmhForm.controls["tatCategory"].value != null) {//נבחרה תת קטגוריה
+    //     console.log(this.gmhForm.controls["tatCategory"].value);
         
-        this.tatCategories.forEach(element => {
-          if (element.CategoryName === this.gmhForm.controls.tatCategory.value.CategoryName) {
-            g.CategoryCode = element.CategoryCode;
-            master = element.CategoryCode
-          }
-        })
-        this.addGmh(g);
-      }
-     else if (this.gmhForm.controls["newTatCategory"].value != null)//תת קטגוריה חדשה
-      {
-        // console.log(this.gmhForm.controls["newTatCategory"].value);
+    //     this.tatCategories.forEach(element => {
+    //       if (element.CategoryName === this.gmhForm.controls.tatCategory.value.CategoryName) {
+    //         g.CategoryCode = element.CategoryCode;
+    //         master = element.CategoryCode
+    //       }
+    //     })
+    //     this.addGmh(g);
+    //   }
+    //  else if (this.gmhForm.controls["newTatCategory"].value != null)//תת קטגוריה חדשה
+    //   {
+    //     // console.log(this.gmhForm.controls["newTatCategory"].value);
   
-        let c = new CategoryGMH();
-        c.CategoryName = this.gmhForm.controls["newTatCategory"].value;
-        c.MasterCategoryCode = master;
-        this.categoriesService.addCategory(c).subscribe(
-          res => {
-            // console.log(res);
-            g.CategoryCode = res;
-            // console.log(g);
+    //     let c = new CategoryGMH();
+    //     c.CategoryName = this.gmhForm.controls["newTatCategory"].value;
+    //     c.MasterCategoryCode = master;
+    //     this.categoriesService.addCategory(c).subscribe(
+    //       res => {
+    //         // console.log(res);
+    //         g.CategoryCode = res;
+    //         // console.log(g);
   
-          }
-        )
-        this.addGmh(g);
-      }
+    //       }
+    //     )
+    //     this.addGmh(g);
+    //   }
      
-    }
-    addGmh(g) {
-      // console.log(this.userService.CurrentUser)
+    // }
+    addGmh() {
+      let g = new GMH();
+      console.log(this.gmhForm.controls["tatCategory"].value);
+      console.log(this.gmhForm.controls["category"].value.CategoryCode);
+      console.log(this.gmhForm.controls["category"].value);
+      
+      if (this.gmhForm.controls["tatCategory"].value != ""&&this.gmhForm.controls["tatCategory"].value != null)
+      g.CategoryCode=this.gmhForm.controls["tatCategory"].value.CategoryCode
+      else g.CategoryCode=this.gmhForm.controls["category"].value.CategoryCode
       g.GmhName = this.gmhForm.controls.GmhName.value;
       g.Adress = this.userService.CurrentUser.Adress;
       g.Phone = this.userService.CurrentUser.Phone;

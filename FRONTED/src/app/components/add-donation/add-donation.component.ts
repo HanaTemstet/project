@@ -296,4 +296,5 @@ export class AddDonationComponent implements OnInit {
     this.donor = !this.donor
     this.donation = !this.donation
   }
+
 }

@@ -44,15 +44,17 @@ export class OneGmhComponent implements OnInit {
   startDate; endDate;
   max;
   dataSource;
-
+// display:boolean
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = ['name','date','buttons','amount','describe','picture']
   constructor(private route: ActivatedRoute,
-    private gmhService: GmhService, private productsServices: ProductsService,private router:Router, private datepipe: DatePipe) {
+    public gmhService: GmhService, private productsServices: ProductsService,private router:Router, private datepipe: DatePipe) {
     ;
   }
   ngOnInit(): void {
+this.gmhService.display =true ;
+
     this.editPForm = new FormGroup({
       Name: new FormControl(Validators.required),
       FreeDescription: new FormControl(),
@@ -384,5 +386,8 @@ export class OneGmhComponent implements OnInit {
   }
   addReqest(){
     this.router.navigate(['addReqest',this.myGmh.GmhCode])
+  }
+  ClosePopUp(){
+    this.gmhService.display=false
   }
 }

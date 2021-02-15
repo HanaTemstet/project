@@ -9,6 +9,18 @@
         </button>
     </div>
 
+
+    <p-dialog  [(visible)]="gmhService.display" [responsive]="false" dismissableMask="ClosePopUp()"[modal]="true" (onHide)="ClosePopUp()"
+    [style]="{width: '630px'}" [responsive] ="false"
+    [maximizable]="false" [baseZIndex]="10350">
+    <p-header class="col-md-2" style="font-size:20px;color: #34495e">התחברות</p-header>
+<app-sign-in></app-sign-in>
+</p-dialog>
+
+
+
+
+
     <div class="content">
 
 
@@ -309,7 +321,8 @@
         </form>
 
     </div>
-    
+
+
   <footer>
     <p>Author: Hege Refsnes<br>
     <a href="mailto:hege@example.com">hege@example.com</a></p>

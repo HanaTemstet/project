@@ -64,7 +64,7 @@ namespace API.Controllers
         {
             return Ok(BL.donationsBL.RemoveDonation(d));
         }
-        [Route("donationAnswer"),HttpPost]
+        [Route("donationAnswer/{b}/{userCode}/{donationCode}"),HttpPost]
         public void donationAnswer(bool b, int userCode, int donationCode)
         {
             BL.donationsBL.donationAnswer(b,userCode,donationCode);

@@ -16,21 +16,23 @@ namespace BL
         //        return BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.ToList());
         //    }
         //}
-        public static List<NeedsGmhim> filterNeedsGmhim(int c,int tc,string adress)
+        
+      
+        public static List<NeedsGmhim> filterNeedsGmhim(int c, int tc, string adress)
         {
             List<DTO.NeedsGmhim> needsGmhims = new List<DTO.NeedsGmhim>();
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 if (tc != 0)
                 {
-             
 
-                    needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY==tc).ToList()));
-                    if (adress != "" && adress != "undefind")
+
+                    needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY == tc).ToList()));
+                    if (adress != "" && adress != "undefined")
                     {
                         foreach (NeedsGmhim ng in needsGmhims)
                         {
-                            if (BL.GoogleMaps.GetDistance(ng.Adress, adress) > 50)
+                            if (BL.GoogleMaps.GetDistance(ng.Adress, adress) > 20)
                                 needsGmhims.Remove(ng);
                         }
 
@@ -40,11 +42,11 @@ namespace BL
                 else if (c != 0)
                 {
                     needsGmhims.AddRange(BL.Converters.GMHConverter.convertToDTOList(db.NeedsGmhim.Where(ng => ng.CATEGORY == c).ToList()));
-                    if (adress != "" && adress != "undefind")
+                    if (adress != "" && adress != "undefined")
                     {
                         foreach (NeedsGmhim ng in needsGmhims.ToList())
                         {
-                            if (BL.GoogleMaps.GetDistance(ng.Adress, adress) > 50)
+                            if (BL.GoogleMaps.GetDistance(ng.Adress, adress) > 20)
                                 needsGmhims.Remove(ng);
                         }
 
@@ -52,21 +54,39 @@ namespace BL
                     }
 
                 }
-               else
+                else if (adress != "" && adress != "undefined")
                 {
                     foreach (DAL.NeedsGmhim ng in db.NeedsGmhim)
                     {
-                        if (BL.GoogleMaps.GetDistance(ng.ADRESS, adress) < 50)
+                        if (BL.GoogleMaps.GetDistance(ng.ADRESS, adress) < 20)
                             needsGmhims.Add(BL.Converters.GMHConverter.convertToDTO(ng));
                     }
-                      
+
 
                 }
                 return needsGmhims.Distinct().ToList();
             }
         }
 
-        public static void add(NeedsGmhim ng)
+
+        public static void remove(NeedsGmhim ng)
+        {
+            using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
+            {
+                foreach (var item in db.NeedsGmhim)
+                {
+                    if(item.CATEGORY==ng.category&& BL.GoogleMaps.GetDistance(ng.Adress,item.ADRESS)<20)
+                    { 
+                    db.NeedsGmhim.Remove(item);
+                    db.SaveChanges();
+                    }
+
+                }
+            }
+
+            }
+
+            public static void add(NeedsGmhim ng)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             { 

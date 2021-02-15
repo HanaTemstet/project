@@ -18,6 +18,10 @@ namespace BL
                 try
                 {
                     db.SaveChanges();
+                    NeedsGmhim ng = new NeedsGmhim();
+                    ng.category = gmh.CategoryCode;
+                    ng.Adress = gmh.Adress;
+                    needsGmhim.remove(ng);
                     return true;
                 }
                 catch (DbEntityValidationException ex)
@@ -38,6 +42,8 @@ namespace BL
             }
 
         }
+
+
         public static bool delete(GMH gmh)
         {
 
