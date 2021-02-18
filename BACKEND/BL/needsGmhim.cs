@@ -90,6 +90,7 @@ namespace BL
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             { 
+                if(ng.category!=null && ng.category!= 0)
                 db.NeedsGmhim.Add(BL.Converters.GMHConverter.convertToDal(ng));
                 db.SaveChanges();
             }

@@ -14,9 +14,9 @@ import { validSearch } from 'src/app/validators/valid';
   styleUrls: ['./needs-gmhim.component.css']
 })
 export class NeedsGMHimComponent implements OnInit {
-  allCategories:CategoryGMH[]=[]
- tatCategoryNG: CategoryGMH[]=[]
-  masterCategoryNG: CategoryGMH[]=[]
+  allCategories: CategoryGMH[] = []
+  tatCategoryNG: CategoryGMH[] = []
+  masterCategoryNG: CategoryGMH[] = []
   needsGmhimForm: FormGroup;
   needsGmhim;
   masterCategories: CategoryGMH[]
@@ -28,6 +28,7 @@ export class NeedsGMHimComponent implements OnInit {
   adress;
   masterCategory: CategoryGMH;
   displayedColumns = ["category", "adress"]
+  currentNg: CategoryGMH;
   constructor(private gmhService: GmhService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
@@ -109,96 +110,63 @@ export class NeedsGMHimComponent implements OnInit {
     this.needsGmhimForm.controls.location.disable()
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position.coords.latitude, position.coords.longitude);
-
         this.adress = (position.coords.latitude + " " + position.coords.longitude).toString();
-        console.log(this.adress);
-
       });
     }
-
-
-
-
     else {
       alert("Geolocation is not supported by this browser.");
     }
 
   }
-
-
   chooseLocation() {
     this.needsGmhimForm.controls.location.enable()
   }
   filterNeedsGmhim() {
-    this.masterCategoryNG=[]
+    this.masterCategoryNG = []
     let fd = new FormData()
-    console.log(this.categoriesControl.value, this.tatcategoriesControl.value);
     if (this.categoriesControl.value == null || this.categoriesControl.value == "") fd.append('category', "0")
     else fd.append('category', this.categoriesControl.value.CategoryCode)
     if (this.tatcategoriesControl.value == null || this.tatcategoriesControl.value == "") fd.append('tatcategory', "0")
     else fd.append('tatcategory', this.tatcategoriesControl.value.CategoryCode)
-    console.log(this.adress);
-
     fd.append('adress', this.adress)
     this.gmhService.filterNeedsGmhim(fd).subscribe(
       res => {
         this.needsGmhim = res
         this.needsGmhim.forEach(ng => {
           this.categoriesService.getCategoryName(ng.category).subscribe(
-            res => {ng.categoryName = res
-            this.masterCategories.forEach(element => {
-              if (element.CategoryName == ng.categoryName) 
-                this.masterCategoryNG.push(element)
-                
-                
-
-                // else{
-                //   this.allCategories.forEach(a => {
-                //     if (a.CategoryName == res) {  
-                //       this.masterCategories.forEach(mc => {
-                //         if(a.MasterCategoryCode==mc.CategoryCode)
-                //         this.masterCategoryNG.push(mc)
-                //       });
-                      
-                //   });
-                // }
-
-
-              
-            });
-          }
+            res => {
+              ng.categoryName = res
+              this.masterCategories.forEach(element => {
+                if (element.CategoryName == ng.categoryName)
+                  this.masterCategoryNG.push(element)
+              });
+            }
           )
-      });
-  }
-    )
-console.log(this.masterCategoryNG);
-
-  //this.adress = ""
-}
-getTatForNG(CategoryCode:number){
-  this.tatCategoryNG=[]
-  let c= new CategoryGMH()
-  c.CategoryCode=CategoryCode
-  this.gmhService.getCategoriesForGmach(c).subscribe(res => {
-    this.tatCategories = res;
-
-    console.log(res);
-    console.log(this.needsGmhim);
-    
-    this.needsGmhim.forEach(ng => {
-      this.tatCategories.forEach(element => {
-    console.log(ng.category+", "+element.CategoryCode);
-
-        if(ng.category==element.CategoryCode){
-        this.tatCategoryNG.push(element)
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaddddddddddddddd!!!!");
+        });
       }
-      }); 
+    )
+  }
+  getTatForNG(c: CategoryGMH) {
+    console.log(this.tatCategoryNG,this.currentNg);
+    console.log(this.tatCategoryNG.length!=0,this.currentNg!=c);
+    if(this.tatCategoryNG.length!=0 && this.currentNg==c){
+      this.tatCategoryNG = []
+    }
+    else{
+    this.tatCategoryNG = []
+    this.currentNg = c;
+    this.gmhService.getCategoriesForGmach(c).subscribe(res => {
+      this.tatCategories = res;
+      this.needsGmhim.forEach(ng => {
+        this.tatCategories.forEach(element => {
+          if (ng.category == element.CategoryCode) {
+            this.tatCategoryNG.push(element)
+          }
+        });
       });
-    err => { console.log(err); }
-  });
- 
-}
+      err => { console.log(err); }
+    });
+  }
+  }
 
 }

@@ -37,17 +37,17 @@ namespace BL
                 }
             }
         }
-        
-             public static OPINION[] getOpinionsForGMH(GMH gmh)
+
+        public static OPINION[] getOpinionsForGMH(GMH gmh)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
                 List<OPINION> p = new List<OPINION>();
-                foreach (var op in db.OPINIONS)
-                {
-                    if (op.gmhCode == gmh.GmhCode)
-                        p.Add(BL.Converters.OpinionConverter.convertToDTO(op));
-                }
+                //foreach (var op in db.OPINIONS)
+                //{
+                //    if (op.LandingCode == gmh.)
+                //        p.Add(BL.Converters.OpinionConverter.convertToDTO(op));
+                //}
                 return p.ToArray();
                 //return BL.Converters.ProductToGmhConverter.convertToDTOarray(db.PRODUCTtoGMH.Where(p=>p.GmhCode==gmh.GmhCode).ToArray());
             }

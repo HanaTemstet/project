@@ -21,36 +21,68 @@ h1{
    line-height: 100%;
    padding:  3% 0%  3% 0% ;
 }
-.content {
+/* .content {
     display: flex;
     text-align: right;
     align-items:flex-start;
-    margin: 70px auto 32px;
-    padding: 0 16px;
+    margin: 70px auto 32px; 
+     padding: 0 16px;
     max-width: 960px;
     flex-direction: column;
-    align-items: right;
-  }
+  } */
   body{
-      /* margin-top: -20%; */
-    background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;
+    background-image: url( "src/assets/bg.png") !important;
+     background-size: 40% 35% !important;
+     /* margin-top: 10%; */
+      background-repeat: no-repeat !important;
+      background-position-y: 50%;
     }
-    .divMove {
+  .divMove {
+    display:inline-block;
+    /* margin-bottom: -5%; */
+    margin-top: 3%;
    direction: rtl;
-   margin:2% !important;
+   margin-right: 100% !important;
    text-align: right;
-    background-color:rgb(144, 185, 250);
-     padding: 2%; width: 65%;
-      box-shadow: 0 0 10px 1px rgba(0, 140, 186, 0.5);
-
-        position: relative;
-        animation: mymove 3s;
-        animation-fill-mode: forwards;
-      }
-
-      @keyframes mymove {
-        from {left: 40px;}
-        to {left: 200px; background-color: rgb(185, 229, 247);}
-      }
+   background-color:rgb(185, 229, 247);
+   padding: 1%;
+    width: 40%;
+   box-shadow: 0 0 10px 1px rgba(0, 140, 186, 0.5);
+   display: inline-block !important;
+   position: relative;
+   animation: mymove 3s;
+   animation-fill-mode: forwards;
+  }
+  @keyframes mymove {
+    from {left: 50px;}
+    to {left: 400px; background-color: rgb(185, 229, 247);}
+  }
+.thank{
+  direction: rtl; 
+  background-color:rgb(185, 229, 247);
+  display: inline-block !important;
+   padding: 2%;
+   text-align: right;
+   box-shadow: 0 0 10px 1px rgba(0, 140, 186, 0.5);
+   position: relative;
+ width: 70%;
+  
+}
+.newGmh{
+ direction: rtl;
+ display: inline-block !important; 
+ text-align: right;
+ margin-left: 95%;
+ padding: 2%;
+ width: 70%;
+}
+form{
+  display: inline-block !important;
+  margin-top: -10% !important;
+  margin-right: -30% !important;
+  width: 50% ;
+  align-items: center ;
+  margin-bottom: 10% !important;
+}
 
       

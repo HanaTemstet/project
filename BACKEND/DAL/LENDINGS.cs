@@ -14,14 +14,22 @@ namespace DAL
     
     public partial class LENDINGS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LENDINGS()
+        {
+            this.OPINIONS = new HashSet<OPINIONS>();
+        }
+    
         public int LendingCode { get; set; }
         public int UserCode { get; set; }
         public int ProductCode { get; set; }
-        public string Comment { get; set; }
         public Nullable<System.DateTime> LendingDate { get; set; }
         public Nullable<System.DateTime> ReturnDate { get; set; }
+        public string Comment { get; set; }
     
         public virtual PRODUCTtoGMH PRODUCTtoGMH { get; set; }
         public virtual USERS USERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OPINIONS> OPINIONS { get; set; }
     }
 }

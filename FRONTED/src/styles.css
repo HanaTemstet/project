@@ -22,7 +22,6 @@ text{
     font-weight: bold;
 }
 label{
- /* color:rgb(245, 20, 12); */
  font-weight: bold;
 }
 .clabel{
@@ -37,37 +36,6 @@ margin-left: 11px;
 float: left;
 color:#34495e; 
 }
-/* .ui-widget-overlay {
-  background: rgba(0, 0, 0, .25);
-  opacity: 1!important;
-  filter: alpha(opacity=100)!important;
-  z-index: 1049!important
-} */
-
-
-
-
-/* You can add global styles to this file, and also import other style files */
-/* #HiglightRow tr:hover {
-  background-color:#317082; color:#FFF; }
-
-#HiglightRow table {
-  border:1px solid #000; border-collapse: collapse; }
-
-#HiglightRow thead th { font-weight:bold; color:#000; background-color:#E2EBED; }
-
-#HiglightRow td { padding:2px; }
-
-  
- 
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding:17px;
-  } */
-  .a{background-color:  rgb(215,12,46);}
-  button{background-color:  rgb(215,12,46) }
   th{
     background-color: #dddddd;
   }
@@ -75,26 +43,13 @@ color:#34495e;
     background-color: #dddddd;
     width: 70%;
   } 
-  .btn-success{
-    background-color:rgb(215,12,46)!important ;
+.mat-red{
+  background-color:rgb(215,12,46)!important ;
     border-color:rgb(215,12,46)!important;
-  }
-  /* 
-
- 
-
-#HiglightRow td { padding:2px; } */
-
-  
-  
-  
- 
-  
- 
-
-
-.mat-a{
-  background-color:rgb(215,12,46);
+} 
+.mat-red{
+  background-color:rgb(215,12,46)!important ;
+    border-color:rgb(215,12,46)!important;
 } 
 .content {
     display: flex;
@@ -109,42 +64,23 @@ color:#34495e;
   .pointer{
     cursor: pointer;
   }
-  
-
-
- 
-
-
-  
 html, body { height: 100%;
 }
 .search{
   top:10%;
   position: relative ;
-  /* bottom: 0; */
 }
 footer {
-  /* margin-top:5%; */
-  display: block!important;
-  /* left: 0; */
-  /* position: sticky; */
+  /* display: block!important; */
   width: 100%;
   color: white;
   text-align: center;
-  /* padding: 3px; */
   background-color:rgb(155, 14, 14);
   color: rgb(68, 46, 46);
-/* position: block; */
-  /* position:fixed; */
-  bottom:0px;
+  /* margin-top: 10% !important; */
+  /* bottom:0px; */
   }
-
 body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
   font-weight: bold;
-
-  /* background-image: "assets\images.png"; */
-  /* background-image: url('assets/images.png');  */
-  /* opacity: 0.97; */
-
 }

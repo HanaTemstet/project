@@ -55,7 +55,7 @@ namespace BL
             List<DAL.RequestForLoan> requests = new List<DAL.RequestForLoan>();
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
             {
-                BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d, db.GMH.FirstOrDefault(g => g.GmhCode == 6002));
+      //          BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d, db.GMH.FirstOrDefault(g => g.GmhCode == 6002));
 
                 requests = db.RequestForLoan.Where(r => r.ProductCode == d.ProductCode).ToList();
                 //if (db.Donations.Contains(BL.Converters.DonationConverter.convertToDAL(d)))
@@ -67,6 +67,7 @@ namespace BL
                     });
           //      }
                 gMHs = db.GMH.Where(g => g.CategoryCode == d.Category).ToList();
+                BL.EmailService.offerDonationMail("קבלת הצעה לתרומה", d,  gMHs[0]);
 
                 if (requests.Count() == 1)//אם יש רק אחד באותה קטגוריה
                 {
@@ -107,7 +108,6 @@ namespace BL
             }
 
         }
-
         public static void donationAnswer(bool b, int userCode, int donationCode)
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
@@ -142,7 +142,6 @@ namespace BL
             }
           
 } 
-
         public static List<Donations> GetDonations()
         {
             using (DAL.Charity_DBEntities db = new DAL.Charity_DBEntities())
@@ -194,40 +193,39 @@ namespace BL
                 List<Donations> donations = new List<Donations>();
                 if (tc != 0)
                 {
-
-
                     donations.AddRange(BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => d.Category == tc).ToList()));
                     if (adress != "" && adress != "undefind")
                     {
                         foreach (Donations d in donations)
                         {
-                            if (BL.GoogleMaps.GetDistance(d.Adress, adress) > 50)
+                            if (BL.GoogleMaps.GetDistance(d.Adress, adress) > 20)
                                 donations.Remove(d);
                         }
 
 
                     }
                 }
-                //   else if (c != 0)
-                //   {
-                //   donations.AddRange(BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => d.MasterCategory == c).ToList()));
-                //   if (adress != "" && adress != "undefined")
-                //   {
-                //       foreach (Donations d in donations.ToList())
-                //       {
-                //           if (BL.GoogleMaps.GetDistance(d.Adress, adress) > 50)
-                //               donations.Remove(d);
-                //       }
-                //
-                //
-                //   }
-
-                //  }
+                else if (c != 0)
+                {
+                    List<int> categories = db.CategoryGMH.Where(c1 => c1.MasterCategoryCode == c).Select(c1 => c1.CategoryCode).ToList();
+                    donations.AddRange(BL.Converters.DonationConverter.convertToDTOList(db.Donations.Where(d => d.Category == c || categories.Contains(d.Category)).ToList()));
+                if (adress != "" && adress != "undefined")
+                {
+                    foreach (Donations d in donations.ToList())
+                    {
+                        if (BL.GoogleMaps.GetDistance(d.Adress, adress) > 20)
+                            donations.Remove(d);
+                    }
+               
+               
+                }
+               
+               }
                 else
                 {
                     foreach (DAL.Donations d in db.Donations)
                     {
-                        if (BL.GoogleMaps.GetDistance(d.Adress, adress) < 50)
+                        if (BL.GoogleMaps.GetDistance(d.Adress, adress) < 20)
                             donations.Add(BL.Converters.DonationConverter.convertToDTO(d));
                     }
                 }

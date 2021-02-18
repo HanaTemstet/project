@@ -22,6 +22,7 @@ export class AddReqestComponent implements OnInit {
   filteredProducts: Observable<Product[]>;
   products: Array<Product>
   myReqest:RequestForLoan
+  display:boolean=true
   constructor(private route:ActivatedRoute,private reqestService:ReqestService, private gmhService:GmhService,private productsService:ProductsService) { }
 
   ngOnInit(): void {

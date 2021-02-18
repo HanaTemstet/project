@@ -182,7 +182,8 @@ this.gmhService.display =true ;
           res => {
             console.log(res);
             if (res) {this.setProducts()
-            this.comment=false}
+            this.comment=false
+          alert("נשמר בהצלחה")}
           }
         )
       }

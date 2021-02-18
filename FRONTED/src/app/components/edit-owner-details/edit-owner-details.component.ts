@@ -14,16 +14,15 @@ export class EditOwnerDetailsComponent implements OnInit {
   editDetailsForm: FormGroup
   currentUser
   adress
+  display: boolean = true
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.userService.CurrentUser;
-  //  console.log(this.currentUser);
-
     this.editDetailsForm = new FormGroup({
-      Cell_Phone: new FormControl(Validators.compose([Validators.required ,Validators.pattern('[0-9]{10}')])),
-      Phone: new FormControl(Validators.compose([Validators.required ,Validators.pattern('[0-9]{9}')])),
-      E_mail: new FormControl(Validators.compose([Validators.required ,Validators.email])),
+      Cell_Phone: new FormControl(Validators.compose([Validators.required, Validators.pattern('[0-9]{10}')])),
+      Phone: new FormControl(Validators.compose([Validators.required, Validators.pattern('[0-9]{9}')])),
+      E_mail: new FormControl(Validators.compose([Validators.required, Validators.email])),
       password: new FormControl(),
       Adress: new FormControl(),
       userName: new FormControl()
@@ -53,17 +52,12 @@ export class EditOwnerDetailsComponent implements OnInit {
     u.Password = this.currentUser.Password
     u.Adress = this.editDetailsForm.controls.Adress.value;
     u.Name = this.editDetailsForm.controls.userName.value;
-    //console.log(u);
-
     this.userService.saveChanges(u).subscribe(
       res => {
-      //  console.log(res)
-      
         if (res) {
           if (confirm("רוצה לשנות את הפרטים גם בגמחים")) {
             this.userService.saveChangesInGmhim(u).subscribe(//לשנות תגמחים
               res => {
-               // console.log(res)
               }
             )
           }
@@ -72,7 +66,7 @@ export class EditOwnerDetailsComponent implements OnInit {
               this.currentUser = res;
               this.userService.setCurrentUser(res);
               localStorage.setItem('user', JSON.stringify(this.userService.CurrentUser));
-              console.log(res);
+              confirm("השינויים נשמרו בהצלחה")
             }
           )
           this.router.navigate(['/manageTheGMH'])

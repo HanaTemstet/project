@@ -5,8 +5,8 @@ body{
   background-image: url( "src/assets/bg.png") !important; background-size: 35% 30% !important;margin-top: 10%; background-repeat: no-repeat !important;
   }
   .donations{
-    display: inline-block;
-     width: 30%;
+    display: inline-block!important;
+     width: 50%  !important;
      /* height: 170px; */
      /* border: 2px solid ; */
      /* border-color:  rgb(245, 230, 230); */

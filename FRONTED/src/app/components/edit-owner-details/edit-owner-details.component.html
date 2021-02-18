@@ -1,27 +1,24 @@
-<button  mat-raised-button color="primary" [routerLink]="['/manageTheGMH']" routerLinkActive="active">חזרה לגמחים</button>
-
 <div class="content">
-
-    <form [formGroup]="editDetailsForm">
-        <p>שם :<input type="text" formControlName="userName" class="form-control"></p>
-        <p>טלפון:<input type="text" formControlName="Cell_Phone"  class="form-control"></p>
-        <p>פלאפון:<input type="text" formControlName="Phone"  class="form-control"></p>
-       
-        <p>אימיל:<input type="text" formControlName="E_mail" class="form-control"></p>
-        <p>כתובת:
-            <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
-                (onAddressChange)="handleDestinationChange($event)" class="form-control">‏
-        </p>
-       
-        
-        <p><button  mat-raised-button color="primary"  (click)="saveChange()">
-            שמור שינויים
-        </button>
-        </p>
-    </form>
-    
-  <footer>
+  <button style="position: fixed;margin-left: 80%" mat-raised-button color="red" [routerLink]="['/manageTheGMH']"
+    routerLinkActive="active">חזרה לגמחים</button>
+  <form [formGroup]="editDetailsForm" class="form-group form">
+    <label matLabel>כאן תוכל/י לשנות את פרטיך האישיים</label>
+    <p>שם :<input type="text" formControlName="userName" class="form-control"></p>
+    <p>טלפון:<input type="text" formControlName="Cell_Phone" class="form-control"></p>
+    <p>פלאפון:<input type="text" formControlName="Phone" class="form-control"></p>
+    <p>אימיל:<input type="text" formControlName="E_mail" class="form-control"></p>
+    <p>כתובת:
+      <input ngx-google-places-autocomplete #placesRef="ngx-places" formControlName="Adress"
+        (onAddressChange)="handleDestinationChange($event)" class="form-control">‏
+    </p>
+    <p><button mat-raised-button color="red" (click)="saveChange()">
+        שמור שינויים
+      </button>
+    </p>
+  </form>
+  <footer class="fixed-bottom">
     <p>Author: Hege Refsnes<br>
-    <a href="mailto:hege@example.com">hege@example.com</a></p>
+      <a href="mailto:hege@example.com">hege@example.com</a>
+    </p>
   </footer>
 </div>

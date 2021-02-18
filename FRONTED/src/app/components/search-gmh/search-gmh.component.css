@@ -53,8 +53,10 @@ margin-right: 40px;
   margin-right: -50px!important;
 }
 .form{
-width: 100%;
+width: 100%  !important;
 }
-
+.form-group{
+  align-items: flex-start;
+}
 
   

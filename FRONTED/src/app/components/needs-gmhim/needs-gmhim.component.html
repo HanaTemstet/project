@@ -1,119 +1,43 @@
 <body>
-    <form  class="form content" [formGroup]="needsGmhimForm" (submit)="filterNeedsGmhim()">
-
-    <div class="form-group">
-        <h2 >ספר לנו היכן תרצה לפתוח גמ"ח:</h2>
-        <p ><input type="radio" value="1" name="r" checked (click)="getCurrentLocation()">
-            <mat-icon>room</mat-icon>מיקום נוכחי
-        </p>
-        <input type="radio" value="2" name="r" (click)="chooseLocation()"> <input ngx-google-places-autocomplete #placesRef="ngx-places"
-          (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏" formControlName="location">
-    <!-- <div *ngIf="needsGmhim.errors?.validSearch!=null" style="text-align: right;">
-            {{needsGmhim.errors?.validSearch}}
-        </div> -->
-    </div>
-    
+    <form class="form form-group" [formGroup]="needsGmhimForm">
         <div class="form-group">
-    <h2> בחר קטגוריה מועדפת:</h2>
-    <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
-        [matAutocomplete]="auto" [value]="displayFn" class="form-control">
-    <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn"
->
-        <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
-            {{c.CategoryName}}
-        </mat-option>
-    </mat-autocomplete>
-</div>
-<!-- <div class="form-group">
-        <label> תת קטגוריה:</label>
-        <input type="text" placeholder="בחר " aria-label="Number" matInput [matAutocomplete]="auto1"
-            [value]="displayFn" [formControl]="tatcategoriesControl" class="form-control">
-        <mat-autocomplete matAutocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let tc of filteredTatCategories | async" [value]="tc">
-                {{tc.CategoryName}}
-            </mat-option>
-        </mat-autocomplete>
-</div> -->
-<input type="submit" value="סנן" class="btn btn-success form-group">
-
-        <!-- <label> כתובת:</label>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1" (click)="getCurrentLocation()">מיקום נוכחי
-            <p >
-            </mat-radio-button>
-        <mat-radio-button value="2">
-            <input ngx-google-places-autocomplete #placesRef="ngx-places" class="form-control"
-                (onAddressChange)="handleDestinationChange($event)" placeholder="Address">
-            </mat-radio-button>
-            </mat-radio-group>‏
-        <input type="submit" value="סנן" class="btn btn-primary"> -->
-        
-
-
-    <!-- <div class="form-group">
-        <label>קטגוריה:</label>
-        <select formControlName="category" class="form-control" (change)="getCategoriesForGmach()">
-            <option selected hidden>-בחר קטגוריה-</option>
-            <option >-כל הקטגוריות-</option>
-            <option *ngFor="let a of categories">{{a.CategoryName}}</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label> תת קטגוריה:</label>
-        <select  formControlName="tatCategory" class="form-control">
-            <option  selected hidden>-בחר קטגוריה-</option>
-            <option >-כל תתי הקטגוריות-</option>
-            <option *ngFor="let b of tatCategories">{{b.CategoryName}}</option>
-        </select>
-    </div> -->
-
-
-      
-      <div class="list-group">
-          <h1>:הנה הגמ"חים שחסרים באזור שביקשת</h1>
-        <div style="margin: 1%;width: 150%;" class="list-group-item list-group-item-action flex-column align-items-start active" *ngFor="let c of masterCategoryNG" (click)="getTatForNG(c.CategoryCode)">
-        <div class="d-flex w-100 justify-content-between">{{c.CategoryName}}</div>
-        <div class="d-flex w-100 justify-content-between" *ngFor="let tc of tatCategoryNG">{{tc.CategoryName}}</div>
-        
+            <h2 class="form-control title">ספר לנו היכן תרצה לפתוח גמ"ח:</h2>
+            <p><input type="radio" class="form-check-input" name="r" checked (click)="getCurrentLocation()" >
+                <mat-icon style="margin-right: 2%;">room</mat-icon>מיקום נוכחי
+            </p>
+            <input type="radio" class="form-check-input"  name="r" (click)="this.needsGmhimForm.controls.location.enable()"> <input ngx-google-places-autocomplete
+                #placesRef="ngx-places" (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏"
+                formControlName="location" class="form-control">
         </div>
+
+        <div class="form-group">
+            <h2 class="form-control title" > בחר קטגוריה מועדפת:</h2>
+            <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
+                [matAutocomplete]="auto" [value]="displayFn" class="form-control">
+            <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let c of filteredCategories | async" [value]="c">
+                    {{c.CategoryName}}
+                </mat-option>
+            </mat-autocomplete>
         </div>
-</form>
+        <button class="form-group" (click)="filterNeedsGmhim()" mat-raised-button color="red">סנן גמח"ים נצרכים</button>
+        <div class="list-group" *ngIf="masterCategoryNG!=undefined && masterCategoryNG.length!=0">
+            <h1>:הנה הגמ"חים שחסרים באזור שביקשת</h1>
+            <div class="ng"
+                class="list-group-item list-group-item-action flex-column align-items-start active"
+                *ngFor="let c of masterCategoryNG" (click)="getTatForNG(c)">
+                <div class="d-flex w-100 justify-content-between">{{c.CategoryName}}</div>
+                <div *ngIf="c==currentNg">
+                    <div class="d-flex w-100 justify-content-between" *ngFor="let tc of tatCategoryNG">
+                        {{tc.CategoryName}}</div>
+                </div>
+            </div>
+        </div>
+    </form>
 
-    <!-- <table mat-table class="table table-hover" [dataSource]="needsGmhim">
-        <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef> קטגוריה </th>
-            <td mat-cell *matCellDef="let ng"> {{ng.categoryName}} </td>
-          </ng-container>
-          <ng-container matColumnDef="adress">
-            <th mat-header-cell *matHeaderCellDef> מיקום </th>
-            <td mat-cell *matCellDef="let ng"> {{ng.Adress}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table> -->
-
-
-
-       <!-- <table class="table table-hover">
-            <thead>
-                <tr>
-                    <td>קטגוריה</td>
-                    <td>מקום</td>
-
-                </tr>
-            </thead>
-            <tbody *ngFor="let ng of needsGmhim">
-                <tr >
-                <td>{{ng.categoryName}}</td>
-                <td>{{ng.Adress}}</td>
-            </tr>
-            </tbody>
-        </table>
-        -->
-
-        <footer>
-            <p>Author: Hege Refsnes<br>
-            <a href="mailto:hege@example.com">hege@example.com</a></p>
-          </footer>
+    <footer class="fixed-bottom">
+        <p>Author: Hege Refsnes<br>
+            <a href="mailto:hege@example.com">hege@example.com</a>
+        </p>
+    </footer>
 </body>

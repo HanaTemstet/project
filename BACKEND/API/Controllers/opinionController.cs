@@ -20,7 +20,7 @@ namespace API.Controllers
             else return Ok(false);
         }
 
-            [Route("getOpinionsForGMH"), HttpPost]
+        [Route("getOpinionsForGMH"), HttpPost]
         public IHttpActionResult getOpinionsForGMH(DTO.GMH gmh)
         {
             System.Diagnostics.Debug.WriteLine("getOpinionsForGMH");

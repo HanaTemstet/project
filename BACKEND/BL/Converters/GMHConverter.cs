@@ -30,7 +30,10 @@ namespace BL.Converters
                 GmhCode = g.GmhCode,
                 Adress = g.Adress,
                 CategoryCode = g.CategoryCode,
-                UserCode = g.UserCode
+                UserCode = g.UserCode,
+                e_mail=g.e_mail,
+                Phone=g.Phone
+                
             };
         }
         public static DAL.NeedsGmhim convertToDal(DTO.NeedsGmhim ng)

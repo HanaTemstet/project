@@ -18,245 +18,135 @@ import { isCategory } from 'src/app/validators/valid';
   styleUrls: ['./new-gmh.component.css']
 })
 export class NewGmhComponent implements OnInit {
-  gmhForm:FormGroup;
+  gmhForm: FormGroup;
   filteredTatCategories: Observable<CategoryGMH[]>;
   categories: Array<CategoryGMH>;
   tatCategories: CategoryGMH[];
   filteredCategories: Observable<CategoryGMH[]>;
   myGmhim: GMH[];
-  newgmh = false;
-  // currentUser: User;
-  currLat=0;
-  currLng=0;
+  currLat = 0;
+  currLng = 0;
   adress;
-  constructor(private gmhService: GmhService, private userService: UserService, private categoriesService: CategoriesService,private router:Router) { }
+  myDetails:boolean=true;
+  constructor(private gmhService: GmhService, private userService: UserService, private categoriesService: CategoriesService, private router: Router) { }
 
   ngOnInit(): void {
     this.gmhForm = new FormGroup({
-      GmhName: new FormControl('',Validators.required),
-      divLocation: new FormControl(),
-      category: new FormControl(),
-      newCategory: new FormControl(),
+      GmhName: new FormControl('', Validators.required),
+      category: new FormControl('',Validators.required),
       tatCategory: new FormControl({ value: '', disabled: true }),
-      newTatCategory: new FormControl({ value: '', disabled: true }),
-      location:new FormControl(),
+      phone: new FormControl('',Validators.pattern('[0-9]{9,10}')),
+      e_mail: new FormControl('',Validators.email),
       comments: new FormControl()
-    },{validators: isCategory('category','newCategory')})
-    this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));    
+    },)
+    this.myGmhim = JSON.parse(localStorage.getItem('gmhim'));
     this.gmhService.setMyGmhim(this.myGmhim)
-    // this.currentUser = this.userService.CurrentUser;
     this.getMyGmhim();
     this.getCurrentLocation();
     this.getCategoryGmh();
   }
-  choosecategory() {
-    this.gmhForm.controls["newCategory"].disable();
-    this.gmhForm.controls["category"].enable();
-    this.gmhForm.controls["newCategory"].setValue('')
-  }
   getTatCategoriesForGmh(c) {
-      //console.log(this.gmhForm.controls["newTatCategory"].disabled);
-      this.gmhForm.controls["tatCategory"].enable();
-  
-      if (this.gmhForm.controls["newTatCategory"].disabled) {
-  
-        this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
-          this.tatCategories = res;
-          console.log(res),
-  
-            this.filteredTatCategories = this.gmhForm.controls.tatCategory.valueChanges
-              .pipe(
-                startWith(''),
-                map(value => typeof value === 'string' ? value : value.CategoryName),
-                map(name => name ? this._filter(name) : this.tatCategories.slice())
-              );
-          err => { console.log(err); }
-        });
-      }
-    }
-    filter() {
-      console.log(this.categories);
-      this.filteredCategories = this.gmhForm.controls.category.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => typeof value === 'string' ? value : value.CategoryName),
-          map(name => name ? this._filter(name) : this.categories.slice())
-        );
-    }
-    newcategory() {
-      this.gmhForm.controls["newCategory"].enable();
-      this.gmhForm.controls["category"].disable();
-      this.gmhForm.controls["tatCategory"].disable();
-      this.gmhForm.controls["newTatCategory"].disable();
-      this.gmhForm.controls["newTatCategory"].setValue('');
-  
-      this.gmhForm.controls["category"].setValue('');
-    }
-    newtatcategory() {
-      this.gmhForm.controls["newTatCategory"].enable();
-      this.gmhForm.controls["tatCategory"].disable();
-      this.gmhForm.controls["tatCategory"].setValue('');
-  
-      // this.tatCategories=new Array<CategoryGMH>();
-    }
-    choosetatcategory() {
-      this.gmhForm.controls["newTatCategory"].disable();
-      this.gmhForm.controls["tatCategory"].enable();
-      this.gmhForm.controls["newTatCategory"].setValue('')
-    }
-    displayFn(c: CategoryGMH): string {
-      return c && c.CategoryName ? c.CategoryName : '';
-    }
-    private _filter(name: string): CategoryGMH[] {
-      const filterValue = name.toLowerCase();
-      return this.categories.filter(c => c.CategoryName.toLowerCase().indexOf(filterValue) === 0);
-    }
-    // setCategoty() {
-    //   let g = new GMH();
-    //   let master;
-    //   console.log(
-    //    this.gmhForm.controls["category"].value);
-    //   if (this.gmhForm.controls["category"].value != null)//נבחרה קגורית אב
-    //   {
-    //     this.categories.forEach(element => {
-    //       console.log(element.CategoryName, this.gmhForm.controls.category.value.CategoryName);
-  
-    //       if (element.CategoryName == this.gmhForm.controls.category.value.CategoryName) {
-    //         g.CategoryCode = element.CategoryCode;
-    //         master = element.CategoryCode
-    //       }
-    //     })
-  
-    //   }
-    //   else if (this.gmhForm.controls["newCategory"].value != null) {//קטגורית אב חדשה
-    //     console.log(this.gmhForm.controls["newCategory"].value);
-  
-    //     let c = new CategoryGMH();
-    //     c.CategoryName = this.gmhForm.controls["newCategory"].value;
-    //     this.categoriesService.addCategory(c).subscribe(
-    //       res => {
-    //         console.log(res);
-    //         g.CategoryCode = res;
-    //         master = res;
-    //       }
-    //     )
-    //   }
-    //   if (this.gmhForm.controls["tatCategory"].value != null) {//נבחרה תת קטגוריה
-    //     console.log(this.gmhForm.controls["tatCategory"].value);
-        
-    //     this.tatCategories.forEach(element => {
-    //       if (element.CategoryName === this.gmhForm.controls.tatCategory.value.CategoryName) {
-    //         g.CategoryCode = element.CategoryCode;
-    //         master = element.CategoryCode
-    //       }
-    //     })
-    //     this.addGmh(g);
-    //   }
-    //  else if (this.gmhForm.controls["newTatCategory"].value != null)//תת קטגוריה חדשה
-    //   {
-    //     // console.log(this.gmhForm.controls["newTatCategory"].value);
-  
-    //     let c = new CategoryGMH();
-    //     c.CategoryName = this.gmhForm.controls["newTatCategory"].value;
-    //     c.MasterCategoryCode = master;
-    //     this.categoriesService.addCategory(c).subscribe(
-    //       res => {
-    //         // console.log(res);
-    //         g.CategoryCode = res;
-    //         // console.log(g);
-  
-    //       }
-    //     )
-    //     this.addGmh(g);
-    //   }
-     
-    // }
-    addGmh() {
-      let g = new GMH();
-      console.log(this.gmhForm.controls["tatCategory"].value);
-      console.log(this.gmhForm.controls["category"].value.CategoryCode);
-      console.log(this.gmhForm.controls["category"].value);
-      
-      if (this.gmhForm.controls["tatCategory"].value != ""&&this.gmhForm.controls["tatCategory"].value != null)
-      g.CategoryCode=this.gmhForm.controls["tatCategory"].value.CategoryCode
-      else g.CategoryCode=this.gmhForm.controls["category"].value.CategoryCode
-      g.GmhName = this.gmhForm.controls.GmhName.value;
-      g.Adress = this.userService.CurrentUser.Adress;
-      g.Phone = this.userService.CurrentUser.Phone;
-      g.e_mail = this.userService.CurrentUser.E_mail;
-      g.UserCode = this.userService.CurrentUser.UserCode;
-      g.comments = this.gmhForm.controls.comments.value;
-      console.log(g);
-      this.gmhService.add(g).subscribe(
-        res => {
-          console.log(res)
-          if (res) {
-            this.getMyGmhim();
-            this.closeNew();
-            this.getCategoryGmh();
-            this.gmhForm.reset()
-            alert('נוסף בהצלחה')
-            this.router.navigate(['/manageTheGMH'])
-          }
-          else {
-            alert('error, try again')
-          }
-        }
-      )
-    }
-    closeNew() {
-      this.newgmh = false
-    }
-    getMyGmhim() {
-      this.gmhService.getMyGmhim(this.userService.CurrentUser).subscribe(
-        res => {
-        //  console.log(res);
-          
-          this.gmhService.setMyGmhim(res); this.myGmhim = res;
-          localStorage.setItem('gmhim', JSON.stringify(res));
-  
-          this.myGmhim.forEach(g =>
-            this.gmhService.getUser(g).subscribe(
-              res => g.User = res
-            ))
-          //console.log(res);
-        },
+    this.gmhForm.controls["tatCategory"].enable();
+      this.gmhService.getCategoriesForGmach(c.option.value).subscribe(res => {
+        this.tatCategories = res;
+          this.filteredTatCategories = this.gmhForm.controls.tatCategory.valueChanges
+            .pipe(
+              startWith(''),
+              map(value => typeof value === 'string' ? value : value.CategoryName),
+              map(name => name ? this._filter(name) : this.tatCategories.slice())
+            );
         err => { console.log(err); }
-      )
-    }
-    getCategoryGmh() {
-      this.gmhService.getCategoryGmach().subscribe(
-        res => {
-          this.categories = res; this.filter()
-  console.log(res);
-  
-        },
-        err => console.log(err)
+      });
+  }
+  filter() {
+    this.filteredCategories = this.gmhForm.controls.category.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.CategoryName),
+        map(name => name ? this._filter(name) : this.categories.slice())
       );
-    }
-    new() {
-      this.newgmh = true;
-      this.getCategoryGmh();
-  
-    }
-    getCurrentLocation() {
-      this.gmhForm.controls.location.setValue("")
-      this.gmhForm.controls.location.disable()
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          this.currLat = position.coords.latitude;
-          this.currLng = position.coords.longitude;
-        });
+  }
+  displayFn(c: CategoryGMH): string {
+    return c && c.CategoryName ? c.CategoryName : '';
+  }
+  private _filter(name: string): CategoryGMH[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(c => c.CategoryName.toLowerCase().indexOf(filterValue) === 0);
+  }
+  addGmh() {
+    let g = new GMH();
+    if (this.gmhForm.controls["tatCategory"].value != "" && this.gmhForm.controls["tatCategory"].value != null)
+      g.CategoryCode = this.gmhForm.controls["tatCategory"].value.CategoryCode
+    else g.CategoryCode = this.gmhForm.controls["category"].value.CategoryCode
+    g.GmhName = this.gmhForm.controls.GmhName.value;
+    if(this.myDetails){
+    g.Adress = this.userService.CurrentUser.Adress;
+    g.Phone = this.userService.CurrentUser.Phone;
+    g.e_mail = this.userService.CurrentUser.E_mail;
+  }
+  else{
+    console.log(this.gmhForm.controls.adress.value);
+    
+    if(this.gmhForm.controls.adress.value)
+    g.Adress = this.gmhForm.controls.adress.value;
+    g.Phone = this.gmhForm.controls.phone.value;
+    g.e_mail =this.gmhForm.controls.e_mail.value;
+  }
+    g.UserCode = this.userService.CurrentUser.UserCode;
+    g.comments = this.gmhForm.controls.comments.value;
+    console.log(g);
+    this.gmhService.add(g).subscribe(
+      res => {
+        console.log(res)
+        if (res) {
+          this.getMyGmhim();
+          this.getCategoryGmh();
+          this.gmhForm.reset()
+          alert('נוסף בהצלחה')
+          this.router.navigate(['/manageTheGMH'])
+        }
+        else {
+          alert('error, try again')
+        }
       }
-      else {
-        alert("Geolocation is not supported by this browser.");
-      }
+    )
+  }
+  getMyGmhim() {
+    this.gmhService.getMyGmhim(this.userService.CurrentUser).subscribe(
+      res => {
+        this.gmhService.setMyGmhim(res); 
+        this.myGmhim = res;
+        localStorage.setItem('gmhim', JSON.stringify(res));
+        this.myGmhim.forEach(g =>
+          this.gmhService.getUser(g).subscribe(
+            res => g.User = res
+          ))
+      },
+      err => { console.log(err); }
+    )
+  }
+  getCategoryGmh() {
+    this.gmhService.getCategoryGmach().subscribe(
+      res => {
+        this.categories = res;
+        this.filter()
+      },
+      err => console.log(err)
+    );
+  }
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.currLat = position.coords.latitude;
+        this.currLng = position.coords.longitude;
+        this.adress=(this.currLat," ",this.currLng).toString()
+      });
     }
-    chooseLocation(){
-      this.gmhForm.controls.location.enable()
+    else {
+      alert("Geolocation is not supported by this browser.");
     }
-    handleDestinationChange(a: Address) {
-      this.adress = a;
-      //  console.log(a)
-    }
+  }
+  handleDestinationChange(a: Address) {
+    this.adress = a;
+  }
 }

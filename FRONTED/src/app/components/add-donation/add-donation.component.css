@@ -16,5 +16,10 @@
     align-items: center;
   }
   body{font-size: medium;
-    background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;margin-top: 10%; background-repeat: no-repeat !important;
+    background-image: url( "src/assets/bg.png") !important; background-size: 40% 35% !important;
+     background-repeat: no-repeat !important;
+     
+  }
+  .donor{
+    border-radius: 5px;padding:5%;  box-shadow: 0 0 10px 1px rgb(185, 229, 247);
   }

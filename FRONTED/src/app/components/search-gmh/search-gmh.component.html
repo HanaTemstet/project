@@ -1,7 +1,6 @@
 <div class="content" color="primary">
-    <form class="form" [formGroup]="searchForm" (submit)="search()">
+    <form class="form" [formGroup]="searchForm" >
         <div class="form-group">
-            <!-- <label> טקסט לחיפוש:</label> -->
                 <input type="text" style="position: relative" placeholder="...הזן מוצר לחיפוש" matInput formControlName="textSearch" class="form-control"
                 [matAutocomplete]="auto" [value]="displayFn">
                 <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
@@ -9,46 +8,26 @@
                         {{p.Productname}}
                     </mat-option>
                 </mat-autocomplete>
-            <!-- <input type="text" placeholder="בחר " matInput formControlName="textSearch" class="form-control"
-                [matAutocomplete]="auto" [value]="displayFn">
-            <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let p of filteredProducts | async" [value]="p">
-                    {{p.Productname}}
-                </mat-option>
-            </mat-autocomplete> -->
             <div class="error" *ngIf="searchForm.controls['textSearch'].errors!=null"> אותיות בעברית בלבד!</div>
         </div>
-
         <div class="form-group">
-            <label>קטגוריה:</label>
+            <label >קטגוריה:</label>
             <select formControlName="category" class="form-control" (change)="getCategoriesForGmach()">
                 <option selected hidden>-בחר קטגוריה-</option>
                 <option >-כל הקטגוריות-</option>
                 <option *ngFor="let a of categories">{{a.CategoryName}}</option>
             </select>
         </div>
-
         <div *ngIf="this.searchForm.controls.category.value!=''" class="form-group">
-            <label> תת קטגוריה:</label>
+            <label > תת קטגוריה:</label>
             <select  formControlName="tatCategory" class="form-control">
                 <option  selected hidden>-בחר קטגוריה-</option>
                 <option >-כל תתי הקטגוריות-</option>
                 <option *ngFor="let b of tatCategories">{{b.CategoryName}}</option>
             </select>
         </div>
-
         <div class="form-group">
-            <label>אזור ישוב:</label>
-            <!-- <select formControlName="location" class="form-control">
-                <option selected hidden>קרוב אלי</option>
-                <option >בחר ישוב</option>
-                <input ngx-google-places-autocomplete #placesRef="ngx-places"
-                    (onAddressChange)="handleDestinationChange($event)" placeholder="בחר מיקום‏" formControlName="location">
-            </select>-->
-       <!-- יש מצב שצריך את זה ....במקום השורות שאח"כ -->
-        <!-- <p><input type="radio" name="r" #r1  [checked]="true" (click)="getCurrentLocation()">מיקום נוכחי </p>
-        <input type="radio" name="r" #r2 (click)=" this.searchForm.controls.location.enable()" > <input ngx-google-places-autocomplete #placesRef="ngx-places"
-            (onAddressChange)="handleDestinationChange($event)" formControlName="location" placeholder="בחר מיקום‏"  > -->
+            <label >אזור ישוב:</label>
             <p ><input type="radio" name="r" checked (click)="getCurrentLocation()">
                 <mat-icon>room</mat-icon>מיקום נוכחי
             </p>
@@ -58,35 +37,14 @@
                 {{searchForm.errors?.validSearch}}
             </div>
         </div>
-
-
-
         <div class="form-group">
         <label>מרחק נסיעה</label>
 <input type="number" min="0" formControlName="distance" class="form-control">
-        <!-- <select formControlName="distance" class="form-control">
-            <option selected hidden>-בחר מרחק-</option>
-            <option value="50">חצי שעה נסיעה</option>
-            <option value="1000">שעה נסיעה</option>
-            <option value="150">שעה וחצי נסיעה</option>
-            <option value="20000">כל הארץ</option>
-        </select> -->
     </div>
-<!-- 
-    <p-dialog header="Header" [(visible)]="gmhService.display" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-        [draggable]="false" [resizable]="false">
-        <p class="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <ng-template pTemplate="footer"> -->
-            <!-- <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button> -->
-            <!-- </ng-template>
-    </p-dialog> -->
         <div class="form-group">
-            <input type="submit" class="btn btn-success" value="חפש" [disabled]="!searchForm.valid"
-                style="margin-right: 35%;">
+            <button mat-raised-button color="red"  [disabled]="!searchForm.valid"
+                style="margin-right: 35%;" (click)="search()" >חיפוש</button>
         </div>
-
         <h3 *ngIf="IncreaseTheSearchArea==true">
             חיפשת ולא מצאת, נכון שזה מעצבן?
             לכן, אני שומרת את הביטוי ומבטיחה לשפר את מנוע החיפוש בהמשך .
@@ -101,23 +59,3 @@
         </tbody>
     </table>
 </div>
-
-
-<!-- <table style="width:100%" *ngIf="IncreaseTheSearchArea==false" id="HiglightRow"> -->
-    <!-- <tr> -->
-        <!-- <th>שם גמ"ח</th> -->
-        <!-- <th>כתובת</th> -->
-        <!-- <th>טלפון</th> -->
-        <!-- <th>אימייל</th> -->
-        <!-- <th>המלצות</th> -->
-    <!-- </tr> -->
-    <!-- <tr *ngFor="let g of gmhs" [routerLink]="['/gmh',g.GmhCode]"> -->
-        <!-- <td>{{g.GmhName}}</td> -->
-        <!-- <td>{{g.Adress}}</td> -->
-        <!-- <td>{{g.Phone}}</td> -->
-        <!-- <td>{{g.e_mail}}</td> -->
-        <!-- <td>{{g.comments}}</td> -->
-    <!-- </tr> -->
-<!-- </table> -->
-
-<!--<app-gmh *ngIf="gmhs" (send)="showGMHS($event)" [gmh]="gmhs"></app-gmh>-->

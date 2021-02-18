@@ -1,6 +1,6 @@
 <body>
     <div class="content">
-        <form (submit)="filterDonations()">
+        <form (submit)="filterDonations()" [formGroup]="donationForm">
             <label> קטגוריה:</label>
             <input type="text" placeholder="בחר " aria-label="Number" matInput [formControl]="categoriesControl"
                 [matAutocomplete]="auto" [value]="displayFn" class="form-control">
@@ -81,8 +81,5 @@
         </div>
     </div>
     
-  <footer>
-    <p>Author: Hege Refsnes<br>
-    <a href="mailto:hege@example.com">hege@example.com</a></p>
-  </footer>
+
 </body>

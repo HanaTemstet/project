@@ -1,8 +1,6 @@
-table {
-  direction: rtl;
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 70%;
+.nav{
+  margin-top: 2% !important;
+  direction: rtl !important;
 }
 
 td, th {
@@ -15,7 +13,12 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 header{
-  
+  padding:6px;
+   position: fixed;
+   width: 100%; 
+   right: 0;
+    top: 0;
+    background-color: white;
     direction: rtl;
     text-align: right;
 }
@@ -54,7 +57,7 @@ font-size: 120%;
 text-align: center;
 }
 .home{
-  text-align: center;
+  top: 0% !important;
   font-size: 250%;
   border-bottom:1px solid rgb(181, 210, 255)!important; 
 }
@@ -68,14 +71,10 @@ ul#nav li:hover ul { display:block; }
     width: 90px;
     display: inline-block;
 }
-
-/* li:active{
-  border-bottom: 5px solid blue !important;
-
-} */
 .enterExitName{
   font: outline;
   font-size: large;
+  float: left;
 }
 .active{
   font: bold!important;

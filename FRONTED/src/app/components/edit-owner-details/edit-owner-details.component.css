@@ -1,0 +1,17 @@
+.content{
+  background-image: url( "src/assets/bg.png") !important; 
+  background-size: 40% 65% !important;
+  margin-top: 10%; 
+  background-repeat: no-repeat !important;
+  direction:rtl; 
+  }
+  .mat-a{
+      background-color:rgb(185, 229, 247);;
+  }
+  .form{
+      width: 30%;
+      padding: 2%;
+      background-color: rgb(185, 229, 247);;
+      margin-left: 40% !important;
+      border-radius:3% ;
+  }

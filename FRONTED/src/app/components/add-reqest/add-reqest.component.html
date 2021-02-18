@@ -1,19 +1,19 @@
-
 <div class="content">
+    <p-dialog [(visible)]="display" [modal]="true"
+        dismissableMask="ClosePopUp()" header="הוסף בקשה:" styleClass="class">
+        
     <form [formGroup]="addReqestForm">
-
         <div style="border-radius: 5px; font-size: medium;">
             <h2>פרטי הבקשה</h2>
             <div class="form-group">
                 <label>מוצר:</label>
-                    <input type="text" placeholder="בחר " matInput formControlName="textSearch" class="form-control"
+                <input type="text" placeholder="בחר " matInput formControlName="textSearch" class="form-control"
                     [matAutocomplete]="auto" [value]="displayFn">
-                    <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                        <mat-option *ngFor="let p of filteredProducts | async" [value]="p">
-                            {{p.Productname}}
-                        </mat-option>
-                    </mat-autocomplete>
-                <!-- <div class="error" *ngIf="searchForm.controls['textSearch'].errors!=null"> שדה נדרש</div> -->
+                <mat-autocomplete matAutocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let p of filteredProducts | async" [value]="p">
+                        {{p.Productname}}
+                    </mat-option>
+                </mat-autocomplete>
             </div>
             <div class="form-group">
                 <label>הערות</label>
@@ -21,12 +21,13 @@
                 <div class="error" *ngIf="addReqestForm.controls['comments'].errors!=null"> שדה נדרש</div>
             </div>
         </div>
-            <button class="btn btn-success" (click)="addReqest()" [disabled]="!addReqestForm.valid"
-                style="margin-right: 35%;">הוספה</button>
+        <button mat-raised-button color="red" (click)="addReqest()" [disabled]="!addReqestForm.valid"
+            [routerLink]="['/manageTheGMH']" style="margin-right: 35%;">הוספה</button>
     </form>
-    
-  <footer>
-    <p>Author: Hege Refsnes<br>
-    <a href="mailto:hege@example.com">hege@example.com</a></p>
-  </footer>
+</p-dialog>
+    <footer class="fixed-bottom">
+        <p>Author: Hege Refsnes<br>
+            <a href="mailto:hege@example.com">hege@example.com</a>
+        </p>
+    </footer>
 </div>

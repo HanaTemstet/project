@@ -115,6 +115,7 @@ export class DonationsComponent implements OnInit {
     fd.append('adress', this.adress)
     this.donationService.filterDonations(fd).subscribe(
       res =>{ this.donations = res;
+        fd=new FormData();
       console.log(res);
       }
     )

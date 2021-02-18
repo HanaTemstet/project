@@ -44,7 +44,7 @@ namespace BL
             string password = "charity2020";
             //string email = ConfigurationManager.AppSettings["emailAddress"];
             // string password = ConfigurationManager.AppSettings["emailPassword"];
-           // string Body = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("http://localhost:4200/searchGMH"));
+            // string Body = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("http://localhost:4200/searchGMH"));
 
             var loginInfo = new NetworkCredential(email, password);
             var msg = new MailMessage();
@@ -58,8 +58,8 @@ namespace BL
             string.Format(
                @"
 <div dir=' ltr'>
-                    <h1>Hello!</h1>
-                    <h3>There is a doctor who need your confirm:</h3>
+                    <h1>מצאנו תרומה תואמת לבקשתך!</h1>
+                   
                     <div style='
     position: relative;
     padding: 0.75rem 1.25rem;
@@ -71,21 +71,30 @@ namespace BL
     background-color: #d1ecf1;
     border-color: #bee5eb;'
 >
-<label> Id: {0}</label>
+<h3>במידה ואתה לוקח את התרומה אשר את קבלתה</h3>
+<h2>פרטי תרומה</h2>
+<label>שם: {0} </label>
                     <br />
-                    <label> First Name: {1}</ label>
+                    <label> תיאור: {1}</ label>
                     <br />
-                    <label> Last Name: {2}</label>
+                        <img [src]='https://localhost:44360/image/{2}' />
+
+                    <br />              
                     <br />
-                    <label> Phone Number: {3}</label>
+<h2>פרטי מוסר</h2>
+<label> שם: {3}</label>
                     <br />
-                    <label> Address: {4}</label>
+                    <label>  כתובת:{4}</ label>
+                    <br />
+                    <label> פלאפון: {5}</label>
+                    <br />
+                    <label>  אימייל:{6}</label>
                     <br />
                     <br />
 </div>
 <div>
 <div style='display: inline-block;'>
- <form action= 'https://localhost:44360/api/donation/donationAnswer/true/{5}/{6}' method ='post' >
+ <form action= 'https://localhost:44360/api/donation/donationAnswer/true/{7}/{8}' method ='post' >
                         <button type='submit'
                            style='display: inline-block;
                            font-weight: 400;
@@ -104,11 +113,11 @@ namespace BL
                            color: #fff;
                            background-color: #28a745;
                            border-color: #28a745;'>
-                        Confirm
+                        אני לוקח
                           </button>
                         </form>
 </div>
-                     <form action= 'https://localhost:44360/api/donation/donationAnswer/false/{5}/{6}' method ='post'>
+                     <form action= 'https://localhost:44360/api/donation/donationAnswer/false/{7}/{8}' method ='post'>
                         <button type='submit'
                            style='display: inline-block;
                            font-weight: 400;
@@ -127,20 +136,23 @@ namespace BL
                            color: #fff;
                            background-color: #dc3545;
                            border-color: #dc3545;'>
-                        UnConfirm
+                       לא רלוונטי
                     </button>
                  </form>
                  </div>
 </div>
                 "
-                , donation.Adress,
-                      donation.Description,
+                ,
+               donation.donationName,
+               donation.Description,
+               donation.Picture,
+               donation.donorName,
+               donation.Adress,
+                      donation.Phone,
                       donation.donorEmail,
-                      donation.donorName,
-                      donation.Category,
                       gmh.UserCode,
                       donation.donationCode
-                      
+
                        );
 
             msg.IsBodyHtml = true;

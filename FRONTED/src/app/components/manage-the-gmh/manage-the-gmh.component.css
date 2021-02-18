@@ -1,41 +1,36 @@
-
-   /* .text{
-    visibility: hidden;
-
-  } */
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  /* .img:hover .text {
-    visibility: visible;
-  } */
   .gmhs{
-    /* background-color: rgb(181, 210, 255); */
-    width:100%;
-    /* padding: 10%; */
-  }
-  .content {
-    display: flex;
-
-    /* margin: 82px auto; */
-    padding: 0 16px;
-    max-width: 100%;
-    flex-direction: column;
-    align-items: center;
-    /* margin-top: 10%; */
-    /* margin-top: 10%; */
-
-    direction:rtl; 
-    text-align: right;
-    margin-left: 30%;
+    width:20%;
+    margin-left: 50%;
   }
   body{
-    /* background-image:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 0%),url( "src/assets/bg.png") !important; background-size: 60% 55% !important; margin-top: 10%; background-repeat: no-repeat !important; */
-    background-image:url( "src/assets/bg.png") !important; background-size: 50% 45% !important;background-position: 0% 50%; background-attachment: fixed; margin-top:- 10%; background-repeat: no-repeat !important;
+    background-image:url( "src/assets/bg.png") !important;
+    background-size: 50% 45% !important;
+    background-position: 0% 50%;
+    background-attachment: fixed;
+    margin-top: 8%; 
+    background-repeat: no-repeat !important;
     }
     .img{
       display: inline-block;
       padding: 2%;
     }
     form13{font-weight: bolder;}
-  
-  
+  .bar{
+    left: 3%; 
+    /* margin-top: 1%; */
+     position: fixed;
+  }
+  .form{
+    background-color:rgb(185, 229, 247)  !important ;
+    width: 150%;
+    padding: 0% 20% 10% 20%;
+    border-radius: 3%;
+    display: inline-block;
+/* margin-top: -8%; */
+  }
+  .btn{
+    /* margin-right: -5% !important; */
+    display: inline-block !important;
+    /* background-color:rgb(185, 229, 247)  !important ; */
+    /* margin-top: -30% !important; */
+  }
